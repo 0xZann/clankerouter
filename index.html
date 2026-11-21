@@ -55,6 +55,7 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 }
 @media (max-width:760px){
 .cr-brand-text{font-size:13px}
+#hl-grid>:nth-child(n+4){display:none}
 .cr-tabs{width:100%;display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr))}
 .cr-tab{padding:0 4px !important;font-size:14px !important;width:100%}
 .cr-sec{padding-left:16px !important;padding-right:16px !important;padding-top:56px !important;padding-bottom:56px !important}
@@ -121,11 +122,15 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-empty{border:1.5px dashed #332D42;border-radius:18px;padding:22px;text-align:center;color:#9A97A6;font-size:15px}
 .cr-seg{display:flex;gap:6px;background:#2A1C47;border-radius:999px;padding:4px}
 .cr-seg button{flex:1;background:transparent;color:#C9C3DB;border:0;border-radius:999px;min-height:36px;font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;padding:0 12px}
+.cr-seg-light{background:#131218;border:1.5px solid #26222F}
+.cr-seg-light button{color:#B4B1BF;font-size:14px;min-height:40px;padding:0 16px}
 .cr-seg button[aria-selected=true]{background:var(--accent);color:#F2F1F5;font-weight:600}
 .cr-code{margin:0;background:#120A24;border-radius:16px;padding:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.7;color:#E8E9EC;overflow-x:auto;white-space:pre}
 .cr-key{display:flex;gap:8px;align-items:center;background:#0A0A0C;border:1.5px solid #26222F;border-radius:14px;padding:8px 8px 8px 14px;font-family:'IBM Plex Mono',monospace;font-size:14px}
 .cr-key code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (max-width:760px){.cr-side{position:static !important}}
+.cr-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.cr-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cr-stats .cr-stat{padding:14px}.cr-stats .cr-stat strong{font-size:20px}}
 .cr-stat{background:#131218;border:1.5px solid #26222F;border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .cr-stat strong{font-family:Unbounded,sans-serif;font-size:26px;font-weight:700;overflow-wrap:anywhere}
 .cr-stat-dark{background:#17141F;border-color:#17141F;color:#ECEAF2}
@@ -224,11 +229,11 @@ html{scroll-behavior:auto}
 <span class="cr-brand-text">CLANKER ROUTER</span>
 </a>
 <div class="cr-links" id="cr-menu">
+<a href="#/tokens" data-route="tokens">Tokens</a>
 <a href="#/fuel" data-route="fuel">Fuel</a>
 <a href="#/build" data-route="build">Build</a>
 <a href="#/stake" data-route="stake">Stake</a>
 <a href="#/plug" data-route="plug">Plug in</a>
-<a href="#/tokens" data-route="tokens">Tokens</a>
 <a href="#/docs" data-route="docs">Docs</a>
 <a href="#/dashboard" data-route="dashboard">Dashboard</a>
 </div>
@@ -259,7 +264,7 @@ html{scroll-behavior:auto}
 <div style="flex: 1 1 220px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">INPUT</span>
 <span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">Any token</span>
-<span style="font-size: 14px; color: #A9ACB3">ETH, stables, memecoins — [supported list]</span>
+<span style="font-size: 14px; color: #A9ACB3">ETH, stables, memecoins on Base</span>
 </div>
 <div class="cr-arrow-wrap" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 4px">
 <svg class="cr-arrow" width="36" height="36" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg>
@@ -283,15 +288,27 @@ html{scroll-behavior:auto}
 <!-- LIVE STATS -->
 <section aria-labelledby="h-stats" style="max-width: 1240px; margin: 0 auto; padding: 8px 16px 0">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 14px">
-<h2 id="h-stats" class="cr-kicker" style="margin: 0; font-weight: 600">NETWORK STATS</h2>
-<span class="cr-kicker" id="stats-src">Live stats coming soon</span>
+<h2 id="h-stats" class="cr-kicker" style="margin: 0; font-weight: 600">CLANKER ON BASE · LIVE</h2>
+<span class="cr-kicker" id="stats-src">Loading…</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
-<div class="cr-stat"><span class="cr-kicker">CREDITS DELIVERED</span><strong data-stat="credits">—</strong></div>
-<div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong data-stat="tokens">—</strong></div>
-<div class="cr-stat"><span class="cr-kicker">TOTAL STAKED</span><strong data-stat="staked">—</strong></div>
-<div class="cr-stat"><span class="cr-kicker">API CALLS · 24H</span><strong data-stat="calls">—</strong></div>
+<div class="cr-stats">
+<div class="cr-stat"><span class="cr-kicker">TOKENS ON CLANKER</span><strong data-stat="total">—</strong></div>
+<div class="cr-stat"><span class="cr-kicker">NEW · LAST 24H</span><strong data-stat="day">—</strong></div>
+<div class="cr-stat"><span class="cr-kicker">LAUNCHED HERE</span><strong data-stat="here">—</strong></div>
+<div class="cr-stat cr-stat-dark"><span class="cr-kicker">PLATFORM FEE</span><strong data-stat="fee">—</strong></div>
 </div>
+</section>
+
+<!-- LIVE TOKENS (home) -->
+<section aria-labelledby="h-live" style="max-width: 1240px; margin: 0 auto; padding: 64px 16px 0; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="cr-live cr-live-on" id="hl-live" style="align-self: flex-start"><span class="cr-live-dot" aria-hidden="true"></span><span id="hl-live-text">Live</span></span>
+<h2 id="h-live" style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 48px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase">Fresh off Clanker</h2>
+</div>
+<a href="#/tokens" class="cr-btn-s">See all tokens →</a>
+</div>
+<div id="hl-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px"></div>
 </section>
 
 <!-- MODES (tabs) -->
@@ -695,6 +712,10 @@ export MODEL="auto"</pre>
 <span class="cr-live" id="tk-live"><span class="cr-live-dot" aria-hidden="true"></span><span id="tk-live-text">Connecting…</span></span>
 <span class="cr-kicker" id="tk-total"></span>
 </div>
+<div class="cr-seg cr-seg-light" role="tablist" aria-label="Which tokens" style="align-self: flex-start">
+<button type="button" role="tab" data-src="all" aria-selected="true">All Clanker</button>
+<button type="button" role="tab" data-src="here" aria-selected="false">Launched here</button>
+</div>
 <div class="cr-row" style="align-items: flex-end">
 <div class="cr-field" style="flex: 3 1 260px">
 <label for="tk-q">Search</label>
@@ -1007,6 +1028,7 @@ function route(){
   else window.scrollTo(0,0);
   if(id==='v-stake')fillStakeTokens();
   if(id==='v-tokens')startTokens();
+  if(id==='v-home'){startHomeTokens();startStats()}
   if(id==='v-dashboard')renderDash();
 }
 window.addEventListener('hashchange',route);
@@ -1461,8 +1483,10 @@ var CLANKER_TOKEN_URL='https://www.clanker.world/clanker/';
 var POLL_MS=8000;
 var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqId:0};
 var pendingStake=null;
+var tkSrc='all';
 function tkParams(cursor){
   var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'20'});
+  if(tkSrc==='here')p.set('socialInterface','Clanker Router');
   var q=$('tk-q').value.trim(),s=$('tk-sort').value;
   if(q.length>=2)p.set('q',q.slice(0,100));
   if(s!=='new'){p.set('sortBy',s);p.set('sort','desc')}
@@ -1577,20 +1601,48 @@ $('tk-more').addEventListener('click',function(){var b=this;b.textContent='Loadi
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&$('v-tokens').classList.contains('active'))pollTokens()});
 
 
-/* ================= LIVE STATS =================
-   Point fetchStats() at your API. Expected shape: {credits, tokens, staked, calls}.
-   Until then the tiles show "—" — no made-up numbers. */
-var STATS_URL=null; // e.g. 'https://api.clankerouter.xyz/v1/stats'
-function fetchStats(){
-  if(!STATS_URL)return Promise.resolve(null);
-  return fetch(STATS_URL).then(function(r){return r.ok?r.json():null}).catch(function(){return null});
-}
+/* ================= LIVE STATS (from Clanker's public API) ================= */
 function fmt(n){return typeof n==='number'?n.toLocaleString('en-US'):String(n)}
-fetchStats().then(function(s){
-  if(!s)return;
-  document.querySelectorAll('[data-stat]').forEach(function(e){var v=s[e.getAttribute('data-stat')];if(v!=null)e.textContent=fmt(v)});
-  $('stats-src').textContent='Live · updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-});
+function countTokens(extra){
+  var p=new URLSearchParams({chainId:'8453',limit:'1'});for(var k in extra)p.set(k,extra[k]);
+  function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
+  return go(tkApi).then(function(j){return typeof j.total==='number'?j.total:null}).catch(function(){return null});
+}
+var statsTimer=null;
+function loadStats(){
+  if(document.hidden||!$('v-home').classList.contains('active'))return;
+  var since=Math.floor(Date.now()/1000)-86400;
+  Promise.all([countTokens({}),countTokens({startDate:String(since)}),countTokens({socialInterface:'Clanker Router'})]).then(function(r){
+    var vals={total:r[0],day:r[1],here:r[2],fee:INTEGRATOR?INTEGRATOR.share+'% of tax':'0%'},any=r.some(function(x){return x!=null});
+    document.querySelectorAll('[data-stat]').forEach(function(e){var v=vals[e.getAttribute('data-stat')];e.textContent=v==null?'—':fmt(v)});
+    $('stats-src').textContent=any?'Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}):'Offline · retrying';
+  });
+}
+function startStats(){loadStats();clearInterval(statsTimer);statsTimer=setInterval(loadStats,30000)}
+
+
+
+document.querySelectorAll('[data-src]').forEach(function(b){b.addEventListener('click',function(){
+  tkSrc=b.dataset.src;document.querySelectorAll('[data-src]').forEach(function(x){x.setAttribute('aria-selected',x===b)});loadTokens(true);
+})});
+/* home: latest tokens */
+var hlTimer=null;
+function loadHomeTokens(){
+  if(document.hidden||!$('v-home').classList.contains('active'))return;
+  var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'6'});
+  function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
+  go(tkApi).then(function(j){
+    var data=(Array.isArray(j.data)?j.data:[]).slice(0,6),g=$('hl-grid'),prev=g.getAttribute('data-ids')||'';
+    var ids=data.map(function(t){return t.contract_address}).join(',');
+    g.innerHTML='';data.forEach(function(t){g.appendChild(tokenCard(t,prev&&prev.indexOf(t.contract_address)<0))});
+    g.setAttribute('data-ids',ids);
+    $('hl-live').className='cr-live cr-live-on';$('hl-live-text').textContent='Live · '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  }).catch(function(){
+    $('hl-live').className='cr-live cr-live-off';$('hl-live-text').textContent='Offline · retrying';
+    if(!$('hl-grid').children.length){var e=el('div',null,'Loading live tokens…');e.className='cr-empty';e.style.gridColumn='1 / -1';$('hl-grid').appendChild(e)}
+  });
+}
+function startHomeTokens(){loadHomeTokens();clearInterval(hlTimer);hlTimer=setInterval(loadHomeTokens,10000)}
 
 $('d-disconnect').addEventListener('click',function(){disconnectWallet();toast('Wallet disconnected');location.hash='#/'});
 window.addEventListener('unhandledrejection',function(e){var r=e.reason;if(r&&(r.message==='closed'||r.code===4001))e.preventDefault()});
