@@ -1,0 +1,1609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clanker Router — Launch tokens on Base, earn from every trade</title>
+<meta name="description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 fill=%22%230A0A0C%22/%3E%3Cg fill=%22none%22 stroke=%22%239B6BFF%22 stroke-width=%2228%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%2292%22 y=%22168%22 width=%22328%22 height=%22236%22 rx=%2264%22/%3E%3Cpath d=%22M256 168v-58%22/%3E%3C/g%3E%3Ccircle cx=%22256%22 cy=%2294%22 r=%2222%22 fill=%22%239B6BFF%22/%3E%3Cg fill=%22none%22 stroke=%22%23F4F0FF%22 stroke-width=%2218%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M168 286h56%22/%3E%3Cpath d=%22M224 286C262 286 262 236 300 236h12%22/%3E%3Cpath d=%22M224 286h88%22/%3E%3Cpath d=%22M224 286C262 286 262 336 300 336h12%22/%3E%3C/g%3E%3Ccircle cx=%22164%22 cy=%22286%22 r=%2220%22 fill=%22%23F4F0FF%22/%3E%3Ccircle cx=%22340%22 cy=%22236%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3Ccircle cx=%22340%22 cy=%22286%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3Ccircle cx=%22340%22 cy=%22336%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clanker Router — Launch tokens on Base, earn from every trade">
+<meta property="og:site_name" content="Clanker Router">
+<meta property="og:description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
+<meta property="og:url" content="https://clankerouter.xyz/">
+<meta property="og:image" content="https://clankerouter.xyz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clanker Router — Launch tokens on Base, earn from every trade">
+<meta name="twitter:description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
+<meta name="twitter:image" content="https://clankerouter.xyz/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+:root{--accent:#9B6BFF;--cr-accent:#9B6BFF;color-scheme:dark}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0A0A0C}
+a{color:#F2F1F5}a:hover{color:#FFFFFF}
+*{box-sizing:border-box}
+@keyframes cr-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.cr-dot{animation:cr-pulse 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.cr-dot{animation:none}}
+.cr-nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;background:#131218;border:1.5px solid #2E2840;border-radius:999px;padding:8px 8px 8px 20px}
+.cr-brand{order:1;flex:1 1 auto;display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.cr-brand-text{font-family:Unbounded,sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.01em;white-space:nowrap}
+.cr-links{order:2;display:flex;align-items:center;gap:22px;font-size:15px;font-weight:500}
+.cr-links a{text-decoration:none;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
+.cr-wallet{order:3;background:#9B6BFF;color:#0A0A0C;font-family:Inter,sans-serif;font-weight:600;font-size:15px;padding:0 20px;border:0;border-radius:999px;min-height:44px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.cr-burger{display:none;order:4;width:44px;height:44px;border-radius:999px;border:1.5px solid #2E2840;background:#131218;cursor:pointer;align-items:center;justify-content:center;padding:0}
+.cr-wicon{display:none}
+.cr-hl{color:#0A0A0C;background:var(--cr-accent);padding:0 10px;border-radius:12px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (max-width:1100px){
+.cr-nav{border-radius:22px;gap:4px 12px;padding:10px 10px 10px 14px}
+.cr-wallet{order:2;width:44px;padding:0;justify-content:center;position:relative}
+.cr-wallet .js-wallet-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cr-wallet .cr-dot{position:absolute;top:8px;right:8px}
+.cr-wicon{display:block !important}
+.cr-burger{order:3 !important;display:inline-flex}
+.cr-links{order:5;flex-basis:100%;display:none;flex-direction:column;align-items:stretch;gap:0;border-top:1px solid #26222F;margin-top:6px;font-size:16px}
+.cr-links.cr-open{display:flex}
+.cr-links a{padding:4px 4px;border-bottom:1px solid #1E1B26}
+}
+@media (max-width:1000px){
+.cr-diagram>div{flex-basis:100% !important}
+.cr-arrow{transform:rotate(90deg)}
+}
+@media (max-width:760px){
+.cr-brand-text{font-size:13px}
+.cr-tabs{width:100%;display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr))}
+.cr-tab{padding:0 4px !important;font-size:14px !important;width:100%}
+.cr-sec{padding-left:16px !important;padding-right:16px !important;padding-top:56px !important;padding-bottom:56px !important}
+.cr-panel{padding:20px !important;border-radius:22px !important;gap:28px !important}
+.cr-fact{padding:12px !important}
+.cr-step{padding:14px 16px !important;gap:12px !important}
+}
+</style>
+<style>
+.view{display:none}
+.view.active{display:block}
+.cr-links a.cur{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.cr-page{max-width:1240px;margin:0 auto;padding:32px 16px 80px;display:flex;flex-direction:column;gap:28px}
+.cr-back{align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:13px;text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+.cr-tag{color:#0A0A0C;align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;background:var(--accent);padding:4px 12px;border-radius:999px}
+.cr-h1{margin:0;font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(32px,5.5vw,72px);line-height:1;letter-spacing:-0.035em;text-transform:uppercase}
+.cr-lead{margin:0;font-size:18px;color:#B4B1BF;max-width:640px}
+.cr-note{border:1.5px dashed #4A3A75;background:#221B33;border-radius:16px;padding:12px 16px;font-size:14px;color:#D6CCFF}
+.cr-grid{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.cr-card{flex:1.4 1 520px;min-width:0;background:#131218;border:1.5px solid #2E2840;border-radius:28px;padding:clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:22px}
+.cr-side{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.cr-dark{background:#17141F;color:#ECEAF2;border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.cr-mono{font-family:'IBM Plex Mono',monospace}
+.cr-kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9A97A6}
+.cr-dark .cr-kicker{color:#A9A3BB}
+.cr-kv{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #3A2A5C;padding-bottom:10px;font-size:15px}
+.cr-kv:last-child{border-bottom:0;padding-bottom:0}
+.cr-kv span:first-child{color:#A9A3BB}
+.cr-kv strong{text-align:right;overflow-wrap:anywhere}
+.cr-btn{background:#9B6BFF;color:#0A0A0C;font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;border:0;border-radius:999px;min-height:56px;padding:0 24px;cursor:pointer;letter-spacing:0.01em}
+.cr-btn:disabled{opacity:.6;cursor:wait}
+.cr-btn-s{background:#9B6BFF;color:#0A0A0C;font-family:Inter,sans-serif;font-weight:600;font-size:15px;border:0;border-radius:999px;min-height:44px;padding:0 18px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.cr-btn-a{background:#F2F1F5;color:#0A0A0C}
+.cr-btn-g{background:transparent;color:#F2F1F5;border:1.5px solid #3A3350}
+.cr-dark .cr-btn-g{color:#ECEAF2;border-color:#6B5A92}
+.cr-row{display:flex;flex-wrap:wrap;gap:16px}
+.cr-field{display:flex;flex-direction:column;gap:6px;min-width:0;position:relative}
+.cr-field label,.cr-label{font-weight:600;font-size:15px}
+.cr-field input[type=text],.cr-field input[type=url],.cr-field textarea,.cr-field select{width:100%;min-height:50px;padding:12px 14px;border:1.5px solid #332D42;border-radius:14px;background:#0A0A0C;font-family:Inter,sans-serif;font-size:16px;color:#F2F1F5}
+.cr-field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F2F1F5' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;cursor:pointer}
+.cr-field textarea{resize:vertical;line-height:1.5}
+.cr-field input:focus,.cr-field textarea:focus,.cr-field select:focus{outline:none;border-color:#9B6BFF;box-shadow:0 0 0 3px #3B2E5C}
+.cr-field [aria-invalid=true]{border-color:#FF6B5E !important}
+.cr-hint{font-size:13px;color:#9A97A6}
+.cr-err{font-size:13px;color:#FF6B5E}
+.cr-err:empty{display:none}
+.cr-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cr-chip{background:#0A0A0C;border:1.5px solid #26222F;border-radius:999px;min-height:40px;padding:0 14px;font-family:'IBM Plex Mono',monospace;font-size:14px;cursor:pointer;color:#F2F1F5}
+.cr-chip:hover{border-color:#9B6BFF}
+.cr-drop{display:flex;gap:16px;align-items:center;border:1.5px dashed #4A4060;border-radius:18px;padding:14px;cursor:pointer;background:#0F0E14}
+.cr-drop:hover,.cr-drop.drag{border-color:#9B6BFF;background:#1C1729}
+.cr-drop:focus-within{box-shadow:0 0 0 3px #3B2E5C}
+.cr-more summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
+.cr-status{display:none;background:#131218;border:1.5px solid #2E2840;border-radius:24px;padding:22px;flex-direction:column;gap:14px}
+.cr-status ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.cr-demo{font-family:'IBM Plex Mono',monospace;font-size:11px;background:#221B33;color:#D6CCFF;padding:2px 8px;border-radius:999px;vertical-align:middle}
+.cr-step-row{display:flex;gap:12px;align-items:center;font-size:15px;color:#9A97A6}
+.cr-step-row .b{width:26px;height:26px;border-radius:50%;border:1.5px solid #332D42;display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;flex:0 0 auto}
+.cr-step-row.on{color:#F2F1F5;font-weight:600}
+.cr-step-row.on .b{border-color:#9B6BFF;animation:cr-pulse 1.2s ease-in-out infinite}
+.cr-step-row.ok{color:#F2F1F5}
+.cr-step-row.ok .b{background:#9B6BFF;border-color:#9B6BFF;color:#0A0A0C}
+.cr-pos{background:#131218;border:1.5px solid #26222F;border-radius:18px;padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.cr-empty{border:1.5px dashed #332D42;border-radius:18px;padding:22px;text-align:center;color:#9A97A6;font-size:15px}
+.cr-seg{display:flex;gap:6px;background:#2A1C47;border-radius:999px;padding:4px}
+.cr-seg button{flex:1;background:transparent;color:#C9C3DB;border:0;border-radius:999px;min-height:36px;font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;padding:0 12px}
+.cr-seg button[aria-selected=true]{background:var(--accent);color:#F2F1F5;font-weight:600}
+.cr-code{margin:0;background:#120A24;border-radius:16px;padding:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.7;color:#E8E9EC;overflow-x:auto;white-space:pre}
+.cr-key{display:flex;gap:8px;align-items:center;background:#0A0A0C;border:1.5px solid #26222F;border-radius:14px;padding:8px 8px 8px 14px;font-family:'IBM Plex Mono',monospace;font-size:14px}
+.cr-key code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:760px){.cr-side{position:static !important}}
+.cr-stat{background:#131218;border:1.5px solid #26222F;border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cr-stat strong{font-family:Unbounded,sans-serif;font-size:26px;font-weight:700;overflow-wrap:anywhere}
+.cr-stat-dark{background:#17141F;border-color:#17141F;color:#ECEAF2}
+.cr-stat-dark .cr-kicker{color:#A9A3BB}
+.cr-mini{font-size:14px;font-weight:600;text-decoration:none;margin-top:auto}
+.cr-stat-dark .cr-mini{color:var(--accent)}
+.cr-act{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.cr-act .t{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9A97A6;flex:0 0 auto;padding-top:2px}
+.cr-tok{background:#131218;border:1.5px solid #2E2840;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.cr-tok-img{width:56px;height:56px;border-radius:16px;background:var(--accent);flex:0 0 auto;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-weight:800;font-size:22px;color:#17141F}
+.cr-live{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;background:#131218;border:1.5px solid #26222F}
+.cr-live-dot{width:8px;height:8px;border-radius:50%;background:#9A94AA}
+.cr-live-on .cr-live-dot{background:#16A34A;animation:cr-pulse 1.6s ease-in-out infinite}
+.cr-live-off .cr-live-dot{background:#FF6B5E}
+.cr-badge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;background:#221B33;color:#D6CCFF;border-radius:999px;padding:1px 7px;flex:0 0 auto}
+.cr-badge-new{background:#9B6BFF;color:#0A0A0C}
+@keyframes cr-flash{from{box-shadow:0 0 0 4px var(--accent)}to{box-shadow:0 0 0 0 transparent}}
+.cr-new{animation:cr-flash 2.4s ease-out}
+.cr-docs{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.cr-docnav{flex:0 0 200px;position:sticky;top:16px;display:flex;flex-direction:column;gap:2px;border-left:2px solid #26222F;padding-left:4px}
+.cr-docnav a{text-decoration:none;padding:8px 12px;border-radius:10px;font-size:15px;min-height:40px;display:flex;align-items:center}
+.cr-docnav a:hover{background:#221B33}
+.cr-doc{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:36px}
+.cr-doc article{scroll-margin-top:16px}
+.cr-doc h2{margin:0 0 12px;font-family:Unbounded,sans-serif;font-size:24px;letter-spacing:-0.01em}
+.cr-doc p,.cr-doc li{color:#D2D0DA;font-size:16.5px;line-height:1.65}
+.cr-doc p{margin:0 0 12px}
+.cr-doc ul,.cr-doc ol{margin:0 0 12px;padding-left:22px}
+.cr-doc a{color:#B79BFF}
+.cr-doc code{font-family:'IBM Plex Mono',monospace;font-size:.9em;background:#221B33;padding:1px 6px;border-radius:6px}
+.cr-doc pre code,.cr-code code{background:none;padding:0}
+.cr-table-wrap{overflow-x:auto;border:1.5px solid #26222F;border-radius:16px;background:#131218}
+.cr-table{width:100%;border-collapse:collapse;font-size:15px}
+.cr-table th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#9A97A6;padding:12px 14px;border-bottom:1.5px solid #26222F;white-space:nowrap}
+.cr-table td{padding:12px 14px;border-bottom:1px solid #1E1B26;vertical-align:top}
+.cr-table tr:last-child td{border-bottom:0}
+.cr-social{width:44px;height:44px;border-radius:999px;border:1.5px solid #2E2840;display:inline-flex;align-items:center;justify-content:center}
+.cr-social:hover{background:#221B33}
+.cr-fcol{display:flex;flex-direction:column;gap:6px;font-size:15px}
+.cr-fcol a{text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+@media (max-width:860px){
+.cr-docnav{flex:1 1 100%;position:static;flex-direction:row;overflow-x:auto;border-left:0;border-bottom:2px solid #26222F;padding:0 0 6px}
+.cr-docnav a{white-space:nowrap}
+}
+/* ---------- smooth ---------- */
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+@keyframes cr-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.view.active{animation:cr-in .45s cubic-bezier(.2,.7,.2,1) both}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+a,button,.cr-tok,.cr-stat,.cr-chip,.cr-drop,.cr-field input,.cr-field select,.cr-field textarea{transition:background-color .2s,border-color .2s,color .2s,box-shadow .25s,transform .2s cubic-bezier(.2,.7,.2,1),opacity .2s}
+.cr-btn:hover,.cr-btn-s:hover,.cr-wallet:hover{transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(155,107,255,.35)}
+.cr-btn:active,.cr-btn-s:active,.cr-wallet:active,.cr-chip:active,.cr-tab:active{transform:scale(.97);box-shadow:none}
+.cr-btn:disabled:hover{transform:none;box-shadow:none}
+.cr-tok:hover,.cr-stat:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(155,107,255,.35)}
+.cr-links a{position:relative}
+.cr-links.cr-open{animation:cr-in .3s cubic-bezier(.2,.7,.2,1) both}
+.cr-burger svg{transition:transform .25s}
+.cr-burger[aria-expanded=true] svg{transform:rotate(90deg)}
+:focus-visible{outline:3px solid #7C5CFF;outline-offset:2px;border-radius:6px}
+.cr-plus{display:inline-block;transition:transform .25s}
+details[open] .cr-plus{transform:rotate(45deg)}
+.cr-note-live{border-color:#9B6BFF;background:#17121F;color:#E6DCFF}
+.cr-wallet .cr-dot{background:#0A0A0C !important}
+.cr-wallet.is-on .cr-dot{background:#16A34A !important}
+/* ---------- modal + toast ---------- */
+.cr-modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.72);display:flex;align-items:flex-end;justify-content:center;padding:16px;opacity:0;transition:opacity .22s}
+.cr-modal.open{opacity:1}
+.cr-modal[hidden]{display:none}
+.cr-modal-box{font-family:Inter,system-ui,sans-serif;color:#F2F1F5;background:#131218;border:1.5px solid #2E2840;border-radius:26px;width:100%;max-width:420px;padding:22px;display:flex;flex-direction:column;gap:16px;transform:translateY(24px);transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+.cr-modal.open .cr-modal-box{transform:none}
+@media (min-width:600px){.cr-modal{align-items:center}}
+.cr-wallet-opt{display:flex;align-items:center;gap:12px;width:100%;min-height:54px;padding:10px 14px;border:1.5px solid #26222F;border-radius:16px;background:#0F0E14;font-family:Inter,sans-serif;font-size:16px;font-weight:600;color:#F2F1F5;cursor:pointer;text-decoration:none}
+.cr-wallet-opt:hover{border-color:#9B6BFF;background:#1C1729}
+.cr-toast{font-family:Inter,system-ui,sans-serif;position:fixed;left:50%;bottom:20px;z-index:60;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:#9B6BFF;color:#0A0A0C;padding:12px 18px;border-radius:999px;font-size:15px;font-weight:500;max-width:calc(100% - 32px);text-align:center;transition:opacity .25s,transform .3s cubic-bezier(.2,.7,.2,1)}
+.cr-toast.show{opacity:1;transform:translate(-50%,0)}
+.cr-toast.err{background:#FF6B5E}
+@media (prefers-reduced-motion: reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div style="width: 100%; min-height: 100vh; background: #0A0A0C; color: #F2F1F5; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55">
+
+<!-- NAV -->
+<header style="max-width: 1240px; margin: 0 auto; padding: 16px 16px">
+<nav aria-label="Main" class="cr-nav">
+<a href="#/" class="cr-brand">
+<span style="flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; background: #17141F; display: inline-flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12.5" rx="3.6"></rect><path d="M12 7.5V4.2"></path><path d="M7.6 13.75h3.1c1.9 0 1.9-2.5 3.8-2.5h.9M10.7 13.75h4.7M10.7 13.75c1.9 0 1.9 2.5 3.8 2.5h.9"></path></svg>
+</span>
+<span class="cr-brand-text">CLANKER ROUTER</span>
+</a>
+<div class="cr-links" id="cr-menu">
+<a href="#/fuel" data-route="fuel">Fuel</a>
+<a href="#/build" data-route="build">Build</a>
+<a href="#/stake" data-route="stake">Stake</a>
+<a href="#/plug" data-route="plug">Plug in</a>
+<a href="#/tokens" data-route="tokens">Tokens</a>
+<a href="#/docs" data-route="docs">Docs</a>
+<a href="#/dashboard" data-route="dashboard">Dashboard</a>
+</div>
+<button type="button" data-wallet class="cr-wallet"><svg class="cr-wicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18M16 14.5h2"></path></svg><span class="cr-dot" style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent); color: #0A0A0C"></span><span class="js-wallet-label">Connect wallet</span></button>
+<button type="button" class="cr-burger" id="cr-burger" aria-label="Menu" aria-expanded="false" aria-controls="cr-menu">
+<svg class="ic-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F1F5" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+<svg class="ic-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F1F5" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</nav>
+</header>
+
+<div class="view" id="v-home">
+<!-- HERO -->
+<section id="top" style="max-width: 1240px; margin: 0 auto; padding: 40px 16px 32px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
+<h1 style="flex: 1 1 640px; min-width: 0; margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(36px, 7vw, 104px); line-height: 1.02; letter-spacing: -0.04em; text-transform: uppercase">Feed the<br>machine.<br><span class="cr-hl">Get compute.</span></h1>
+<div style="flex: 1 1 320px; min-width: 0; max-width: 400px; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-size: 18px; color: #B4B1BF">Turn any token into AI credits, gift them to any wallet, or build a token that rewards its holders with model access.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#modes" style="text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Start a run →</a>
+<a href="#/docs" style="text-decoration: none; border: 1.5px solid #2E2840; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Docs</a>
+</div>
+</div>
+</div>
+
+<!-- machine diagram -->
+<div class="cr-diagram" style="background: #17141F; color: #ECEAF2; border-radius: 28px; padding: clamp(18px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+<div style="flex: 1 1 220px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">INPUT</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">Any token</span>
+<span style="font-size: 14px; color: #A9ACB3">ETH, stables, memecoins — [supported list]</span>
+</div>
+<div class="cr-arrow-wrap" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 4px">
+<svg class="cr-arrow" width="36" height="36" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg>
+</div>
+<div style="flex: 1.3 1 260px; min-width: 0; background: var(--accent); color: #0A0A0C; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600">THE ROUTER</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1">Swap → credit → route</span>
+<span style="font-size: 14px">One signature. Picks the best model for each call.</span>
+</div>
+<div class="cr-arrow-wrap" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 4px">
+<svg class="cr-arrow" width="36" height="36" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg>
+</div>
+<div style="flex: 1 1 220px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">OUTPUT</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">[N]+ AI models</span>
+<span style="font-size: 14px; color: #A9ACB3">One key, OpenAI-compatible API</span>
+</div>
+</div>
+</section>
+
+<!-- LIVE STATS -->
+<section aria-labelledby="h-stats" style="max-width: 1240px; margin: 0 auto; padding: 8px 16px 0">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 14px">
+<h2 id="h-stats" class="cr-kicker" style="margin: 0; font-weight: 600">NETWORK STATS</h2>
+<span class="cr-kicker" id="stats-src">Live stats coming soon</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+<div class="cr-stat"><span class="cr-kicker">CREDITS DELIVERED</span><strong data-stat="credits">—</strong></div>
+<div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong data-stat="tokens">—</strong></div>
+<div class="cr-stat"><span class="cr-kicker">TOTAL STAKED</span><strong data-stat="staked">—</strong></div>
+<div class="cr-stat"><span class="cr-kicker">API CALLS · 24H</span><strong data-stat="calls">—</strong></div>
+</div>
+</section>
+
+<!-- MODES (tabs) -->
+<section id="modes" class="cr-sec" style="max-width: 1240px; margin: 0 auto; padding: 80px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 4.4vw, 56px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase">Pick a mode</h2>
+<div role="tablist" aria-label="Modes" class="cr-tabs" style="display: flex; flex-wrap: wrap; gap: 6px; background: #131218; border: 1.5px solid #2E2840; border-radius: 999px; padding: 6px">
+<button type="button" class="cr-tab" role="tab" data-tab="0" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Fuel</button>
+<button type="button" class="cr-tab" role="tab" data-tab="1" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Build</button>
+<button type="button" class="cr-tab" role="tab" data-tab="2" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Stake</button>
+<button type="button" class="cr-tab" role="tab" data-tab="3" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Plug in</button>
+</div>
+</div>
+
+<div class="cr-panel" style="background: #131218; border: 1.5px solid #2E2840; border-radius: 28px; padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="align-self: flex-start; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; background: var(--accent); padding: 4px 12px; border-radius: 999px; color: #0A0A0C"><span id="m-tag"></span></span>
+<h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: clamp(26px, 3vw, 38px); line-height: 1.1; letter-spacing: -0.02em" id="m-title"></h3>
+<p style="margin: 0; font-size: 17px; color: #B4B1BF" id="m-desc"></p>
+<div id="m-facts" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 8px"></div>
+<a href="#modes" style="align-self: flex-start; text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 48px; display: inline-flex; align-items: center; margin-top: 8px" id="m-cta"></a>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<div id="m-code" style="background: #17141F; border-radius: 18px; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px 10px 18px; border-bottom: 1px solid #3A2A5C">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">terminal</span>
+<button type="button" id="copy-btn" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: var(--accent); color: #0A0A0C; border: 0; border-radius: 999px; padding: 0 14px; min-height: 32px; cursor: pointer; font-weight: 600">Copy</button>
+</div>
+<pre id="code" style="margin: 0; padding: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; line-height: 1.75; color: #E8E9EC; overflow-x: auto; white-space: pre">export OPENAI_BASE_URL="https://api.clankerouter.xyz/v1"
+export OPENAI_API_KEY="[YOUR-KEY]"
+export MODEL="auto"</pre>
+</div>
+<div id="m-steps" style="display: flex; flex-direction: column; gap: 12px"></div>
+</div>
+</div>
+</section>
+
+<!-- SAFETY -->
+<section id="safety" style="background: #17141F; color: #ECEAF2">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 36px">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 4.4vw, 56px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase">Bolted down<span style="color: var(--accent)">.</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 420px; min-width: 0; border: 1.5px solid #4A3A6B; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--accent)">ENFORCED BY CODE</span>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px">
+<li style="display: flex; gap: 12px"><span style="color: var(--accent)" aria-hidden="true">■</span>You sign every transaction from your own wallet</li>
+<li style="display: flex; gap: 12px"><span style="color: var(--accent)" aria-hidden="true">■</span>We never hold your keys or seed phrase</li>
+<li style="display: flex; gap: 12px"><span style="color: var(--accent)" aria-hidden="true">■</span>Token supply is fixed at launch</li>
+<li style="display: flex; gap: 12px"><span style="color: var(--accent)" aria-hidden="true">■</span>Launches run on Clanker’s public contracts on Base</li>
+</ul>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">STILL ON TRUST</span>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px; color: #C9CBD0">
+<li style="display: flex; gap: 12px"><span aria-hidden="true">□</span>Clanker’s launch contracts</li>
+<li style="display: flex; gap: 12px"><span aria-hidden="true">□</span>Our staking &amp; credit system (in development)</li>
+<li style="display: flex; gap: 12px"><span aria-hidden="true">□</span>Third-party AI model providers</li>
+<li style="display: flex; gap: 12px"><span aria-hidden="true">□</span>Token prices can drop to zero</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ (grid) -->
+<section id="faq" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 32px">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 4.4vw, 56px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase">Good questions</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">What's an AI credit?</h3><p style="margin: 0; color: #9A97A6">Prepaid balance for AI model calls, spent through one API key. [Pricing details.]</p></div>
+<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Do I need an account?</h3><p style="margin: 0; color: #9A97A6">No. Connect a wallet and sign a message — that's your login.</p></div>
+<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">How do holders earn?</h3><p style="margin: 0; color: #9A97A6">A share of trading fees is converted into credits for stakers. [Schedule &amp; rules.]</p></div>
+<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Which chains?</h3><p style="margin: 0; color: #9A97A6">Base for building tokens. [Other chains for Fuel.]</p></div>
+<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Which models?</h3><p style="margin: 0; color: #9A97A6">[List of supported models and providers.]</p></div>
+<div style="background: var(--accent); border: 1.5px solid #2E2840; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; justify-content: space-between; color: #0A0A0C"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Still stuck?</h3><a href="#/docs" style="align-self: flex-start; text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 18px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Read the docs →</a></div>
+</div>
+</section>
+
+<!-- CTA -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 0 24px 80px">
+<div style="background: var(--accent); border: 1.5px solid #2E2840; border-radius: 32px; padding: clamp(32px, 6vw, 72px); display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between; color: #0A0A0C">
+<h2 style="flex: 1 1 520px; min-width: 0; margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(32px, 5vw, 68px); line-height: 0.98; letter-spacing: -0.035em; text-transform: uppercase">Boot up your first clanker.</h2>
+<button type="button" data-wallet style="background: #9B6BFF; color: #0A0A0C; font-family: Inter, sans-serif; font-weight: 600; font-size: 17px; padding: 0 28px; border: 0; border-radius: 999px; min-height: 56px; cursor: pointer"><span class="js-wallet-label">Connect wallet</span></button>
+</div>
+</section>
+</div>
+
+<!-- ================= FUEL ================= -->
+<section class="view" id="v-fuel" aria-labelledby="h-fuel">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">MODE 1 · FUEL</span>
+<h1 class="cr-h1" id="h-fuel">Fuel a wallet</h1>
+<p class="cr-lead">Pay with any token you hold. The recipient gets AI credits they can spend on models right away.</p>
+</div>
+<div class="cr-note" role="note"><strong>Demo mode:</strong> sending here is simulated. No funds move and nothing is sent on-chain.</div>
+<div class="cr-grid">
+<form id="fu-form" class="cr-card" novalidate>
+<div class="cr-field">
+<label for="fu-to">Recipient wallet <span aria-hidden="true">*</span></label>
+<input id="fu-to" type="text" autocomplete="off" spellcheck="false" placeholder="0x… or name.eth" aria-describedby="e-fu-to" style="font-family: 'IBM Plex Mono', monospace">
+<span class="cr-err" id="e-fu-to"></span>
+<button type="button" id="fu-self" class="cr-chip" style="align-self: flex-start">Send to my wallet</button>
+</div>
+<div class="cr-row">
+<div class="cr-field" style="flex: 2 1 200px">
+<label for="fu-amt">Amount <span aria-hidden="true">*</span></label>
+<input id="fu-amt" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="e-fu-amt">
+<span class="cr-err" id="e-fu-amt"></span>
+</div>
+<div class="cr-field" style="flex: 1 1 160px">
+<label for="fu-token">Pay with</label>
+<select id="fu-token">
+<option>USDC</option>
+<option>ETH</option>
+<option>[Other token]</option>
+</select>
+</div>
+</div>
+<div class="cr-chips" aria-label="Quick amounts">
+<button type="button" class="cr-chip" data-amt="5">5</button>
+<button type="button" class="cr-chip" data-amt="10">10</button>
+<button type="button" class="cr-chip" data-amt="25">25</button>
+<button type="button" class="cr-chip" data-amt="50">50</button>
+</div>
+<div class="cr-field">
+<label for="fu-chain">Network</label>
+<select id="fu-chain">
+<option>Base</option>
+<option>[Other chain]</option>
+</select>
+</div>
+<div class="cr-field">
+<label for="fu-msg">Message <span style="font-weight: 400; color: #9A97A6">(optional)</span></label>
+<input id="fu-msg" type="text" maxlength="140" placeholder="gm, here's some compute">
+</div>
+<button type="submit" class="cr-btn" id="fu-btn">Connect wallet to send</button>
+</form>
+<aside class="cr-side" aria-label="Summary" style="position: sticky; top: 16px">
+<span class="cr-kicker">SUMMARY</span>
+<div class="cr-dark">
+<div class="cr-kv"><span>You pay</span><strong id="fu-s-pay">—</strong></div>
+<div class="cr-kv"><span>Recipient</span><strong id="fu-s-to" class="cr-mono">—</strong></div>
+<div class="cr-kv"><span>Network</span><strong id="fu-s-chain">Base</strong></div>
+<div class="cr-kv"><span>They receive</span><strong>≈ credits at [RATE]</strong></div>
+<div class="cr-kv"><span>Fee</span><strong>[FEE]</strong></div>
+</div>
+<div class="cr-status" id="fu-status" role="status" aria-live="polite">
+<strong style="font-family: Unbounded, sans-serif; font-size: 17px">Sending <span class="cr-demo">DEMO</span></strong>
+<ol id="fu-steps"></ol>
+<div id="fu-done" style="display: none; flex-direction: column; gap: 10px">
+<span style="font-size: 15px">Credits delivered to <code class="cr-mono" id="fu-done-to"></code></span>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#" class="cr-btn-s cr-btn-a">View transaction</a>
+<button type="button" class="cr-btn-s cr-btn-g" id="fu-again">Send another</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</section>
+
+<!-- ================= BUILD ================= -->
+<section class="view" id="v-build" aria-labelledby="h-build">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">MODE 2 · BUILD</span>
+<h1 class="cr-h1" id="h-build">Build a clanker</h1>
+<p class="cr-lead">Launch a real token on Base through Clanker, straight from your wallet. Gas is the only launch cost.</p>
+</div>
+<div class="cr-note cr-note-live" role="note"><strong>Live on Base:</strong> this deploys a real token. You pay gas (plus any launch buy) from your wallet, and a launch can't be undone.</div>
+<div class="cr-grid">
+<form id="b-form" class="cr-card" novalidate>
+<div class="cr-row">
+<div class="cr-field" style="flex: 2 1 240px">
+<label for="b-name">Token name <span aria-hidden="true">*</span></label>
+<input id="b-name" type="text" maxlength="32" autocomplete="off" placeholder="e.g. Rusty Bolt" aria-describedby="e-b-name">
+<span class="cr-err" id="e-b-name"></span>
+</div>
+<div class="cr-field" style="flex: 1 1 160px">
+<label for="b-ticker">Ticker <span aria-hidden="true">*</span></label>
+<div style="position: relative">
+<span aria-hidden="true" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', monospace; color: #9A97A6">$</span>
+<input id="b-ticker" type="text" maxlength="10" autocomplete="off" placeholder="BOLT" aria-describedby="e-b-ticker" style="padding-left: 28px; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase">
+</div>
+<span class="cr-err" id="e-b-ticker"></span>
+</div>
+</div>
+
+<div class="cr-field">
+<span class="cr-label" id="l-b-img">Image <span aria-hidden="true">*</span></span>
+<label for="b-img" class="cr-drop" id="b-drop">
+<span id="b-drop-preview" style="width: 64px; height: 64px; border-radius: 16px; background: #0A0A0C; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: 0 0 auto"></span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<strong id="b-drop-title" style="font-size: 15px; overflow-wrap: anywhere">Upload an image</strong>
+<span class="cr-hint">PNG, JPG, GIF or WEBP · max 2 MB · square works best</span>
+</span>
+</label>
+<input id="b-img" type="file" accept="image/png,image/jpeg,image/gif,image/webp" aria-labelledby="l-b-img" aria-describedby="e-b-img" style="position: absolute; width: 1px; height: 1px; opacity: 0">
+<div class="cr-field" style="margin-top: 4px">
+<label for="b-imgurl" style="font-weight: 500; font-size: 14px; color: #B4B1BF">…or paste an image link (https:// or ipfs://)</label>
+<input id="b-imgurl" type="url" autocomplete="off" spellcheck="false" placeholder="https://… or ipfs://…">
+</div>
+<span class="cr-err" id="e-b-img"></span>
+</div>
+
+<div class="cr-field">
+<label for="b-desc">Narrative <span style="font-weight: 400; color: #9A97A6">(<span id="b-count">0</span>/280)</span></label>
+<textarea id="b-desc" rows="4" maxlength="280" placeholder="What is this clanker about?"></textarea>
+</div>
+
+<details class="cr-more">
+<summary><span aria-hidden="true" class="cr-mono cr-plus">+</span>Links (optional)</summary>
+<div style="display: flex; flex-direction: column; gap: 14px; padding-top: 14px">
+<div class="cr-field"><label for="b-web">Website</label><input id="b-web" type="url" placeholder="https://"></div>
+<div class="cr-row">
+<div class="cr-field" style="flex: 1 1 200px"><label for="b-x">X / Twitter</label><input id="b-x" type="text" placeholder="@handle"></div>
+<div class="cr-field" style="flex: 1 1 200px"><label for="b-tg">Telegram</label><input id="b-tg" type="text" placeholder="t.me/…"></div>
+</div>
+</div>
+</details>
+
+<div style="background: #0A0A0C; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<span class="cr-kicker">TRADING TAX</span>
+<div class="cr-row">
+<div class="cr-field" style="flex: 1 1 140px">
+<label for="b-buy">Buy tax</label>
+<select id="b-buy"><option value="1">1%</option><option value="2">2%</option><option value="3" selected>3%</option><option value="5">5%</option><option value="10">10%</option></select>
+</div>
+<div class="cr-field" style="flex: 1 1 140px">
+<label for="b-sell">Sell tax</label>
+<select id="b-sell"><option value="1">1%</option><option value="2">2%</option><option value="3" selected>3%</option><option value="5">5%</option><option value="10">10%</option></select>
+</div>
+<div class="cr-field" style="flex: 1 1 160px">
+<label for="b-dev">Launch buy <span style="font-weight: 400; color: #9A97A6">(ETH, optional)</span></label>
+<input id="b-dev" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="e-b-dev">
+<span class="cr-err" id="e-b-dev"></span>
+</div>
+</div>
+<span class="cr-hint" id="b-cut">Taxes go to your wallet as the creator, minus a 15% platform fee. Clanker keeps a protocol share.</span>
+</div>
+
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; cursor: pointer">
+<input id="b-ack" type="checkbox" style="width: 22px; height: 22px; margin: 1px 0 0; accent-color: #9B6BFF; flex: 0 0 auto">
+<span>I understand this launches a real token on Base, it can't be undone, and token prices can drop to zero.</span>
+</label>
+<span class="cr-err" id="e-b-ack" style="margin-top: -14px"></span>
+<button type="submit" class="cr-btn" id="b-btn">Connect wallet to deploy</button>
+</form>
+
+<aside class="cr-side" aria-label="Preview" style="position: sticky; top: 16px">
+<span class="cr-kicker">LIVE PREVIEW</span>
+<div class="cr-dark" style="gap: 18px">
+<div style="display: flex; gap: 16px; align-items: center">
+<span id="b-p-img" style="width: 72px; height: 72px; border-radius: 20px; background: var(--accent); flex: 0 0 auto; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 26px; color: #17141F">?</span>
+<div style="min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<strong id="b-p-name" style="font-family: Unbounded, sans-serif; font-size: 20px; overflow-wrap: anywhere">Your token</strong>
+<span id="b-p-ticker" class="cr-mono" style="color: var(--accent)">$TICKER</span>
+</div>
+</div>
+<p id="b-p-desc" style="margin: 0; color: #C9C3DB; font-size: 15px; overflow-wrap: anywhere">Your narrative shows up here.</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">CHAIN</span><strong>Base</strong></div>
+<div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">TAX</span><strong id="b-p-tax">3% / 3%</strong></div>
+</div>
+</div>
+<div class="cr-status" id="b-status" role="status" aria-live="polite">
+<strong style="font-family: Unbounded, sans-serif; font-size: 17px" id="b-status-title">Deploying</strong>
+<ol id="b-steps"></ol>
+<p id="b-error" class="cr-err" style="margin: 0; font-size: 14px"></p>
+<div id="b-done" style="display: none; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; overflow-wrap: anywhere">Contract: <code class="cr-mono" id="b-addr"></code></span>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#" id="b-view" target="_blank" rel="noopener" class="cr-btn-s cr-btn-a">View on Clanker ↗</a>
+<a href="#" id="b-scan" target="_blank" rel="noopener" class="cr-btn-s cr-btn-g">Transaction ↗</a>
+<button type="button" class="cr-btn-s cr-btn-g" id="b-again">Build another</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</section>
+
+<!-- ================= STAKE ================= -->
+<section class="view" id="v-stake" aria-labelledby="h-stake">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">MODE 3 · STAKE</span>
+<h1 class="cr-h1" id="h-stake">Stake &amp; earn</h1>
+<p class="cr-lead">Stake a token built on Clanker Router and receive your share of its trading fees as AI credits — no claiming needed.</p>
+</div>
+<div class="cr-note" role="note"><strong>Demo mode:</strong> staking here is simulated. No tokens move.</div>
+<div class="cr-grid">
+<form id="st-form" class="cr-card" novalidate>
+<div class="cr-field">
+<label for="st-token">Token <span aria-hidden="true">*</span></label>
+<select id="st-token" aria-describedby="e-st-token"></select>
+<span class="cr-hint">Tokens you build in this session show up here. [Load the full list from your indexer.]</span>
+<span class="cr-err" id="e-st-token"></span>
+</div>
+<div class="cr-field" id="st-addr-wrap" style="display: none">
+<label for="st-addr">Token contract address</label>
+<input id="st-addr" type="text" autocomplete="off" spellcheck="false" placeholder="0x…" aria-describedby="e-st-addr" style="font-family: 'IBM Plex Mono', monospace">
+<span class="cr-err" id="e-st-addr"></span>
+</div>
+<div class="cr-field">
+<label for="st-amt">Amount to stake <span aria-hidden="true">*</span></label>
+<input id="st-amt" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="e-st-amt">
+<span class="cr-hint">Wallet balance: [BALANCE]</span>
+<span class="cr-err" id="e-st-amt"></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">PAYOUT</span><strong>[SCHEDULE]</strong></div>
+<div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">UNSTAKE WAIT</span><strong>[DURATION]</strong></div>
+</div>
+<button type="submit" class="cr-btn" id="st-btn">Connect wallet to stake</button>
+</form>
+<aside class="cr-side" aria-label="Your positions">
+<span class="cr-kicker">YOUR POSITIONS</span>
+<div id="st-list" style="display: flex; flex-direction: column; gap: 12px"></div>
+<div class="cr-dark">
+<div class="cr-kv"><span>Credits earned (all time)</span><strong>[—]</strong></div>
+<div class="cr-kv"><span>Next payout</span><strong>[TIME]</strong></div>
+<a href="#/plug" class="cr-btn-s cr-btn-a" style="align-self: flex-start">Spend credits →</a>
+</div>
+<div class="cr-status" id="st-status" role="status" aria-live="polite">
+<strong style="font-family: Unbounded, sans-serif; font-size: 17px">Staking <span class="cr-demo">DEMO</span></strong>
+<ol id="st-steps"></ol>
+</div>
+</aside>
+</div>
+</div>
+</section>
+
+<!-- ================= PLUG IN ================= -->
+<section class="view" id="v-plug" aria-labelledby="h-plug">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">MODE 4 · PLUG IN</span>
+<h1 class="cr-h1" id="h-plug">Plug in</h1>
+<p class="cr-lead">Sign in with your wallet, grab an API key, and point any OpenAI-compatible app or coding agent at the router.</p>
+</div>
+<div class="cr-note" role="note"><strong>Demo mode:</strong> the key shown here is fake and won't work against a real API.</div>
+<div class="cr-grid">
+<div class="cr-card">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="cr-kicker">STEP 1</span>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: 22px">Sign in</h2>
+<p style="margin: 0; color: #9A97A6">Sign a free message — no transaction, no gas.</p>
+</div>
+<button type="button" class="cr-btn" id="pl-sign">Connect wallet &amp; sign</button>
+<div id="pl-account" style="display: none; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="cr-kicker">STEP 2 · YOUR API KEY</span>
+<div class="cr-key">
+<code id="pl-key"></code>
+<button type="button" class="cr-chip" id="pl-show" aria-pressed="false">Show</button>
+<button type="button" class="cr-chip" id="pl-copykey">Copy</button>
+</div>
+<button type="button" class="cr-chip" id="pl-regen" style="align-self: flex-start">Regenerate key</button>
+<span class="cr-hint">Keep it secret. Regenerating disables the old key.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">BALANCE</span><strong>[BALANCE] credits</strong></div>
+<div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">MODELS</span><strong>[N]+</strong></div>
+</div>
+<a href="#/fuel" class="cr-btn-s cr-btn-g" style="align-self: flex-start">Top up credits</a>
+</div>
+</div>
+<aside class="cr-side" aria-label="Code">
+<span class="cr-kicker">STEP 3 · CONNECT YOUR TOOLS</span>
+<div class="cr-dark">
+<div class="cr-seg" role="tablist" aria-label="Snippet">
+<button type="button" role="tab" data-snip="env" aria-selected="true">.env</button>
+<button type="button" role="tab" data-snip="curl" aria-selected="false">curl</button>
+<button type="button" role="tab" data-snip="py" aria-selected="false">Python</button>
+</div>
+<pre class="cr-code" id="pl-code"></pre>
+<button type="button" class="cr-btn-s cr-btn-a" id="pl-copycode" style="align-self: flex-start">Copy</button>
+</div>
+</aside>
+</div>
+</div>
+</section>
+
+<!-- ================= TOKENS ================= -->
+<section class="view" id="v-tokens" aria-labelledby="h-tokens">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">EXPLORE</span>
+<h1 class="cr-h1" id="h-tokens">Tokens</h1>
+<p class="cr-lead">Live tokens deployed through Clanker on Base. Updates on its own every few seconds.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+<span class="cr-live" id="tk-live"><span class="cr-live-dot" aria-hidden="true"></span><span id="tk-live-text">Connecting…</span></span>
+<span class="cr-kicker" id="tk-total"></span>
+</div>
+<div class="cr-row" style="align-items: flex-end">
+<div class="cr-field" style="flex: 3 1 260px">
+<label for="tk-q">Search</label>
+<input id="tk-q" type="text" autocomplete="off" spellcheck="false" placeholder="Name, $ticker, 0x address or @creator">
+</div>
+<div class="cr-field" style="flex: 1 1 180px">
+<label for="tk-sort">Sort by</label>
+<select id="tk-sort">
+<option value="new">Newest</option>
+<option value="market-cap">Market cap</option>
+<option value="volume-h24">24h volume</option>
+<option value="price-percent-h24">24h change</option>
+<option value="tx-h24">24h trades</option>
+</select>
+</div>
+</div>
+<div id="tk-err" class="cr-note" role="alert" style="display: none; border-color: #FF6B5E; background: #241012; color: #FFB4AB"></div>
+<div id="tk-grid" aria-live="polite" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px"></div>
+<button type="button" id="tk-more" class="cr-btn-s cr-btn-g" style="align-self: center; display: none">Load more</button>
+<p class="cr-hint" style="margin: 0; text-align: center">Token data from <a href="https://www.clanker.world" target="_blank" rel="noopener">clanker.world</a>. Not an endorsement — do your own research.</p>
+</div>
+</section>
+
+<!-- ================= DASHBOARD ================= -->
+<section class="view" id="v-dashboard" aria-labelledby="h-dash">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">DASHBOARD</span>
+<h1 class="cr-h1" id="h-dash">Your machine</h1>
+<p class="cr-lead" id="d-sub">Connect a wallet to see your credits, stakes and activity.</p>
+</div>
+<div id="d-locked" class="cr-card" style="flex: none; align-items: flex-start">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: 22px">Wallet not connected</h2>
+<p style="margin: 0; color: #9A97A6">Your wallet is your account. No email, no password.</p>
+<button type="button" class="cr-btn" data-wallet>Connect wallet</button>
+</div>
+<div id="d-open" style="display: none; flex-direction: column; gap: 24px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+<div class="cr-stat cr-stat-dark"><span class="cr-kicker">WALLET · BASE</span><strong id="d-eth">—</strong><a href="#/fuel" class="cr-mini">Top up credits →</a></div>
+<div class="cr-stat"><span class="cr-kicker">ACTIVE STAKES</span><strong id="d-stakes">0</strong><a href="#/stake" class="cr-mini">Manage →</a></div>
+<div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong id="d-built">0</strong><a href="#/tokens" class="cr-mini">View →</a></div>
+<div class="cr-stat"><span class="cr-kicker">API KEY</span><strong id="d-key">None</strong><a href="#/plug" class="cr-mini">Get key →</a></div>
+</div>
+<div class="cr-grid">
+<div class="cr-card" style="flex: 1.4 1 480px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: 20px">API usage</h2>
+<span class="cr-kicker">LAST 7 DAYS</span>
+</div>
+<div class="cr-empty">No requests yet. Usage shows up here once your key starts making calls.<br><span class="cr-mono" style="font-size: 12px">[Load from GET /v1/usage]</span></div>
+</div>
+<div class="cr-side">
+<div class="cr-card" style="flex: none">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: 20px">Activity</h2>
+<ol id="d-activity" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"></ol>
+<button type="button" class="cr-btn-s cr-btn-g" id="d-disconnect" style="align-self: flex-start">Disconnect wallet</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= DOCS ================= -->
+<section class="view" id="v-docs" aria-labelledby="h-docs">
+<div class="cr-page">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">DOCS</span>
+<h1 class="cr-h1" id="h-docs">Documentation</h1>
+<p class="cr-lead">Everything you need to fuel wallets, build tokens, stake, and call models through the router.</p>
+</div>
+<div class="cr-docs">
+<nav class="cr-docnav" aria-label="Docs sections">
+<a href="#doc-overview">Overview</a>
+<a href="#doc-quickstart">Quickstart</a>
+<a href="#doc-fuel">Fuel</a>
+<a href="#doc-build">Build</a>
+<a href="#doc-stake">Stake</a>
+<a href="#doc-api">API reference</a>
+<a href="#doc-routing">Routing</a>
+<a href="#doc-errors">Errors</a>
+<a href="#doc-fees">Fees</a>
+<a href="#doc-contracts">Contracts</a>
+</nav>
+<div class="cr-doc">
+<article id="doc-overview">
+<h2>Overview</h2>
+<p>Clanker Router connects on-chain value to AI compute. It does three things:</p>
+<ul>
+<li><strong>Fuel</strong> — turn any token into AI credits for any wallet.</li>
+<li><strong>Build &amp; Stake</strong> — launch tokens on Base whose trading fees are paid to stakers as AI credits.</li>
+<li><strong>Plug in</strong> — spend credits on [N]+ models through one OpenAI-compatible API.</li>
+</ul>
+<p>Your wallet is your account. There is no email sign-up.</p>
+</article>
+<article id="doc-quickstart">
+<h2>Quickstart</h2>
+<ol>
+<li>Connect a wallet and get credits on the <a href="#/fuel">Fuel</a> tab.</li>
+<li>Go to <a href="#/plug">Plug in</a>, sign a message, and copy your API key.</li>
+<li>Set two environment variables and call any model:</li>
+</ol>
+<pre class="cr-code">export OPENAI_BASE_URL="https://api.clankerouter.xyz/v1"
+export OPENAI_API_KEY="cr-..."
+
+curl $OPENAI_BASE_URL/chat/completions \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"auto","messages":[{"role":"user","content":"gm"}]}'</pre>
+</article>
+<article id="doc-fuel">
+<h2>Fuel</h2>
+<p>Send AI credits to any wallet address or ENS name. You can pay with [supported tokens] on [supported chains]. Your payment is swapped to a stablecoin and deposited to the recipient's credit account in one transaction.</p>
+<p>Credits are priced at <strong>[RATE]</strong>. The protocol fee is <strong>[FEE]</strong>. Clanker Router [never holds / briefly holds] funds during this flow.</p>
+</article>
+<article id="doc-build">
+<h2>Build</h2>
+<p>Launch a token on Base with a name, ticker, image and narrative. The launch goes through Clanker's v5 contracts and is signed by your own wallet — Clanker Router never holds your keys.</p>
+<ul>
+<li>Cost: gas, plus an optional launch buy in ETH.</li>
+<li>Buy and sell tax: you choose 1–10% each. Taxes go to you as the creator, minus a 15% platform fee. Clanker keeps a protocol share.</li>
+<li>Trading starts right away on Uniswap v4, and the token appears on clanker.world.</li>
+<li>Image: upload a file or paste an <code>https://</code> or <code>ipfs://</code> link.</li>
+</ul>
+</article>
+<article id="doc-stake">
+<h2>Stake</h2>
+<p>Stake a token to receive its share of trading fees as AI credits. Fees are collected <strong>[SCHEDULE]</strong>, converted to stablecoin, and credited automatically — there is nothing to claim.</p>
+<p>Unstaking takes <strong>[DURATION]</strong>. Only the staking wallet can move a stake.</p>
+</article>
+<article id="doc-api">
+<h2>API reference</h2>
+<p>Base URL: <code>https://api.clankerouter.xyz/v1</code>. Authenticate with <code>Authorization: Bearer &lt;your key&gt;</code>. The API follows the OpenAI request and response format, so existing SDKs work by changing the base URL.</p>
+<div class="cr-table-wrap">
+<table class="cr-table">
+<thead><tr><th scope="col">Method</th><th scope="col">Path</th><th scope="col">What it does</th></tr></thead>
+<tbody>
+<tr><td><code>POST</code></td><td><code>/chat/completions</code></td><td>Chat completion, streaming supported</td></tr>
+<tr><td><code>GET</code></td><td><code>/models</code></td><td>List available models and prices</td></tr>
+<tr><td><code>GET</code></td><td><code>/credits</code></td><td>Credit balance for your key [confirm]</td></tr>
+<tr><td><code>GET</code></td><td><code>/usage</code></td><td>Usage history [confirm]</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+<article id="doc-routing">
+<h2>Routing</h2>
+<p>Pass a specific model ID to pin it, or <code>"model": "auto"</code> to let the router choose. [Describe how auto picks a model — cost, latency, quality — and how fallback works when a provider fails.]</p>
+</article>
+<article id="doc-errors">
+<h2>Errors</h2>
+<div class="cr-table-wrap">
+<table class="cr-table">
+<thead><tr><th scope="col">Code</th><th scope="col">Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>401</code></td><td>Missing or invalid API key</td></tr>
+<tr><td><code>402</code></td><td>Not enough credits — top up on Fuel</td></tr>
+<tr><td><code>429</code></td><td>Rate limited — retry after the time in <code>Retry-After</code></td></tr>
+<tr><td><code>5xx</code></td><td>Upstream provider error — retried automatically when fallback is on</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+<article id="doc-fees">
+<h2>Fees</h2>
+<div class="cr-table-wrap">
+<table class="cr-table">
+<thead><tr><th scope="col">Action</th><th scope="col">Fee</th><th scope="col">Goes to</th></tr></thead>
+<tbody>
+<tr><td>Fuel</td><td>[FEE]</td><td>[Protocol]</td></tr>
+<tr><td>Token trade</td><td>1–10% buy/sell tax (set at launch)</td><td>Creator 85% · platform fee 15% · plus Clanker protocol share</td></tr>
+<tr><td>API usage</td><td>[Model price + markup?]</td><td>Model provider · [Protocol]</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+<article id="doc-contracts">
+<h2>Contracts</h2>
+<p>All contracts are on Base. Verify them on Basescan before interacting.</p>
+<div class="cr-table-wrap">
+<table class="cr-table">
+<thead><tr><th scope="col">Contract</th><th scope="col">Address</th></tr></thead>
+<tbody>
+<tr><td>Token factory</td><td><code>0x[ADDRESS]</code></td></tr>
+<tr><td>Staking</td><td><code>0x[ADDRESS]</code></td></tr>
+<tr><td>Fee router</td><td><code>0x[ADDRESS]</code></td></tr>
+<tr><td>$[TICKER]</td><td><code>0x[ADDRESS]</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Audit: <strong>[audit firm + report link, or "not yet audited"]</strong></p>
+</article>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= TERMS ================= -->
+<section class="view" id="v-terms" aria-labelledby="h-terms">
+<div class="cr-page" style="max-width: 860px">
+<a href="#/" class="cr-back">← Home</a>
+<h1 class="cr-h1" id="h-terms" style="font-size: clamp(30px, 5vw, 56px)">Terms of Service</h1>
+<p class="cr-hint">Last updated November 22, 2026</p>
+<div class="cr-doc">
+<article><h2>1. About these terms</h2><p>These terms govern your use of Clanker Router, including this website, its apps and its API (together, the "Service"), run by the Clanker Router team ("we", "us"). By using the Service you agree to these terms. If you don't agree, please don't use it.</p></article>
+<article><h2>2. Eligibility</h2><p>You must be at least 18 years old and legally able to agree to these terms. You may not use the Service if you are located in, or a resident of, a country or region subject to comprehensive sanctions, or if you are on any sanctions list. You are responsible for making sure your use of the Service is legal where you live.</p></article>
+<article><h2>3. Your wallet and keys</h2><p>Your wallet is your account. You alone control your wallet, private keys and API keys, and you are responsible for keeping them safe. We never ask for your seed phrase. We can't recover lost keys or reverse transactions on the blockchain.</p></article>
+<article><h2>4. AI credits</h2><p>Credits are a prepaid balance for using AI models through the Service. Credits are not money, a security or an investment, and they can't be transferred out as cash. Credits are non-refundable except where the law requires otherwise. Model prices and availability can change at any time.</p></article>
+<article><h2>5. Tokens, staking and risk</h2><p>Tokens shown or launched through the Service are created by their creators, not by us, and we don't endorse any of them. Token prices are highly volatile and can fall to zero. Smart contracts can contain bugs. Staking rewards depend on trading activity and are never guaranteed. Nothing on the Service is financial, investment, legal or tax advice. Always do your own research.</p></article>
+<article><h2>6. Acceptable use</h2><p>Don't use the Service or its API to break the law, harm others, infringe anyone's rights, send spam or malware, try to break or overload the Service, or get around rate limits. You must also follow the usage policies of the AI model providers you reach through the Service. We may suspend or revoke API keys that break these rules.</p></article>
+<article><h2>7. Third-party services</h2><p>The Service relies on third parties, including blockchains, decentralized exchanges, token launch protocols, data providers and AI model providers. We don't control them and aren't responsible for their availability, accuracy or behavior. Token data shown on the Service may come from third-party sources and may be delayed or incomplete.</p></article>
+<article><h2>8. No warranty</h2><p>The Service is provided "as is" and "as available", without warranties of any kind. We don't promise it will be uninterrupted, error-free or secure.</p></article>
+<article><h2>9. Limitation of liability</h2><p>To the maximum extent allowed by law, we are not liable for any indirect, incidental or consequential losses, lost profits, or losses caused by token prices, smart contracts, blockchain networks or third-party services. Our total liability for any claim is limited to the greater of the amount you paid us in the 12 months before the claim or US$100.</p></article>
+<article><h2>10. Changes and termination</h2><p>We may change the Service or these terms at any time. When we update the terms we'll change the date at the top of this page. You can stop using the Service at any time, and we may suspend access if you break these terms.</p></article>
+<article><h2>11. Contact</h2><p>Questions about these terms? Reach us through the official channels linked on this site.</p></article>
+</div>
+</div>
+</section>
+
+<!-- ================= PRIVACY ================= -->
+<section class="view" id="v-privacy" aria-labelledby="h-privacy">
+<div class="cr-page" style="max-width: 860px">
+<a href="#/" class="cr-back">← Home</a>
+<h1 class="cr-h1" id="h-privacy" style="font-size: clamp(30px, 5vw, 56px)">Privacy Policy</h1>
+<p class="cr-hint">Last updated November 22, 2026</p>
+<div class="cr-doc">
+<article><h2>The short version</h2><p>No sign-up, no email, no password. We use your public wallet address as your account, keep the minimum we need to run the Service, and never sell your data.</p></article>
+<article><h2>What we collect</h2><ul>
+<li><strong>Wallet address</strong> — public on-chain data, used as your account ID.</li>
+<li><strong>API usage</strong> — which models you call, token counts, credits used and timestamps, so we can bill credits and show your usage.</li>
+<li><strong>Prompts and responses</strong> — passed to the model provider to generate a reply. We don't use them to train models.</li>
+<li><strong>Technical data</strong> — IP address, browser type and error logs, used for security and to keep the Service running.</li>
+</ul></article>
+<article><h2>How we use it</h2><p>To run the Service, credit and bill your account, show your dashboard, prevent abuse and fix problems. We don't sell your data and we don't use it for advertising.</p></article>
+<article><h2>Who we share it with</h2><ul>
+<li><strong>AI model providers</strong> — your prompts go to the model you call, under that provider's own terms.</li>
+<li><strong>Infrastructure providers</strong> — hosting and blockchain node (RPC) services that help us run the Service.</li>
+<li><strong>Authorities</strong> — only when the law requires it.</li>
+</ul><p>Anything you do on a blockchain is public and permanent by design.</p></article>
+<article><h2>How long we keep it</h2><p>API usage records are kept for up to 12 months. Server logs are kept for up to 30 days. On-chain data can't be deleted by anyone, including us.</p></article>
+<article><h2>Cookies</h2><p>We don't use advertising or tracking cookies. Your wallet extension may store its own data in your browser.</p></article>
+<article><h2>Your choices</h2><p>You can stop using the Service at any time. Depending on where you live, you may have the right to access or delete the off-chain data we hold about you. Contact us through the official channels on this site and sign a message from your wallet so we can confirm it's you.</p></article>
+<article><h2>Changes</h2><p>If we change this policy we'll update the date at the top of this page.</p></article>
+</div>
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer style="border-top: 1.5px solid #2E2840; background: #131218">
+<div style="max-width: 1240px; margin: 0 auto; padding: 48px 16px 28px; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-wrap: wrap; gap: 36px; justify-content: space-between">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px; max-width: 340px">
+<a href="#/" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+<span style="width: 34px; height: 34px; border-radius: 10px; background: #17141F; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12.5" rx="3.6"></rect><path d="M12 7.5V4.2"></path><path d="M7.6 13.75h3.1c1.9 0 1.9-2.5 3.8-2.5h.9M10.7 13.75h4.7M10.7 13.75c1.9 0 1.9 2.5 3.8 2.5h.9"></path></svg></span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 800">CLANKER ROUTER</span>
+</a>
+<p style="margin: 0; color: #9A97A6; font-size: 15px">Tokens in, compute out. AI credits on Base.</p>
+<div style="display: flex; gap: 10px">
+<a href="https://x.com/[HANDLE]" class="cr-social" aria-label="X (Twitter)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M17.7 3H21l-7.2 8.2L22.3 21h-6.6l-5.2-6.8L4.6 21H1.3l7.7-8.8L1 3h6.8l4.7 6.2L17.7 3zm-1.2 16h1.8L7.6 4.9H5.7L16.5 19z"></path></svg></a>
+<a href="https://t.me/[GROUP]" class="cr-social" aria-label="Telegram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M21.9 4.6 18.8 19.3c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.7 13.2 2 11.7c-1-.3-1-1 .2-1.5l18.3-7c.9-.3 1.6.2 1.4 1.4z"></path></svg></a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px">
+<div class="cr-fcol"><span class="cr-kicker">PRODUCT</span><a href="#/fuel">Fuel</a><a href="#/build">Build</a><a href="#/stake">Stake</a><a href="#/plug">Plug in</a><a href="#/tokens">Tokens</a></div>
+<div class="cr-fcol"><span class="cr-kicker">RESOURCES</span><a href="#/docs">Docs</a><a href="#doc-api">API reference</a><a href="#doc-contracts">Contracts</a><a href="#/dashboard">Dashboard</a><a href="#faq">FAQ</a></div>
+<div class="cr-fcol"><span class="cr-kicker">LEGAL</span><a href="#/terms">Terms</a><a href="#/privacy">Privacy</a></div>
+</div>
+</div>
+<div style="border-top: 1px solid #26222F; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 13px; color: #9A97A6">
+<span class="cr-mono">© 2026 Clanker Router</span>
+<span class="cr-mono">Not financial advice. Tokens are volatile and can lose all value.</span>
+</div>
+</div>
+</footer>
+
+
+</div>
+<div class="cr-modal" id="cr-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cr-modal-title">
+<div class="cr-modal-box">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 id="cr-modal-title" style="margin: 0; font-family: Unbounded, sans-serif; font-size: 19px">Connect a wallet</h2>
+<button type="button" id="cr-modal-close" class="cr-burger" style="display: inline-flex" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2F1F5" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div id="cr-modal-body"></div>
+</div>
+</div>
+<div class="cr-toast" id="cr-toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+function $(id){return document.getElementById(id)}
+function el(tag,style,text){var e=document.createElement(tag);if(style)e.setAttribute('style',style);if(text!=null)e.textContent=text;return e}
+function short(a){return a.length>14?a.slice(0,6)+'…'+a.slice(-4):a}
+function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
+
+/* ================= ROUTER ================= */
+var VIEWS={'':'v-home',fuel:'v-fuel',build:'v-build',stake:'v-stake',plug:'v-plug',tokens:'v-tokens',dashboard:'v-dashboard',docs:'v-docs',terms:'v-terms',privacy:'v-privacy'};
+function keyFor(id){for(var k in VIEWS)if(VIEWS[k]===id)return k;return ''}
+function route(){
+  var h=location.hash||'',key='',id=null,anchor=null;
+  if(h.indexOf('#/')===0){key=h.slice(2);id=VIEWS[key]||null}
+  else if(h.length>1){anchor=h.slice(1);var t=document.getElementById(anchor);var v=t&&t.closest('.view');id=v?v.id:'v-home';key=keyFor(id)}
+  if(!id){id='v-home';key=''}
+  document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active',v.id===id)});
+  document.querySelectorAll('[data-route]').forEach(function(a){var on=key!==''&&a.getAttribute('data-route')===key;a.classList.toggle('cur',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  setMenu(false);
+  if(anchor&&$(anchor)){requestAnimationFrame(function(){$(anchor).scrollIntoView({behavior:'smooth'})})}
+  else window.scrollTo(0,0);
+  if(id==='v-stake')fillStakeTokens();
+  if(id==='v-tokens')startTokens();
+  if(id==='v-dashboard')renderDash();
+}
+window.addEventListener('hashchange',route);
+
+/* ================= MENU ================= */
+var menu=$('cr-menu'),burger=$('cr-burger');
+function setMenu(open){menu.classList.toggle('cr-open',open);burger.setAttribute('aria-expanded',open);burger.querySelector('.ic-open').style.display=open?'none':'';burger.querySelector('.ic-close').style.display=open?'':'none';}
+burger.addEventListener('click',function(){setMenu(!menu.classList.contains('cr-open'))});
+
+/* ================= WALLET (real, no library) =================
+   Works with any browser wallet (MetaMask, Coinbase Wallet, Rabby, Phantom, …) through EIP-6963 / window.ethereum.
+   On phones without an in-app browser it offers deep links into wallet apps. */
+var BASE_CHAIN={chainId:'0x2105',chainName:'Base',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://mainnet.base.org'],blockExplorerUrls:['https://basescan.org']};
+var account=null,activeProvider=null,walletName='';
+var wallets=[];
+window.addEventListener('eip6963:announceProvider',function(e){
+  var d=e.detail;if(!d||!d.provider||!d.info)return;
+  if(!wallets.some(function(w){return w.info.uuid===d.info.uuid}))wallets.push(d);
+});
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+function allWallets(){
+  if(wallets.length)return wallets;
+  if(window.ethereum)return [{info:{name:window.ethereum.isCoinbaseWallet?'Coinbase Wallet':window.ethereum.isMetaMask?'MetaMask':'Browser wallet',icon:'',uuid:'injected'},provider:window.ethereum}];
+  return [];
+}
+function isMobile(){return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)}
+function walletErr(e){
+  if(e&&(e.code===4001||e.code==='ACTION_REJECTED'||/reject|denied|cancel/i.test(e.message||'')))return 'You cancelled in your wallet.';
+  return (e&&(e.shortMessage||e.message))||'Something went wrong with your wallet.';
+}
+/* --- modal --- */
+function openModal(title,body){
+  $('cr-modal-title').textContent=title;var b=$('cr-modal-body');b.innerHTML='';b.appendChild(body);
+  var m=$('cr-modal');m.hidden=false;requestAnimationFrame(function(){m.classList.add('open')});
+  setTimeout(function(){var f=m.querySelector('button,a');if(f)f.focus()},60);
+}
+function closeModal(){var m=$('cr-modal');m.classList.remove('open');setTimeout(function(){m.hidden=true},220);if(modalReject){var r=modalReject;modalReject=null;r(new Error('closed'))}}
+var modalReject=null;
+$('cr-modal-close').addEventListener('click',closeModal);
+$('cr-modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('cr-modal').hidden)closeModal()});
+function pickWallet(){
+  var list=allWallets();
+  if(list.length===1)return Promise.resolve(list[0]);
+  return new Promise(function(resolve,reject){
+    var box=el('div','display:flex;flex-direction:column;gap:10px');
+    if(!list.length){
+      box.appendChild(el('p','margin:0;color:#B4B1BF',isMobile()?'Open this site inside your wallet app to connect:':'No browser wallet found. Install one, then refresh this page:'));
+      var here=location.host+location.pathname;
+      var links=isMobile()?[['Open in MetaMask','https://metamask.app.link/dapp/'+here],['Open in Coinbase Wallet','https://go.cb-w.com/dapp?cb_url='+encodeURIComponent(location.href)]]:[['Get MetaMask','https://metamask.io/download/'],['Get Coinbase Wallet','https://www.coinbase.com/wallet/downloads'],['Get Rabby','https://rabby.io/']];
+      links.forEach(function(l){var a=el('a',null,l[0]+' ↗');a.href=l[1];a.target='_blank';a.rel='noopener';a.className='cr-wallet-opt';box.appendChild(a)});
+      modalReject=reject;openModal('Connect a wallet',box);return;
+    }
+    list.forEach(function(w){
+      var b=el('button');b.type='button';b.className='cr-wallet-opt';
+      if(w.info.icon&&/^data:image\//.test(w.info.icon)){var i=el('img','width:28px;height:28px;border-radius:8px');i.src=w.info.icon;i.alt='';b.appendChild(i)}
+      b.appendChild(el('span',null,w.info.name));
+      b.addEventListener('click',function(){modalReject=null;closeModal();resolve(w)});
+      box.appendChild(b);
+    });
+    modalReject=reject;openModal('Choose a wallet',box);
+  });
+}
+function ensureBase(p){
+  return p.request({method:'eth_chainId'}).then(function(id){
+    if(String(id).toLowerCase()===BASE_CHAIN.chainId)return;
+    return p.request({method:'wallet_switchEthereumChain',params:[{chainId:BASE_CHAIN.chainId}]}).catch(function(e){
+      if(e&&(e.code===4902||e.code===-32603))return p.request({method:'wallet_addEthereumChain',params:[BASE_CHAIN]});
+      throw e;
+    });
+  });
+}
+function attach(w,addr){
+  if(activeProvider&&activeProvider.removeListener){try{activeProvider.removeListener('accountsChanged',onAccounts);activeProvider.removeListener('chainChanged',onChain)}catch(x){}}
+  activeProvider=w.provider;walletName=w.info.name;account=addr;
+  if(activeProvider.on){activeProvider.on('accountsChanged',onAccounts);activeProvider.on('chainChanged',onChain)}
+  try{localStorage.setItem('cr-wallet',w.info.uuid||'injected')}catch(x){}
+  renderWallet();
+}
+function onAccounts(a){if(!a||!a.length)disconnectWallet();else{account=a[0];renderWallet()}}
+function onChain(){renderWallet()}
+function connectWallet(){
+  return pickWallet().then(function(w){
+    return w.provider.request({method:'eth_requestAccounts'}).then(function(a){
+      if(!a||!a.length)throw new Error('No account returned.');
+      return ensureBase(w.provider).catch(function(){/* still connected, deploy will ask again */}).then(function(){attach(w,a[0]);toast('Connected '+short(a[0]));return a[0]});
+    });
+  });
+}
+function ensureWallet(){
+  if(account)return Promise.resolve(account);
+  return connectWallet().catch(function(e){if(e&&e.message!=='closed')toast(walletErr(e),true);throw e});
+}
+function disconnectWallet(){
+  if(activeProvider&&activeProvider.request){activeProvider.request({method:'wallet_revokePermissions',params:[{eth_accounts:{}}]}).catch(function(){})}
+  account=null;activeProvider=null;walletName='';apiKey=null;
+  try{localStorage.removeItem('cr-wallet')}catch(x){}
+  $('pl-account').style.display='none';$('pl-sign').style.display='';renderCode();renderWallet();
+}
+/* restore a previous connection silently (no popup) */
+setTimeout(function(){
+  var saved=null;try{saved=localStorage.getItem('cr-wallet')}catch(x){}
+  if(!saved)return;
+  var w=allWallets().filter(function(x){return (x.info.uuid||'injected')===saved})[0]||allWallets()[0];
+  if(!w)return;
+  w.provider.request({method:'eth_accounts'}).then(function(a){if(a&&a.length)attach(w,a[0])}).catch(function(){});
+},300);
+var busy={fu:false,b:false,st:false};
+function renderWallet(){
+  document.querySelectorAll('.js-wallet-label').forEach(function(l){l.textContent=account?short(account):'Connect wallet'});
+  document.querySelectorAll('.cr-wallet').forEach(function(b){b.classList.toggle('is-on',!!account);b.setAttribute('aria-label',account?'Wallet '+short(account)+' — open dashboard':'Connect wallet')});
+  if(!busy.fu)$('fu-btn').textContent=account?'Send credits':'Connect wallet to send';
+  if(!busy.b)$('b-btn').textContent=account?'Deploy on Base':'Connect wallet to deploy';
+  if(!busy.st)$('st-btn').textContent=account?'Stake':'Connect wallet to stake';
+  if(!apiKey)$('pl-sign').textContent=account?'Sign message':'Connect wallet & sign';
+  renderDash();
+}
+document.querySelectorAll('[data-wallet]').forEach(function(b){b.addEventListener('click',function(){
+  if(account){location.hash='#/dashboard';return}
+  ensureWallet().catch(function(){});
+})});
+/* --- toast --- */
+var toastTimer=null;
+function toast(msg,isErr){var t=$('cr-toast');t.textContent=msg;t.classList.toggle('err',!!isErr);t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show')},3200)}
+
+/* ================= SHARED HELPERS ================= */
+function showErr(id,msg){$('e-'+id).textContent=msg;var f=$(id);if(f&&f.tagName!=='INPUT'||f&&f.type!=='checkbox'&&f.type!=='file')f&&f.setAttribute('aria-invalid','true')}
+function clearErr(id){var e=$('e-'+id);if(e)e.textContent='';var f=$(id);if(f)f.removeAttribute('aria-invalid')}
+function focusFirst(el){if(!el)return;if(el.focus)el.focus();el.scrollIntoView({block:'center',behavior:'smooth'})}
+function renderSteps(ol,steps,active){
+  ol.innerHTML='';
+  steps.forEach(function(s,i){
+    var li=el('li');li.className='cr-step-row'+(i<active?' ok':i===active?' on':'');
+    var b=el('span',null,i<active?'✓':String(i+1));b.className='b';
+    li.appendChild(b);li.appendChild(document.createTextNode(s));ol.appendChild(li);
+  });
+}
+/* Simulated multi-step flow. Replace the body of each real action below with your contract calls. */
+function runSteps(ol,steps){
+  var i=0;
+  return (function next(){
+    renderSteps(ol,steps,i);
+    if(i>=steps.length)return Promise.resolve();
+    return wait(1000).then(function(){i++;return next()});
+  })();
+}
+function isAddr(v){return /^0x[0-9a-fA-F]{40}$/.test(v)}
+function isEns(v){return /^[a-z0-9-]+(\.[a-z0-9-]+)*\.eth$/i.test(v)}
+function isAmount(v){return /^\d+(\.\d+)?$/.test(v)&&parseFloat(v)>0}
+function copyText(txt,btn){
+  var done=function(){var o=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=o},1400)};
+  if(navigator.clipboard)navigator.clipboard.writeText(txt).then(done,done);else done();
+}
+
+/* ================= HOME: mode tabs ================= */
+var modes=[
+{tag:'MODE 1 · FUEL',title:'Top up any wallet with AI credits.',desc:'Pay with whatever token you hold. The recipient gets a credit balance they can spend on AI models right away.',cta:'Fuel a wallet',href:'#/fuel',code:false,
+facts:[['SIGNATURES','1'],['CHAINS','[Base + …]']],
+steps:[['Enter wallet + amount','Paste an address or ENS name.'],['Pay with any token','Swapped to a stablecoin under the hood.'],['Credits land','Ready to use with their wallet login.']]},
+{tag:'MODE 2 · BUILD',title:'Build a token that pays out in AI.',desc:'Name it, ticker it, ship it on Base through Clanker — straight from your wallet. Every trade pays a tax to you, the creator.',cta:'Open the builder',href:'#/build',code:false,
+facts:[['BUY / SELL TAX','1–10%'],['TAX GOES TO','You'],['LAUNCH COST','Gas only'],['POOL','Uniswap v4']],
+steps:[['Describe your token','Name, ticker, image and a short pitch.'],['Sign one transaction','Deployed on Base via Clanker.'],['Trading opens','Taxes flow to your wallet.']]},
+{tag:'MODE 3 · STAKE',title:'Hold the token. Earn model time.',desc:'Stake any launched token and receive your share of its trading fees as AI credits — automatically.',cta:'Start staking',href:'#/stake',code:false,
+facts:[['PAYOUT','[SCHEDULE]'],['UNSTAKE','[DURATION]']],
+steps:[['Pick a token','Browse tokens built on Clanker Router.'],['Stake it','Only your wallet can move it.'],['Credits drip in','No claiming needed.']]},
+{tag:'MODE 4 · PLUG IN',title:'Spend credits in your tools.',desc:'Sign in with your wallet, grab a key, and point any OpenAI-compatible app or coding agent at the router.',cta:'Get my key',href:'#/plug',code:true,
+facts:[['MODELS','[N]+'],['BILLING','Credits']],
+steps:[['Sign a message','Get your key and balance.'],['Set two env vars','Works with existing SDKs.']]}
+];
+var tabs=document.querySelectorAll('[data-tab]');
+function showMode(i){
+  var m=modes[i];
+  tabs.forEach(function(t,j){var on=j===i;t.setAttribute('aria-selected',on);t.style.background=on?'#9B6BFF':'transparent';t.style.color=on?'#0A0A0C':'#F2F1F5';});
+  $('m-tag').textContent=m.tag;$('m-title').textContent=m.title;$('m-desc').textContent=m.desc;$('m-cta').textContent=m.cta;$('m-cta').setAttribute('href',m.href);
+  $('m-code').style.display=m.code?'':'none';
+  var f=$('m-facts');f.innerHTML='';
+  m.facts.forEach(function(x){var d=el('div','background:#0A0A0C;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:2px');d.className='cr-fact';
+    d.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9A97A6",x[0]));
+    d.appendChild(el('span','font-family:Unbounded,sans-serif;font-weight:700;font-size:17px;overflow-wrap:anywhere',x[1]));f.appendChild(d);});
+  var s=$('m-steps');s.innerHTML='';
+  m.steps.forEach(function(x,k){var d=el('div','display:flex;gap:16px;align-items:flex-start;border:1.5px solid #26222F;border-radius:18px;padding:18px 20px');d.className='cr-step';
+    d.appendChild(el('span',"flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:#9B6BFF;color:#0A0A0C;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;display:inline-flex;align-items:center;justify-content:center",String(k+1)));
+    var t=el('div','display:flex;flex-direction:column;gap:2px');t.appendChild(el('strong','font-size:17px',x[0]));t.appendChild(el('span','color:#9A97A6',x[1]));d.appendChild(t);s.appendChild(d);});
+}
+tabs.forEach(function(t){t.addEventListener('click',function(){showMode(+t.dataset.tab)})});
+showMode(0);
+$('copy-btn').addEventListener('click',function(){copyText($('code').textContent,this)});
+
+/* ================= FUEL ================= */
+function fuelSummary(){
+  var amt=$('fu-amt').value.trim(),to=$('fu-to').value.trim();
+  $('fu-s-pay').textContent=amt?amt+' '+$('fu-token').value:'—';
+  $('fu-s-to').textContent=to?short(to):'—';
+  $('fu-s-chain').textContent=$('fu-chain').value;
+}
+['fu-amt','fu-to'].forEach(function(id){$(id).addEventListener('input',function(){clearErr(id);fuelSummary()})});
+['fu-token','fu-chain'].forEach(function(id){$(id).addEventListener('change',fuelSummary)});
+document.querySelectorAll('[data-amt]').forEach(function(c){c.addEventListener('click',function(){$('fu-amt').value=c.dataset.amt;clearErr('fu-amt');fuelSummary()})});
+$('fu-self').addEventListener('click',function(){ensureWallet().then(function(a){$('fu-to').value=a;clearErr('fu-to');fuelSummary()})});
+var FUEL_STEPS=['Confirm in your wallet','Swapping to stablecoin','Depositing to recipient','Crediting account'];
+$('fu-form').addEventListener('submit',function(e){
+  e.preventDefault();if(busy.fu)return;
+  var to=$('fu-to').value.trim(),amt=$('fu-amt').value.trim(),first=null;
+  if(!isAddr(to)&&!isEns(to)){showErr('fu-to','Enter a valid 0x address or .eth name.');first=first||$('fu-to')}
+  if(!isAmount(amt)){showErr('fu-amt','Enter an amount above 0.');first=first||$('fu-amt')}
+  if(first){focusFirst(first);return}
+  ensureWallet().then(function(){
+    busy.fu=true;var btn=$('fu-btn');btn.disabled=true;btn.textContent='Sending…';
+    $('fu-status').style.display='flex';$('fu-done').style.display='none';
+    $('fu-status').scrollIntoView({block:'nearest',behavior:'smooth'});
+    /* REAL: swap + deposit call goes here */
+    return runSteps($('fu-steps'),FUEL_STEPS).then(function(){
+      $('fu-done-to').textContent=short(to);logAct('Fueled '+short(to)+' with '+amt+' '+$('fu-token').value);$('fu-done').style.display='flex';
+      btn.textContent='Sent ✓';busy.fu=false;
+    });
+  });
+});
+$('fu-again').addEventListener('click',function(){
+  $('fu-form').reset();fuelSummary();$('fu-status').style.display='none';$('fu-btn').disabled=false;renderWallet();window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ================= BUILD (real deploy via Clanker SDK v5) =================
+   clanker-sdk.js (bundled Clanker SDK + viem) is loaded only when someone deploys.
+   UPLOAD_API: endpoint that pins an image to IPFS and returns {url:"ipfs://…"} (see api/upload.js). */
+var UPLOAD_API='/api/upload';
+var SDK_URL='./clanker-sdk.js';
+/* Platform cut: share = % of the creator's tax that goes to Clanker Router (0–100). */
+var INTEGRATOR={address:'0xEAE6B9Cd34253850ce3c3Bbb637dAD093E8b4685',share:15};
+var built=[];
+var IMG_ICON='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9A97A6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-5-5L5 21"></path></svg>';
+$('b-drop-preview').innerHTML=IMG_ICON;
+var imgURL=null,imgFile=null;
+function bLetter(){if(!imgURL)$('b-p-img').textContent=($('b-name').value.trim()[0]||'?').toUpperCase()}
+$('b-name').addEventListener('input',function(){$('b-p-name').textContent=this.value.trim()||'Your token';clearErr('b-name');bLetter()});
+$('b-ticker').addEventListener('input',function(){
+  var v=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');if(v!==this.value)this.value=v;
+  $('b-p-ticker').textContent='$'+(v||'TICKER');clearErr('b-ticker');
+});
+$('b-desc').addEventListener('input',function(){$('b-count').textContent=this.value.length;$('b-p-desc').textContent=this.value.trim()||'Your narrative shows up here.'});
+function taxText(){$('b-p-tax').textContent=$('b-buy').value+'% / '+$('b-sell').value+'%'}
+if($('b-cut')&&INTEGRATOR)$('b-cut').textContent='Taxes go to your wallet as the creator, minus a '+INTEGRATOR.share+'% platform fee. Clanker keeps a protocol share.';
+$('b-buy').addEventListener('change',taxText);$('b-sell').addEventListener('change',taxText);
+$('b-dev').addEventListener('input',function(){clearErr('b-dev')});
+function showPreview(src){
+  [$('b-p-img'),$('b-drop-preview')].forEach(function(box){box.innerHTML='';var i=el('img','width:100%;height:100%;object-fit:cover');i.src=src;i.alt='';i.referrerPolicy='no-referrer';box.appendChild(i)});
+}
+function gatewayOf(u){return u.indexOf('ipfs://')===0?'https://ipfs.io/ipfs/'+u.slice(7):u}
+function setImage(file){
+  $('e-b-img').textContent='';
+  if(!file)return;
+  if(!/^image\/(png|jpeg|gif|webp)$/.test(file.type)){$('e-b-img').textContent='Use a PNG, JPG, GIF or WEBP file.';return}
+  if(file.size>2*1024*1024){$('e-b-img').textContent='Image must be 2 MB or smaller.';return}
+  if(imgURL&&imgURL.indexOf('blob:')===0)URL.revokeObjectURL(imgURL);
+  imgFile=file;imgURL=URL.createObjectURL(file);showPreview(imgURL);
+  $('b-drop-title').textContent=file.name;$('b-imgurl').value='';
+}
+$('b-img').addEventListener('change',function(){setImage(this.files[0])});
+$('b-imgurl').addEventListener('input',function(){
+  $('e-b-img').textContent='';var u=this.value.trim();
+  if(/^(https:\/\/|ipfs:\/\/)\S+$/.test(u)){imgFile=null;imgURL=u;showPreview(gatewayOf(u));$('b-drop-title').textContent='Using image link'}
+});
+var drop=$('b-drop');
+['dragenter','dragover'].forEach(function(n){drop.addEventListener(n,function(ev){ev.preventDefault();drop.classList.add('drag')})});
+['dragleave','drop'].forEach(function(n){drop.addEventListener(n,function(ev){ev.preventDefault();drop.classList.remove('drag')})});
+drop.addEventListener('drop',function(ev){var file=ev.dataTransfer.files[0];if(file){try{var dt=new DataTransfer();dt.items.add(file);$('b-img').files=dt.files}catch(x){}setImage(file)}});
+$('b-ack').addEventListener('change',function(){$('e-b-ack').textContent=''});
+
+function uploadImage(file){
+  return fetch(UPLOAD_API,{method:'POST',headers:{'content-type':file.type,'x-filename':encodeURIComponent(file.name)},body:file})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||!j.url)throw new Error(j.error||'Image upload failed ('+r.status+'). Paste an image link instead.');return j.url})},
+          function(){throw new Error('Image upload isn’t available here. Paste an image link instead.')});
+}
+function socials(){
+  var out=[],w=$('b-web').value.trim(),x=$('b-x').value.trim().replace(/^@/,''),t=$('b-tg').value.trim();
+  if(/^https?:\/\//.test(w))out.push({platform:'website',url:w});
+  if(x)out.push({platform:'x',url:/^https?:\/\//.test(x)?x:'https://x.com/'+x});
+  if(t)out.push({platform:'telegram',url:/^https?:\/\//.test(t)?t:'https://'+t.replace(/^\/+/,'')});
+  return out;
+}
+var BUILD_STEPS=['Preparing image','Confirm in your wallet','Deploying on Base','Token is live'];
+function deployToken(d,onStep){
+  var image;
+  onStep(0);
+  var imgP=d.file?uploadImage(d.file):Promise.resolve(d.imageUrl);
+  return imgP.then(function(u){image=u;return import(SDK_URL)}).then(function(m){
+    return ensureBase(activeProvider).then(function(){
+      onStep(1);
+      var transport=m.custom(activeProvider);
+      var wallet=m.createWalletClient({account:account,chain:m.base,transport:transport});
+      var publicClient=m.createPublicClient({chain:m.base,transport:transport});
+      var clanker=new m.Clanker({wallet:wallet,publicClient:publicClient});
+      var cfg={name:d.name,symbol:d.ticker,image:image,tokenAdmin:account,
+        metadata:{description:d.desc||'',socialMediaUrls:d.socials},
+        context:{interface:'Clanker Router'},
+        buyFee:d.buy,sellFee:d.sell};
+      if(d.dev>0)cfg.devBuy={ethAmount:String(d.dev)};
+      if(INTEGRATOR)cfg.integrator=INTEGRATOR;
+      return clanker.deploy(cfg);
+    });
+  }).then(function(res){
+    if(res.error)throw res.error;
+    onStep(2,res.txHash);
+    return res.waitForTransaction().then(function(r){
+      if(r.error)throw r.error;
+      return {address:r.address||res.expectedAddress,txHash:res.txHash};
+    });
+  });
+}
+$('b-form').addEventListener('submit',function(e){
+  e.preventDefault();if(busy.b)return;
+  var first=null,name=$('b-name').value.trim(),ticker=$('b-ticker').value,dev=$('b-dev').value.trim();
+  if(name.length<2){showErr('b-name','Give it a name (2–32 characters).');first=first||$('b-name')}
+  if(!/^[A-Z0-9]{2,10}$/.test(ticker)){showErr('b-ticker','2–10 letters or numbers.');first=first||$('b-ticker')}
+  if(!imgURL){$('e-b-img').textContent='Add an image or paste an image link.';first=first||drop}
+  if(dev&&!(/^\d+(\.\d+)?$/.test(dev))){showErr('b-dev','Enter an ETH amount, e.g. 0.01');first=first||$('b-dev')}
+  if(!$('b-ack').checked){$('e-b-ack').textContent='Please confirm before deploying.';first=first||$('b-ack')}
+  if(first){focusFirst(first);return}
+  ensureWallet().then(function(){
+    busy.b=true;var btn=$('b-btn');btn.disabled=true;btn.textContent='Deploying…';
+    $('b-status').style.display='flex';$('b-done').style.display='none';$('b-error').textContent='';$('b-status-title').textContent='Deploying';
+    $('b-status').scrollIntoView({block:'nearest',behavior:'smooth'});
+    var data={name:name,ticker:ticker,desc:$('b-desc').value.trim(),file:imgFile,imageUrl:imgFile?null:imgURL,buy:+$('b-buy').value,sell:+$('b-sell').value,dev:dev?parseFloat(dev):0,socials:socials()};
+    var cur=0;
+    return deployToken(data,function(i,tx){cur=i;renderSteps($('b-steps'),BUILD_STEPS,i);if(tx){$('b-scan').href='https://basescan.org/tx/'+tx}}).then(function(r){
+      renderSteps($('b-steps'),BUILD_STEPS,BUILD_STEPS.length);
+      $('b-status-title').textContent='Your token is live 🎉';
+      $('b-addr').textContent=r.address;$('b-view').href=CLANKER_TOKEN_URL+r.address;$('b-scan').href='https://basescan.org/tx/'+r.txHash;
+      $('b-done').style.display='flex';btn.textContent='Deployed ✓';busy.b=false;
+      built.push({name:name,ticker:ticker,img:imgFile?imgURL:gatewayOf(imgURL),desc:data.desc,address:r.address});
+      logAct('Launched $'+ticker+' at '+short(r.address));toast('$'+ticker+' is live on Base');
+    }).catch(function(err){
+      renderSteps($('b-steps'),BUILD_STEPS,cur);
+      $('b-status-title').textContent='Not deployed';$('b-error').textContent=walletErr(err);
+      btn.disabled=false;busy.b=false;renderWallet();
+    });
+  }).catch(function(){});
+});
+$('b-again').addEventListener('click',function(){
+  $('b-form').reset();imgURL=null;imgFile=null;taxText();
+  $('b-p-name').textContent='Your token';$('b-p-ticker').textContent='$TICKER';$('b-p-desc').textContent='Your narrative shows up here.';$('b-count').textContent='0';
+  $('b-p-img').innerHTML='?';$('b-drop-title').textContent='Upload an image';$('b-drop-preview').innerHTML=IMG_ICON;
+  $('b-status').style.display='none';$('b-btn').disabled=false;renderWallet();window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ================= STAKE ================= */
+var positions=[];
+function fillStakeTokens(){
+  var sel=$('st-token'),cur=sel.value;sel.innerHTML='';
+  var ph=el('option',null,'Choose a token…');ph.value='';sel.appendChild(ph);
+  built.forEach(function(t){var o=el('option',null,t.name+' ($'+t.ticker+')');o.value='$'+t.ticker;sel.appendChild(o)});
+  var o2=el('option',null,'Paste a contract address…');o2.value='__addr';sel.appendChild(o2);
+  sel.value=cur&&[].some.call(sel.options,function(o){return o.value===cur})?cur:'';
+  if(pendingStake){sel.value='__addr';$('st-addr').value=pendingStake.addr;pendingStake=null;clearErr('st-token');clearErr('st-addr')}
+  $('st-addr-wrap').style.display=sel.value==='__addr'?'flex':'none';
+}
+$('st-token').addEventListener('change',function(){clearErr('st-token');$('st-addr-wrap').style.display=this.value==='__addr'?'flex':'none'});
+['st-addr','st-amt'].forEach(function(id){$(id).addEventListener('input',function(){clearErr(id)})});
+function renderPositions(){
+  var list=$('st-list');list.innerHTML='';
+  if(!positions.length){list.appendChild(el('div',null,'No stakes yet. Stake a token to start earning credits.')).className='cr-empty';return}
+  positions.forEach(function(p,i){
+    var row=el('div');row.className='cr-pos';
+    var info=el('div','display:flex;flex-direction:column;gap:2px;min-width:0');
+    info.appendChild(el('strong','font-family:Unbounded,sans-serif;font-size:16px;overflow-wrap:anywhere',p.label));
+    info.appendChild(el('span','font-size:14px;color:#9A97A6',p.amount+' staked'+(p.unstaking?' · unstaking, ready in [DURATION]':'')));
+    row.appendChild(info);
+    var b=el('button',null,p.unstaking?'Unstaking…':'Unstake');b.type='button';b.className='cr-btn-s cr-btn-g';b.disabled=p.unstaking;
+    b.addEventListener('click',function(){p.unstaking=true;renderPositions();logAct('Started unstaking '+p.label)});
+    row.appendChild(b);list.appendChild(row);
+  });
+}
+var STAKE_STEPS=['Approve token','Confirm stake in your wallet','Stake recorded'];
+$('st-form').addEventListener('submit',function(e){
+  e.preventDefault();if(busy.st)return;
+  var sel=$('st-token').value,addr=$('st-addr').value.trim(),amt=$('st-amt').value.trim(),first=null;
+  if(!sel){showErr('st-token','Choose a token.');first=first||$('st-token')}
+  if(sel==='__addr'&&!isAddr(addr)){showErr('st-addr','Enter a valid 0x contract address.');first=first||$('st-addr')}
+  if(!isAmount(amt)){showErr('st-amt','Enter an amount above 0.');first=first||$('st-amt')}
+  if(first){focusFirst(first);return}
+  ensureWallet().then(function(){
+    busy.st=true;var btn=$('st-btn');btn.disabled=true;btn.textContent='Staking…';
+    $('st-status').style.display='flex';
+    /* REAL: approve + stake contract calls here */
+    return runSteps($('st-steps'),STAKE_STEPS).then(function(){
+      var label=sel==='__addr'?short(addr):$('st-token').options[$('st-token').selectedIndex].text;
+      positions.unshift({label:label,amount:amt,unstaking:false});renderPositions();logAct('Staked '+amt+' '+label);
+      $('st-amt').value='';btn.disabled=false;busy.st=false;renderWallet();
+      setTimeout(function(){$('st-status').style.display='none'},1500);
+    });
+  });
+});
+renderPositions();
+
+/* ================= PLUG IN ================= */
+var apiKey=null,showKey=false,snip='env';
+function newKey(){var h='';var a=new Uint8Array(16);(window.crypto||{getRandomValues:function(x){for(var i=0;i<x.length;i++)x[i]=Math.random()*256|0;return x}}).getRandomValues(a);a.forEach(function(b){h+=('0'+b.toString(16)).slice(-2)});return 'cr-demo-'+h}
+function maskKey(k){return k.slice(0,8)+'•'.repeat(16)+k.slice(-4)}
+function renderKey(){$('pl-key').textContent=apiKey?(showKey?apiKey:maskKey(apiKey)):'';$('pl-show').textContent=showKey?'Hide':'Show';$('pl-show').setAttribute('aria-pressed',showKey)}
+var SNIPS={
+  env:function(k){return 'OPENAI_BASE_URL="https://api.clankerouter.xyz/v1"\nOPENAI_API_KEY="'+k+'"\nMODEL="auto"'},
+  curl:function(k){return 'curl https://api.clankerouter.xyz/v1/chat/completions \\\n  -H "Authorization: Bearer '+k+'" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"model":"auto","messages":[{"role":"user","content":"gm"}]}\''},
+  py:function(k){return 'from openai import OpenAI\n\nclient = OpenAI(\n    base_url="https://api.clankerouter.xyz/v1",\n    api_key="'+k+'",\n)\n\nr = client.chat.completions.create(\n    model="auto",\n    messages=[{"role": "user", "content": "gm"}],\n)\nprint(r.choices[0].message.content)'}
+};
+function renderCode(){$('pl-code').textContent=SNIPS[snip](apiKey||'[YOUR-KEY]')}
+document.querySelectorAll('[data-snip]').forEach(function(b){b.addEventListener('click',function(){
+  snip=b.dataset.snip;document.querySelectorAll('[data-snip]').forEach(function(x){x.setAttribute('aria-selected',x===b)});renderCode();
+})});
+$('pl-sign').addEventListener('click',function(){
+  var btn=this;btn.disabled=true;
+  /* REAL: sign a login message (SIWE) and fetch the key from your backend */
+  ensureWallet().then(function(){btn.textContent='Waiting for signature…';return wait(800)}).then(function(){
+    apiKey=newKey();showKey=false;renderKey();renderCode();logAct('Created API key');
+    btn.style.display='none';btn.disabled=false;$('pl-account').style.display='flex';
+  });
+});
+$('pl-show').addEventListener('click',function(){showKey=!showKey;renderKey()});
+$('pl-copykey').addEventListener('click',function(){if(apiKey)copyText(apiKey,this)});
+$('pl-regen').addEventListener('click',function(){apiKey=newKey();logAct('Regenerated API key');renderKey();renderCode();var b=this;b.textContent='New key created';setTimeout(function(){b.textContent='Regenerate key'},1400)});
+$('pl-copycode').addEventListener('click',function(){copyText($('pl-code').textContent,this)});
+renderCode();
+
+/* ================= ACTIVITY (this session) ================= */
+var activity=[];
+function logAct(text){var d=new Date();activity.unshift({t:('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2),text:text});renderDash()}
+
+/* ================= DASHBOARD ================= */
+function renderDash(){
+  if(!$('d-open'))return;
+  var on=!!account;
+  $('d-locked').style.display=on?'none':'flex';
+  $('d-open').style.display=on?'flex':'none';
+  $('d-sub').textContent=on?'Connected with '+(walletName||'your wallet')+' as '+short(account)+'. Activity below is from this browser session.':'Connect a wallet to see your credits, stakes and activity.';
+  if(!on)return;
+  $('d-stakes').textContent=(positions||[]).filter(function(p){return !p.unstaking}).length;
+  $('d-built').textContent=(built||[]).length;
+  $('d-key').textContent=apiKey?'Active':'None';
+  if(activeProvider&&$('v-dashboard').classList.contains('active')){
+    activeProvider.request({method:'eth_getBalance',params:[account,'latest']}).then(function(h){
+      var wei=BigInt(h),eth=Number(wei/10n**12n)/1e6;$('d-eth').textContent=eth.toLocaleString('en-US',{maximumFractionDigits:4})+' ETH';
+    }).catch(function(){$('d-eth').textContent='—'});
+  }
+  var ol=$('d-activity');ol.innerHTML='';
+  if(!activity.length){var e=el('li',null,'Nothing yet. Fuel a wallet, build a token or stake to see it here.');e.className='cr-empty';ol.appendChild(e);return}
+  activity.slice(0,12).forEach(function(a){var li=el('li');li.className='cr-act';var t=el('span',null,a.t);t.className='t';li.appendChild(t);li.appendChild(el('span',null,a.text));ol.appendChild(li)});
+}
+
+/* ================= TOKENS (live from Clanker) =================
+   Public API: GET https://www.clanker.world/api/tokens
+   If the browser blocks it (CORS), set TOKENS_API to your own proxy that forwards to the same URL. */
+var TOKENS_APIS=['https://www.clanker.world/api/tokens','/api/tokens'],tkApi=0;
+var CLANKER_TOKEN_URL='https://www.clanker.world/clanker/';
+var POLL_MS=8000;
+var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqId:0};
+var pendingStake=null;
+function tkParams(cursor){
+  var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'20'});
+  var q=$('tk-q').value.trim(),s=$('tk-sort').value;
+  if(q.length>=2)p.set('q',q.slice(0,100));
+  if(s!=='new'){p.set('sortBy',s);p.set('sort','desc')}
+  if(cursor)p.set('cursor',cursor);
+  return p.toString();
+}
+function money(n){
+  if(typeof n!=='number'||!isFinite(n))return '—';
+  if(n>=1e9)return '$'+(n/1e9).toFixed(2)+'B';
+  if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';
+  if(n>=1e3)return '$'+(n/1e3).toFixed(1)+'K';
+  return '$'+n.toFixed(n<10?2:0);
+}
+function ago(iso){
+  var s=Math.max(0,(Date.now()-new Date(iso).getTime())/1000);
+  if(s<60)return Math.floor(s)+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';
+  if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';
+}
+function safeImg(u){return typeof u==='string'&&/^https:\/\//.test(u)?u:null}
+function tokenCard(t,isNew){
+  var m=(t.related&&t.related.market)||{};
+  var c=el('div');c.className='cr-tok'+(isNew?' cr-new':'');
+  var top=el('div','display:flex;gap:14px;align-items:center;min-width:0');
+  var im=el('span');im.className='cr-tok-img';
+  var letter=(t.symbol||t.name||'?').charAt(0).toUpperCase();
+  var src=safeImg(t.img_url);
+  if(src){var i=el('img','width:100%;height:100%;object-fit:cover');i.alt='';i.loading='lazy';i.referrerPolicy='no-referrer';i.src=src;i.onerror=function(){im.textContent=letter};im.appendChild(i)}else im.textContent=letter;
+  top.appendChild(im);
+  var nm=el('div','display:flex;flex-direction:column;min-width:0;flex:1');
+  var nrow=el('div','display:flex;gap:6px;align-items:center;min-width:0');
+  nrow.appendChild(el('strong','font-family:Unbounded,sans-serif;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap',t.name||'Unnamed'));
+  if(t.tags&&t.tags.verified){var v=el('span',null,'✓');v.className='cr-badge';v.title='Verified on Clanker';v.setAttribute('aria-label','Verified');nrow.appendChild(v)}
+  if(isNew){var nb=el('span',null,'NEW');nb.className='cr-badge cr-badge-new';nrow.appendChild(nb)}
+  nm.appendChild(nrow);
+  nm.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:13px;color:#B79BFF;overflow:hidden;text-overflow:ellipsis;white-space:nowrap",'$'+(t.symbol||'')+' · '+ago(t.deployed_at||t.created_at)));
+  top.appendChild(nm);c.appendChild(top);
+  var ch=m.priceChangePercent24h;
+  var stats=el('div','display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px');
+  function st(k,v,color){var d=el('div','background:#0A0A0C;border-radius:12px;padding:8px 10px;min-width:0');d.appendChild(el('span',"display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#9A97A6",k));d.appendChild(el('strong','font-size:14px;'+(color?'color:'+color:''),v));return d}
+  stats.appendChild(st('MCAP',money(m.marketCap)));
+  stats.appendChild(st('VOL 24H',money(m.volume24h)));
+  stats.appendChild(st('24H',typeof ch==='number'?(ch>0?'+':'')+ch.toFixed(1)+'%':'—',typeof ch==='number'?(ch>0?'#4ADE80':ch<0?'#FF6B5E':''):''));
+  c.appendChild(stats);
+  var row=el('div','display:flex;flex-wrap:wrap;gap:8px;margin-top:auto');
+  var s=el('button',null,'Stake');s.type='button';s.className='cr-btn-s';
+  s.addEventListener('click',function(){pendingStake={addr:t.contract_address};location.hash='#/stake'});
+  var v2=el('a',null,'Trade ↗');v2.href=CLANKER_TOKEN_URL+encodeURIComponent(t.contract_address);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s cr-btn-g';
+  row.appendChild(s);row.appendChild(v2);c.appendChild(row);
+  return c;
+}
+function renderTokenGrid(newIds){
+  var g=$('tk-grid');g.innerHTML='';
+  if(!tk.list.length){
+    var e=el('div');e.className='cr-empty';e.style.gridColumn='1 / -1';
+    e.textContent=tk.loading?'Loading tokens…':($('tk-q').value.trim()?'No tokens match your search.':'No tokens found.');
+    g.appendChild(e);return;
+  }
+  tk.list.forEach(function(t){g.appendChild(tokenCard(t,newIds&&newIds[t.contract_address]))});
+  $('tk-more').style.display=tk.cursor?'':'none';
+}
+function setLive(state,text){var l=$('tk-live');l.className='cr-live cr-live-'+state;$('tk-live-text').textContent=text}
+function fetchTokens(cursor){
+  var id=++tk.reqId;
+  function go(i){
+    return fetch(TOKENS_APIS[i]+'?'+tkParams(cursor),{headers:{accept:'application/json'}})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+      .then(function(j){tkApi=i;return j})
+      .catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e});
+  }
+  return go(tkApi).then(function(j){return id===tk.reqId?j:null});
+}
+function loadTokens(reset){
+  if(reset){tk.list=[];tk.cursor=null;tk.seen={};tk.firstLoad=true}
+  tk.loading=true;if(reset)renderTokenGrid();
+  return fetchTokens(reset?null:tk.cursor).then(function(j){
+    tk.loading=false;if(!j)return;
+    $('tk-err').style.display='none';
+    var data=Array.isArray(j.data)?j.data:[];
+    data.forEach(function(t){if(!tk.seen[t.contract_address]){tk.seen[t.contract_address]=1;tk.list.push(t)}});
+    tk.cursor=j.cursor||null;
+    if(typeof j.total==='number')$('tk-total').textContent=j.total.toLocaleString('en-US')+' tokens'+($('tk-q').value.trim().length>=2?' found':' on Clanker');
+    renderTokenGrid();setLive('on','Live · updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
+  }).catch(function(err){
+    tk.loading=false;setLive('off','Offline');
+    var e=$('tk-err');e.style.display='block';
+    e.textContent='Couldn’t reach the Clanker API ('+err.message+'). Retrying automatically. Retrying shortly.';
+    renderTokenGrid();
+  });
+}
+/* poll the first page and merge in fresh tokens + updated market data */
+function pollTokens(){
+  if(document.hidden||tk.loading||!$('v-tokens').classList.contains('active'))return;
+  fetchTokens(null).then(function(j){
+    if(!j)return;$('tk-err').style.display='none';
+    var data=Array.isArray(j.data)?j.data:[],fresh={},byAddr={};
+    tk.list.forEach(function(t){byAddr[t.contract_address]=t});
+    data.forEach(function(t){if(!tk.seen[t.contract_address]){fresh[t.contract_address]=1;tk.seen[t.contract_address]=1}});
+    var firstPage=data.slice();var rest=tk.list.filter(function(t){return !data.some(function(d){return d.contract_address===t.contract_address})});
+    tk.list=firstPage.concat(rest);
+    if(typeof j.total==='number')$('tk-total').textContent=j.total.toLocaleString('en-US')+' tokens'+($('tk-q').value.trim().length>=2?' found':' on Clanker');
+    renderTokenGrid(fresh);setLive('on','Live · updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
+  }).catch(function(err){setLive('off','Offline · retrying')});
+}
+function startTokens(){
+  if(!tk.list.length)loadTokens(true);
+  clearInterval(tk.timer);tk.timer=setInterval(pollTokens,POLL_MS);
+}
+var tkDeb=null;
+$('tk-q').addEventListener('input',function(){clearTimeout(tkDeb);tkDeb=setTimeout(function(){loadTokens(true)},350)});
+$('tk-sort').addEventListener('change',function(){loadTokens(true)});
+$('tk-more').addEventListener('click',function(){var b=this;b.textContent='Loading…';loadTokens(false).then(function(){b.textContent='Load more'})});
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&$('v-tokens').classList.contains('active'))pollTokens()});
+
+
+/* ================= LIVE STATS =================
+   Point fetchStats() at your API. Expected shape: {credits, tokens, staked, calls}.
+   Until then the tiles show "—" — no made-up numbers. */
+var STATS_URL=null; // e.g. 'https://api.clankerouter.xyz/v1/stats'
+function fetchStats(){
+  if(!STATS_URL)return Promise.resolve(null);
+  return fetch(STATS_URL).then(function(r){return r.ok?r.json():null}).catch(function(){return null});
+}
+function fmt(n){return typeof n==='number'?n.toLocaleString('en-US'):String(n)}
+fetchStats().then(function(s){
+  if(!s)return;
+  document.querySelectorAll('[data-stat]').forEach(function(e){var v=s[e.getAttribute('data-stat')];if(v!=null)e.textContent=fmt(v)});
+  $('stats-src').textContent='Live · updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+});
+
+$('d-disconnect').addEventListener('click',function(){disconnectWallet();toast('Wallet disconnected');location.hash='#/'});
+window.addEventListener('unhandledrejection',function(e){var r=e.reason;if(r&&(r.message==='closed'||r.code===4001))e.preventDefault()});
+/* scroll reveal */
+(function(){
+  var sel='#v-home section, #v-home .cr-stat, #v-home .cr-diagram, .cr-panel';
+  var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('#top')||e.classList.contains('cr-diagram')});
+  if(!('IntersectionObserver' in window)){return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e,i){e.classList.add('reveal');if(e.classList.contains('cr-stat'))e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)});
+})();
+renderWallet();
+route();
+})();
+</script></body>
+</html>
