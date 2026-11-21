@@ -279,7 +279,7 @@ html{scroll-behavior:auto}
 </div>
 <div style="flex: 1 1 220px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">OUTPUT</span>
-<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">[N]+ AI models</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">Top AI models</span>
 <span style="font-size: 14px; color: #A9ACB3">One key, OpenAI-compatible API</span>
 </div>
 </div>
@@ -295,7 +295,7 @@ html{scroll-behavior:auto}
 <div class="cr-stat"><span class="cr-kicker">TOKENS ON CLANKER</span><strong data-stat="total">—</strong></div>
 <div class="cr-stat"><span class="cr-kicker">NEW · LAST 24H</span><strong data-stat="day">—</strong></div>
 <div class="cr-stat"><span class="cr-kicker">LAUNCHED HERE</span><strong data-stat="here">—</strong></div>
-<div class="cr-stat cr-stat-dark"><span class="cr-kicker">PLATFORM FEE</span><strong data-stat="fee">—</strong></div>
+<div class="cr-stat cr-stat-dark"><span class="cr-kicker">NEW · LAST 7 DAYS</span><strong data-stat="week">—</strong></div>
 </div>
 </section>
 
@@ -550,7 +550,7 @@ export MODEL="auto"</pre>
 <span class="cr-err" id="e-b-dev"></span>
 </div>
 </div>
-<span class="cr-hint" id="b-cut">Taxes go to your wallet as the creator, minus a 15% platform fee. Clanker keeps a protocol share.</span>
+<a href="#doc-fees" class="cr-hint" style="align-self: flex-start; text-decoration: underline; text-underline-offset: 3px">Fee details</a>
 </div>
 
 <label style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; cursor: pointer">
@@ -926,7 +926,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 <article><h2>2. Eligibility</h2><p>You must be at least 18 years old and legally able to agree to these terms. You may not use the Service if you are located in, or a resident of, a country or region subject to comprehensive sanctions, or if you are on any sanctions list. You are responsible for making sure your use of the Service is legal where you live.</p></article>
 <article><h2>3. Your wallet and keys</h2><p>Your wallet is your account. You alone control your wallet, private keys and API keys, and you are responsible for keeping them safe. We never ask for your seed phrase. We can't recover lost keys or reverse transactions on the blockchain.</p></article>
 <article><h2>4. AI credits</h2><p>Credits are a prepaid balance for using AI models through the Service. Credits are not money, a security or an investment, and they can't be transferred out as cash. Credits are non-refundable except where the law requires otherwise. Model prices and availability can change at any time.</p></article>
-<article><h2>5. Tokens, staking and risk</h2><p>Tokens shown or launched through the Service are created by their creators, not by us, and we don't endorse any of them. Token prices are highly volatile and can fall to zero. Smart contracts can contain bugs. Staking rewards depend on trading activity and are never guaranteed. Nothing on the Service is financial, investment, legal or tax advice. Always do your own research.</p></article>
+<article><h2>5. Tokens, staking and risk</h2><p>Tokens shown or launched through the Service are created by their creators, not by us, and we don't endorse any of them. Token prices are highly volatile and can fall to zero. Tokens launched through the Service pay a platform fee of 15% of the creator's share of the trading tax, in addition to Clanker's protocol fee. Smart contracts can contain bugs. Staking rewards depend on trading activity and are never guaranteed. Nothing on the Service is financial, investment, legal or tax advice. Always do your own research.</p></article>
 <article><h2>6. Acceptable use</h2><p>Don't use the Service or its API to break the law, harm others, infringe anyone's rights, send spam or malware, try to break or overload the Service, or get around rate limits. You must also follow the usage policies of the AI model providers you reach through the Service. We may suspend or revoke API keys that break these rules.</p></article>
 <article><h2>7. Third-party services</h2><p>The Service relies on third parties, including blockchains, decentralized exchanges, token launch protocols, data providers and AI model providers. We don't control them and aren't responsible for their availability, accuracy or behavior. Token data shown on the Service may come from third-party sources and may be delayed or incomplete.</p></article>
 <article><h2>8. No warranty</h2><p>The Service is provided "as is" and "as available", without warranties of any kind. We don't promise it will be uninterrupted, error-free or secure.</p></article>
@@ -1039,9 +1039,23 @@ function setMenu(open){menu.classList.toggle('cr-open',open);burger.setAttribute
 burger.addEventListener('click',function(){setMenu(!menu.classList.contains('cr-open'))});
 
 /* ================= WALLET (real, no library) =================
-   Works with any browser wallet (MetaMask, Coinbase Wallet, Rabby, Phantom, …) through EIP-6963 / window.ethereum.
+   Works with any browser wallet (MetaMask, Bitget Wallet, Coinbase Wallet, Rabby, …) through EIP-6963 / window.ethereum.
    On phones without an in-app browser it offers deep links into wallet apps. */
 var BASE_CHAIN={chainId:'0x2105',chainName:'Base',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://mainnet.base.org'],blockExplorerUrls:['https://basescan.org']};
+/* WalletConnect: lets people on a PC scan a QR code with the wallet app on their phone.
+   Get a free Project ID at https://dashboard.reown.com, paste it below, and add your domain to the project's allowlist. */
+var WC_PROJECT_ID='';
+var WC_URL='./walletconnect.js';
+var wcProvider=null;
+function getWC(){
+  if(wcProvider)return Promise.resolve(wcProvider);
+  return import(WC_URL).then(function(m){
+    return m.EthereumProvider.init({projectId:WC_PROJECT_ID,chains:[8453],showQrModal:true,
+      metadata:{name:'Clanker Router',description:'Launch tokens on Base',url:location.origin,icons:[location.origin+'/logo.png']},
+      qrModalOptions:{themeMode:'dark',themeVariables:{'--wcm-accent-color':'#9B6BFF','--wcm-background-color':'#9B6BFF','--wcm-z-index':'100'}}});
+  }).then(function(p){wcProvider=p;p.on('disconnect',function(){if(walletName==='WalletConnect')disconnectWallet()});return p});
+}
+var WC_ITEM={info:{name:'WalletConnect',uuid:'walletconnect',icon:''},wc:true};
 var account=null,activeProvider=null,walletName='';
 var wallets=[];
 window.addEventListener('eip6963:announceProvider',function(e){
@@ -1072,13 +1086,32 @@ $('cr-modal').addEventListener('click',function(e){if(e.target===this)closeModal
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('cr-modal').hidden)closeModal()});
 function pickWallet(){
   var list=allWallets();
-  if(list.length===1)return Promise.resolve(list[0]);
+  if(list.length===1&&!WC_PROJECT_ID)return Promise.resolve(list[0]);
   return new Promise(function(resolve,reject){
     var box=el('div','display:flex;flex-direction:column;gap:10px');
     if(!list.length){
-      box.appendChild(el('p','margin:0;color:#B4B1BF',isMobile()?'Open this site inside your wallet app to connect:':'No browser wallet found. Install one, then refresh this page:'));
+      box.appendChild(el('p','margin:0;color:#B4B1BF',isMobile()?'Pick your wallet app — this site opens inside it so you can connect:':'No browser wallet found. Install one, then refresh this page:'));
       var here=location.host+location.pathname;
-      var links=isMobile()?[['Open in MetaMask','https://metamask.app.link/dapp/'+here],['Open in Coinbase Wallet','https://go.cb-w.com/dapp?cb_url='+encodeURIComponent(location.href)]]:[['Get MetaMask','https://metamask.io/download/'],['Get Coinbase Wallet','https://www.coinbase.com/wallet/downloads'],['Get Rabby','https://rabby.io/']];
+      var u=encodeURIComponent(location.href);
+      var links=isMobile()?[
+        ['Open in MetaMask','https://metamask.app.link/dapp/'+here],
+        ['Open in Bitget Wallet','https://bkcode.vip?action=dapp&url='+u],
+        ['Open in Coinbase Wallet','https://go.cb-w.com/dapp?cb_url='+u],
+        ['Open in Trust Wallet','https://link.trustwallet.com/open_url?coin_id=60&url='+u],
+        ['Open in OKX Wallet','https://www.okx.com/download?deeplink='+encodeURIComponent('okx://wallet/dapp/url?dappUrl='+u)]
+      ]:[
+        ['Get MetaMask','https://metamask.io/download/'],
+        ['Get Bitget Wallet','https://web3.bitget.com/wallet-download?type=2'],
+        ['Get Coinbase Wallet','https://www.coinbase.com/wallet/downloads'],
+        ['Get Rabby','https://rabby.io/'],
+        ['Get OKX Wallet','https://www.okx.com/web3']
+      ];
+      if(WC_PROJECT_ID){
+        box.innerHTML='';
+        box.appendChild(el('p','margin:0;color:#B4B1BF',isMobile()?'Connect any wallet app:':'Use the wallet app on your phone:'));
+        box.appendChild(wcButton(resolve));
+        box.appendChild(el('p','margin:6px 0 0;color:#B4B1BF',isMobile()?'…or open this site inside your wallet app:':'…or install a browser wallet:'));
+      }
       links.forEach(function(l){var a=el('a',null,l[0]+' ↗');a.href=l[1];a.target='_blank';a.rel='noopener';a.className='cr-wallet-opt';box.appendChild(a)});
       modalReject=reject;openModal('Connect a wallet',box);return;
     }
@@ -1089,8 +1122,16 @@ function pickWallet(){
       b.addEventListener('click',function(){modalReject=null;closeModal();resolve(w)});
       box.appendChild(b);
     });
+    if(WC_PROJECT_ID)box.appendChild(wcButton(resolve));
     modalReject=reject;openModal('Choose a wallet',box);
   });
+}
+function wcButton(resolve){
+  var b=el('button');b.type='button';b.className='cr-wallet-opt';
+  b.innerHTML='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B6BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"></path></svg>';
+  var t=el('span','display:flex;flex-direction:column;align-items:flex-start;gap:1px');t.appendChild(el('span',null,'WalletConnect'));t.appendChild(el('span','font-size:13px;font-weight:500;color:#9A97A6',isMobile()?'Any wallet app':'Scan QR with your phone wallet'));b.appendChild(t);
+  b.addEventListener('click',function(){modalReject=null;closeModal();resolve(WC_ITEM)});
+  return b;
 }
 function ensureBase(p){
   return p.request({method:'eth_chainId'}).then(function(id){
@@ -1112,6 +1153,13 @@ function onAccounts(a){if(!a||!a.length)disconnectWallet();else{account=a[0];ren
 function onChain(){renderWallet()}
 function connectWallet(){
   return pickWallet().then(function(w){
+    if(w.wc){
+      toast('Opening WalletConnect…');
+      return getWC().then(function(p){return (p.session&&p.accounts&&p.accounts.length?Promise.resolve():p.connect()).then(function(){
+        var a=p.accounts||[];if(!a.length)throw new Error('No account returned.');
+        attach({info:WC_ITEM.info,provider:p},a[0]);toast('Connected '+short(a[0]));return a[0];
+      })});
+    }
     return w.provider.request({method:'eth_requestAccounts'}).then(function(a){
       if(!a||!a.length)throw new Error('No account returned.');
       return ensureBase(w.provider).catch(function(){/* still connected, deploy will ask again */}).then(function(){attach(w,a[0]);toast('Connected '+short(a[0]));return a[0]});
@@ -1123,6 +1171,7 @@ function ensureWallet(){
   return connectWallet().catch(function(e){if(e&&e.message!=='closed')toast(walletErr(e),true);throw e});
 }
 function disconnectWallet(){
+  if(walletName==='WalletConnect'&&wcProvider&&wcProvider.session){try{wcProvider.disconnect()}catch(x){}}
   if(activeProvider&&activeProvider.request){activeProvider.request({method:'wallet_revokePermissions',params:[{eth_accounts:{}}]}).catch(function(){})}
   account=null;activeProvider=null;walletName='';apiKey=null;
   try{localStorage.removeItem('cr-wallet')}catch(x){}
@@ -1132,6 +1181,10 @@ function disconnectWallet(){
 setTimeout(function(){
   var saved=null;try{saved=localStorage.getItem('cr-wallet')}catch(x){}
   if(!saved)return;
+  if(saved==='walletconnect'){
+    if(WC_PROJECT_ID)getWC().then(function(p){if(p.session&&p.accounts&&p.accounts.length)attach({info:WC_ITEM.info,provider:p},p.accounts[0])}).catch(function(){});
+    return;
+  }
   var w=allWallets().filter(function(x){return (x.info.uuid||'injected')===saved})[0]||allWallets()[0];
   if(!w)return;
   w.provider.request({method:'eth_accounts'}).then(function(a){if(a&&a.length)attach(w,a[0])}).catch(function(){});
@@ -1269,7 +1322,6 @@ $('b-ticker').addEventListener('input',function(){
 });
 $('b-desc').addEventListener('input',function(){$('b-count').textContent=this.value.length;$('b-p-desc').textContent=this.value.trim()||'Your narrative shows up here.'});
 function taxText(){$('b-p-tax').textContent=$('b-buy').value+'% / '+$('b-sell').value+'%'}
-if($('b-cut')&&INTEGRATOR)$('b-cut').textContent='Taxes go to your wallet as the creator, minus a '+INTEGRATOR.share+'% platform fee. Clanker keeps a protocol share.';
 $('b-buy').addEventListener('change',taxText);$('b-sell').addEventListener('change',taxText);
 $('b-dev').addEventListener('input',function(){clearErr('b-dev')});
 function showPreview(src){
@@ -1612,8 +1664,8 @@ var statsTimer=null;
 function loadStats(){
   if(document.hidden||!$('v-home').classList.contains('active'))return;
   var since=Math.floor(Date.now()/1000)-86400;
-  Promise.all([countTokens({}),countTokens({startDate:String(since)}),countTokens({socialInterface:'Clanker Router'})]).then(function(r){
-    var vals={total:r[0],day:r[1],here:r[2],fee:INTEGRATOR?INTEGRATOR.share+'% of tax':'0%'},any=r.some(function(x){return x!=null});
+  Promise.all([countTokens({}),countTokens({startDate:String(since)}),countTokens({socialInterface:'Clanker Router'}),countTokens({startDate:String(since-6*86400)})]).then(function(r){
+    var vals={total:r[0],day:r[1],here:r[2],week:r[3]},any=r.some(function(x){return x!=null});
     document.querySelectorAll('[data-stat]').forEach(function(e){var v=vals[e.getAttribute('data-stat')];e.textContent=v==null?'—':fmt(v)});
     $('stats-src').textContent=any?'Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}):'Offline · retrying';
   });
