@@ -1199,7 +1199,7 @@ function pickWallet(){
       var u=encodeURIComponent(location.href);
       var links=isMobile()?[
         ['Open in MetaMask','https://metamask.app.link/dapp/'+here],
-        ['Open in Bitget Wallet','https://bkcode.vip?action=dapp&url='+u],
+        ['Open in Bitget Wallet',/Android/i.test(navigator.userAgent)?('intent://bkconnect?action=dapp&url='+u+'#Intent;scheme=bitkeep;package=com.bitkeep.wallet;S.browser_fallback_url='+encodeURIComponent('https://bkcode.vip?action=dapp&url='+u)+';end'):('bitkeep://bkconnect?action=dapp&url='+u),'https://web3.bitget.com/wallet-download'],
         ['Open in Coinbase Wallet','https://go.cb-w.com/dapp?cb_url='+u],
         ['Open in Trust Wallet','https://link.trustwallet.com/open_url?coin_id=60&url='+u],
         ['Open in OKX Wallet','https://www.okx.com/download?deeplink='+encodeURIComponent('okx://wallet/dapp/url?dappUrl='+u)]
@@ -1216,7 +1216,9 @@ function pickWallet(){
         box.appendChild(wcButton(resolve));
         box.appendChild(el('p','margin:6px 0 0;color:#B4B1BF',isMobile()?'…or open this site inside your wallet app:':'…or install a browser wallet:'));
       }
-      links.forEach(function(l){var a=el('a',null,l[0]+' ↗');a.href=l[1];a.target='_blank';a.rel='noopener';a.className='cr-wallet-opt';box.appendChild(a)});
+      links.forEach(function(l){var a=el('a',null,l[0]+' ↗');a.href=l[1];
+        if(!isMobile()){a.target='_blank';a.rel='noopener'}
+        else if(l[2]){a.addEventListener('click',function(){var t=setTimeout(function(){if(!document.hidden)location.href=l[2]},1800);document.addEventListener('visibilitychange',function v(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',v)}})})}a.className='cr-wallet-opt';box.appendChild(a)});
       modalReject=reject;openModal('Connect a wallet',box);return;
     }
     list.forEach(function(w){
@@ -1233,7 +1235,7 @@ function pickWallet(){
 function wcButton(resolve){
   var b=el('button');b.type='button';b.className='cr-wallet-opt';
   b.innerHTML='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B6BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"></path></svg>';
-  var t=el('span','display:flex;flex-direction:column;align-items:flex-start;gap:1px');t.appendChild(el('span',null,'WalletConnect'));t.appendChild(el('span','font-size:13px;font-weight:500;color:#9A97A6',isMobile()?'Any wallet app':'Scan QR with your phone wallet'));b.appendChild(t);
+  var t=el('span','display:flex;flex-direction:column;align-items:flex-start;gap:1px');t.appendChild(el('span',null,'WalletConnect'));t.appendChild(el('span','font-size:13px;font-weight:500;color:#9A97A6',isMobile()?'Any wallet app':'Scan with Bitget, MetaMask, Trust, OKX…'));b.appendChild(t);
   b.addEventListener('click',function(){modalReject=null;closeModal();resolve(WC_ITEM)});
   return b;
 }
