@@ -1,5 +1,9 @@
 {
   "name": "clanker-router",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "clanker-sdk": "5.1.0",
+    "viem": "^2.49.0"
+  }
 }
