@@ -30,7 +30,9 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-dot{animation:cr-pulse 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.cr-dot{animation:none}}
 .cr-nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;background:#131218;border:1.5px solid #2E2840;border-radius:999px;padding:8px 8px 8px 20px}
-.cr-brand{order:1;flex:1 1 auto;display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.cr-brand{order:1;flex:1 1 0;display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.cr-brand-text{overflow:hidden;text-overflow:ellipsis}
+.cr-wallet,.cr-burger{flex:0 0 auto}
 .cr-brand-text{font-family:Unbounded,sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.01em;white-space:nowrap}
 .cr-links{order:2;display:flex;align-items:center;gap:22px;font-size:15px;font-weight:500}
 .cr-links a{text-decoration:none;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
@@ -55,6 +57,13 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 }
 @media (max-width:760px){
 .cr-brand-text{font-size:13px}
+.cr-brand{gap:8px}
+}
+@media (max-width:380px){
+.cr-brand-text{font-size:11.5px}
+}
+@media (max-width:760px){
+.cr-nav{gap:4px 8px !important}
 #hl-grid>:nth-child(n+4){display:none}
 .cr-tabs{width:100%;display:grid !important;grid-template-columns:repeat(4,minmax(0,1fr))}
 .cr-tab{padding:0 4px !important;font-size:14px !important;width:100%}
@@ -87,6 +96,7 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-kv strong{text-align:right;overflow-wrap:anywhere}
 .cr-btn{background:#9B6BFF;color:#0A0A0C;font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;border:0;border-radius:999px;min-height:56px;padding:0 24px;cursor:pointer;letter-spacing:0.01em}
 .cr-btn:disabled{opacity:.6;cursor:wait}
+.cr-btn-s:disabled{opacity:.45;cursor:not-allowed;transform:none !important;box-shadow:none !important}
 .cr-btn-s{background:#9B6BFF;color:#0A0A0C;font-family:Inter,sans-serif;font-weight:600;font-size:15px;border:0;border-radius:999px;min-height:44px;padding:0 18px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .cr-btn-a{background:#F2F1F5;color:#0A0A0C}
 .cr-btn-g{background:transparent;color:#F2F1F5;border:1.5px solid #3A3350}
@@ -149,6 +159,26 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-badge-new{background:#9B6BFF;color:#0A0A0C}
 @keyframes cr-flash{from{box-shadow:0 0 0 4px var(--accent)}to{box-shadow:0 0 0 0 transparent}}
 .cr-new{animation:cr-flash 2.4s ease-out}
+.cr-soon-dot{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#B79BFF;border:1px solid #3B2E5C;border-radius:999px;padding:1px 6px;margin-left:4px;vertical-align:2px}
+.cr-step-b{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#9B6BFF;color:#0A0A0C;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+.cr-ic{width:1em;height:1em;flex:0 0 auto}
+.cr-base{display:inline-flex;align-items:center;gap:.3em;color:#FFFFFF;font-weight:500;vertical-align:baseline;white-space:nowrap}
+.cr-base .cr-ic{width:.85em;height:.85em}
+.cr-builton{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-top:6px}
+.cr-by{display:inline-flex;align-items:center;gap:.45em;font-size:15px;color:#B4B1BF;text-decoration:none}
+.cr-by strong{color:#F2F1F5}
+.cr-by .cr-ic{width:1.15em;height:1.15em}
+a.cr-by:hover strong{color:#FFFFFF}
+/* smoother motion */
+::view-transition-old(root),::view-transition-new(root){animation-duration:.32s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+.cr-swap{animation:cr-swap .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes cr-swap{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+#tk-grid .cr-tok,#hl-grid .cr-tok{animation:cr-in .5s cubic-bezier(.2,.7,.2,1) both}
+#tk-grid .cr-tok:nth-child(2),#hl-grid .cr-tok:nth-child(2){animation-delay:.05s}
+#tk-grid .cr-tok:nth-child(3),#hl-grid .cr-tok:nth-child(3){animation-delay:.1s}
+#tk-grid .cr-tok:nth-child(4),#hl-grid .cr-tok:nth-child(4){animation-delay:.15s}
+#tk-grid .cr-tok:nth-child(5),#hl-grid .cr-tok:nth-child(5){animation-delay:.2s}
+#tk-grid .cr-tok:nth-child(6),#hl-grid .cr-tok:nth-child(6){animation-delay:.25s}
 .cr-docs{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
 .cr-docnav{flex:0 0 200px;position:sticky;top:16px;display:flex;flex-direction:column;gap:2px;border-left:2px solid #26222F;padding-left:4px}
 .cr-docnav a{text-decoration:none;padding:8px 12px;border-radius:10px;font-size:15px;min-height:40px;display:flex;align-items:center}
@@ -230,10 +260,10 @@ html{scroll-behavior:auto}
 </a>
 <div class="cr-links" id="cr-menu">
 <a href="#/tokens" data-route="tokens">Tokens</a>
-<a href="#/fuel" data-route="fuel">Fuel</a>
+<a href="#/fuel" data-route="fuel">Fuel <span class="cr-soon-dot">soon</span></a>
 <a href="#/build" data-route="build">Build</a>
-<a href="#/stake" data-route="stake">Stake</a>
-<a href="#/plug" data-route="plug">Plug in</a>
+<a href="#/stake" data-route="stake">Earn</a>
+<a href="#/plug" data-route="plug">Plug in <span class="cr-soon-dot">soon</span></a>
 <a href="#/docs" data-route="docs">Docs</a>
 <a href="#/dashboard" data-route="dashboard">Dashboard</a>
 </div>
@@ -251,11 +281,16 @@ html{scroll-behavior:auto}
 <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
 <h1 style="flex: 1 1 640px; min-width: 0; margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(36px, 7vw, 104px); line-height: 1.02; letter-spacing: -0.04em; text-transform: uppercase">Feed the<br>machine.<br><span class="cr-hl">Get compute.</span></h1>
 <div style="flex: 1 1 320px; min-width: 0; max-width: 400px; display: flex; flex-direction: column; gap: 18px">
-<p style="margin: 0; font-size: 18px; color: #B4B1BF">Turn any token into AI credits, gift them to any wallet, or build a token that rewards its holders with model access.</p>
+<p style="margin: 0; font-size: 18px; color: #B4B1BF">Launch a token on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> in one click, reward the people who hold it, and browse every Clanker token live. AI credits are coming soon.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
-<a href="#modes" style="text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Start a run →</a>
+<a href="#/build" style="text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Launch a token →</a>
 <a href="#/docs" style="text-decoration: none; border: 1.5px solid #2E2840; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Docs</a>
 </div>
+<div class="cr-builton" aria-label="Built on Clanker, live on Base">
+<a href="https://www.clanker.world" target="_blank" rel="noopener" class="cr-by">Built on <svg class="cr-ic" viewBox="0 0 210 177" aria-hidden="true"><rect x="0" y="124" width="46" height="53" fill="#865FD3"></rect><rect x="81" y="59" width="47" height="118" fill="#865FD3"></rect><rect x="163" y="0" width="47" height="177" fill="#865FD3"></rect></svg><strong>Clanker</strong></a>
+<span class="cr-by">Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span></span>
+</div>
+
 </div>
 </div>
 
@@ -318,7 +353,7 @@ html{scroll-behavior:auto}
 <div role="tablist" aria-label="Modes" class="cr-tabs" style="display: flex; flex-wrap: wrap; gap: 6px; background: #131218; border: 1.5px solid #2E2840; border-radius: 999px; padding: 6px">
 <button type="button" class="cr-tab" role="tab" data-tab="0" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Fuel</button>
 <button type="button" class="cr-tab" role="tab" data-tab="1" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Build</button>
-<button type="button" class="cr-tab" role="tab" data-tab="2" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Stake</button>
+<button type="button" class="cr-tab" role="tab" data-tab="2" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Earn</button>
 <button type="button" class="cr-tab" role="tab" data-tab="3" aria-selected="false" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 15px; border: 0; border-radius: 999px; padding: 0 18px; min-height: 44px; cursor: pointer; ">Plug in</button>
 </div>
 </div>
@@ -404,6 +439,17 @@ export MODEL="auto"</pre>
 <h1 class="cr-h1" id="h-fuel">Fuel a wallet</h1>
 <p class="cr-lead">Pay with any token you hold. The recipient gets AI credits they can spend on models right away.</p>
 </div>
+<div class="cr-card cr-soon" style="flex: none; align-items: flex-start">
+<span class="cr-badge cr-badge-new" style="font-size: 12px; padding: 4px 10px">COMING SOON</span>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: clamp(22px, 3vw, 30px)">Fuel is almost here</h2>
+<p style="margin: 0; color: #B4B1BF; max-width: 620px">Top up any wallet with AI credits using any token you hold. We’re finishing the payment flow.</p>
+<ul style="margin: 0; padding-left: 20px; color: #D2D0DA; display: flex; flex-direction: column; gap: 6px"><li>Pay with ETH, USDC or any Base token</li><li>Send credits to any wallet or .eth name</li><li>Credits work across top AI models</li></ul>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<a href="#/build" class="cr-btn-s">Launch a token now</a>
+<a href="#/tokens" class="cr-btn-s cr-btn-g">Browse live tokens</a>
+</div>
+</div>
+<div hidden aria-hidden="true">
 <div class="cr-note" role="note"><strong>Demo mode:</strong> sending here is simulated. No funds move and nothing is sent on-chain.</div>
 <div class="cr-grid">
 <form id="fu-form" class="cr-card" novalidate>
@@ -470,6 +516,7 @@ export MODEL="auto"</pre>
 </aside>
 </div>
 </div>
+</div>
 </section>
 
 <!-- ================= BUILD ================= -->
@@ -487,14 +534,14 @@ export MODEL="auto"</pre>
 <div class="cr-row">
 <div class="cr-field" style="flex: 2 1 240px">
 <label for="b-name">Token name <span aria-hidden="true">*</span></label>
-<input id="b-name" type="text" maxlength="32" autocomplete="off" placeholder="e.g. Rusty Bolt" aria-describedby="e-b-name">
+<input id="b-name" type="text" maxlength="32" autocomplete="off" placeholder="e.g. Clanker Router" aria-describedby="e-b-name">
 <span class="cr-err" id="e-b-name"></span>
 </div>
 <div class="cr-field" style="flex: 1 1 160px">
 <label for="b-ticker">Ticker <span aria-hidden="true">*</span></label>
 <div style="position: relative">
 <span aria-hidden="true" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', monospace; color: #9A97A6">$</span>
-<input id="b-ticker" type="text" maxlength="10" autocomplete="off" placeholder="BOLT" aria-describedby="e-b-ticker" style="padding-left: 28px; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase">
+<input id="b-ticker" type="text" maxlength="10" autocomplete="off" placeholder="CROUTER" aria-describedby="e-b-ticker" style="padding-left: 28px; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase">
 </div>
 <span class="cr-err" id="e-b-ticker"></span>
 </div>
@@ -545,12 +592,16 @@ export MODEL="auto"</pre>
 <select id="b-sell"><option value="1">1%</option><option value="2">2%</option><option value="3" selected>3%</option><option value="5">5%</option><option value="10">10%</option></select>
 </div>
 <div class="cr-field" style="flex: 1 1 160px">
+<label for="b-div">Holder rewards</label>
+<select id="b-div"><option value="0">Off</option><option value="10">10% of tax</option><option value="25" selected>25% of tax</option><option value="50">50% of tax</option></select>
+</div>
+<div class="cr-field" style="flex: 1 1 160px">
 <label for="b-dev">Launch buy <span style="font-weight: 400; color: #9A97A6">(ETH, optional)</span></label>
 <input id="b-dev" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="e-b-dev">
 <span class="cr-err" id="e-b-dev"></span>
 </div>
 </div>
-<a href="#doc-fees" class="cr-hint" style="align-self: flex-start; text-decoration: underline; text-underline-offset: 3px">Fee details</a>
+
 </div>
 
 <label style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; cursor: pointer">
@@ -600,49 +651,69 @@ export MODEL="auto"</pre>
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
 <a href="#/" class="cr-back">← Home</a>
-<span class="cr-tag">MODE 3 · STAKE</span>
-<h1 class="cr-h1" id="h-stake">Stake &amp; earn</h1>
-<p class="cr-lead">Stake a token built on Clanker Router and receive your share of its trading fees as AI credits — no claiming needed.</p>
+<span class="cr-tag">MODE 3 · EARN</span>
+<h1 class="cr-h1" id="h-stake">Hold &amp; earn</h1>
+<p class="cr-lead">Tokens launched with holder rewards pay part of every trade to the people holding them. No staking, no lockups — just hold, then claim here.</p>
 </div>
-<div class="cr-note" role="note"><strong>Demo mode:</strong> staking here is simulated. No tokens move.</div>
 <div class="cr-grid">
-<form id="st-form" class="cr-card" novalidate>
+<form id="er-form" class="cr-card" novalidate>
 <div class="cr-field">
-<label for="st-token">Token <span aria-hidden="true">*</span></label>
-<select id="st-token" aria-describedby="e-st-token"></select>
-<span class="cr-hint">Tokens you build in this session show up here. [Load the full list from your indexer.]</span>
-<span class="cr-err" id="e-st-token"></span>
+<label for="er-addr">Token contract address</label>
+<input id="er-addr" type="text" autocomplete="off" spellcheck="false" placeholder="0x…" aria-describedby="e-er-addr" style="font-family: 'IBM Plex Mono', monospace">
+<span class="cr-err" id="e-er-addr"></span>
+<div class="cr-chips" id="er-mine"></div>
 </div>
-<div class="cr-field" id="st-addr-wrap" style="display: none">
-<label for="st-addr">Token contract address</label>
-<input id="st-addr" type="text" autocomplete="off" spellcheck="false" placeholder="0x…" aria-describedby="e-st-addr" style="font-family: 'IBM Plex Mono', monospace">
-<span class="cr-err" id="e-st-addr"></span>
+<button type="submit" class="cr-btn" id="er-check">Check my rewards</button>
+<div id="er-result" class="cr-dark" style="display: none">
+<div style="display: flex; gap: 14px; align-items: center; min-width: 0">
+<span class="cr-tok-img" id="er-img">?</span>
+<div style="display: flex; flex-direction: column; min-width: 0">
+<strong id="er-name" style="font-family: Unbounded, sans-serif; font-size: 17px; overflow-wrap: anywhere">—</strong>
+<span id="er-sym" class="cr-mono" style="color: #B79BFF; font-size: 13px"></span>
 </div>
-<div class="cr-field">
-<label for="st-amt">Amount to stake <span aria-hidden="true">*</span></label>
-<input id="st-amt" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="e-st-amt">
-<span class="cr-hint">Wallet balance: [BALANCE]</span>
-<span class="cr-err" id="e-st-amt"></span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
-<div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">PAYOUT</span><strong>[SCHEDULE]</strong></div>
-<div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">UNSTAKE WAIT</span><strong>[DURATION]</strong></div>
+<div class="cr-kv"><span>Claimable now</span><strong id="er-amount">—</strong></div>
+<div class="cr-kv"><span>Wallet</span><strong id="er-wallet" class="cr-mono">—</strong></div>
+<p id="er-msg" class="cr-hint" style="margin: 0; color: #B4B1BF"></p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" class="cr-btn-s" id="er-claim" disabled>Claim rewards</button>
+<a href="#" id="er-view" target="_blank" rel="noopener" class="cr-btn-s cr-btn-g">View on Clanker ↗</a>
 </div>
-<button type="submit" class="cr-btn" id="st-btn">Connect wallet to stake</button>
+</div>
 </form>
-<aside class="cr-side" aria-label="Your positions">
-<span class="cr-kicker">YOUR POSITIONS</span>
-<div id="st-list" style="display: flex; flex-direction: column; gap: 12px"></div>
-<div class="cr-dark">
-<div class="cr-kv"><span>Credits earned (all time)</span><strong>[—]</strong></div>
-<div class="cr-kv"><span>Next payout</span><strong>[TIME]</strong></div>
-<a href="#/plug" class="cr-btn-s cr-btn-a" style="align-self: flex-start">Spend credits →</a>
+<aside class="cr-side" aria-label="How it works">
+<span class="cr-kicker">HOW IT WORKS</span>
+<div class="cr-card" style="flex: none; gap: 14px">
+<div class="cr-act"><span class="cr-step-b">1</span><span>A creator turns on holder rewards when launching on the Build tab.</span></div>
+<div class="cr-act"><span class="cr-step-b">2</span><span>Every buy and sell pays a slice of the tax into the token's reward pool.</span></div>
+<div class="cr-act"><span class="cr-step-b">3</span><span>Anyone holding at least 10,000 tokens earns a share by balance, paid in the token's pair (usually ETH).</span></div>
+<div class="cr-act"><span class="cr-step-b">4</span><span>Claim whenever you like. You pay a small gas fee on Base.</span></div>
 </div>
-<div class="cr-status" id="st-status" role="status" aria-live="polite">
-<strong style="font-family: Unbounded, sans-serif; font-size: 17px">Staking <span class="cr-demo">DEMO</span></strong>
-<ol id="st-steps"></ol>
-</div>
+<a href="#/build" class="cr-btn-s cr-btn-a" style="align-self: flex-start">Launch a token with rewards →</a>
+<p class="cr-hint" style="margin: 0">Rewards run on Clanker's v5 contracts. Only v5 tokens launched with holder rewards pay out.</p>
 </aside>
+</div>
+<div class="cr-card" id="fe-card" style="flex: none">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="cr-kicker">FOR CREATORS &amp; PLATFORMS</span>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: clamp(20px, 2.6vw, 26px)">Claim your trading fees</h2>
+<p style="margin: 0; color: #B4B1BF">Launched a token? Your share of every trade waits in Clanker's fee escrow until you claim it. Fees from all your tokens with the same pair add up together.</p>
+</div>
+<div class="cr-row" style="align-items: flex-end">
+<div class="cr-field" style="flex: 3 1 260px">
+<label for="fe-addr">Any token you earn fees from</label>
+<input id="fe-addr" type="text" autocomplete="off" spellcheck="false" placeholder="0x…" aria-describedby="e-fe-addr" style="font-family: 'IBM Plex Mono', monospace">
+<span class="cr-err" id="e-fe-addr"></span>
+</div>
+<button type="button" class="cr-btn-s" id="fe-check" style="min-height: 50px">Check fees</button>
+</div>
+<div class="cr-chips" id="fe-mine"></div>
+<div id="fe-result" class="cr-dark" style="display: none">
+<div class="cr-kv"><span>Fees owed to you</span><strong id="fe-amount">—</strong></div>
+<div class="cr-kv"><span>Wallet</span><strong id="fe-wallet" class="cr-mono">—</strong></div>
+<p id="fe-msg" class="cr-hint" style="margin: 0; color: #B4B1BF"></p>
+<button type="button" class="cr-btn-s" id="fe-claim" disabled style="align-self: flex-start">Claim fees</button>
+</div>
 </div>
 </div>
 </section>
@@ -656,6 +727,17 @@ export MODEL="auto"</pre>
 <h1 class="cr-h1" id="h-plug">Plug in</h1>
 <p class="cr-lead">Sign in with your wallet, grab an API key, and point any OpenAI-compatible app or coding agent at the router.</p>
 </div>
+<div class="cr-card cr-soon" style="flex: none; align-items: flex-start">
+<span class="cr-badge cr-badge-new" style="font-size: 12px; padding: 4px 10px">COMING SOON</span>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-size: clamp(22px, 3vw, 30px)">Plug in is almost here</h2>
+<p style="margin: 0; color: #B4B1BF; max-width: 620px">One API key for top AI models, paid with credits from your wallet. We’re finishing the API.</p>
+<ul style="margin: 0; padding-left: 20px; color: #D2D0DA; display: flex; flex-direction: column; gap: 6px"><li>OpenAI-compatible — works with the tools you already use</li><li>Sign in with your wallet, no email</li><li>Pay per use with AI credits</li></ul>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<a href="#/build" class="cr-btn-s">Launch a token now</a>
+<a href="#/tokens" class="cr-btn-s cr-btn-g">Browse live tokens</a>
+</div>
+</div>
+<div hidden aria-hidden="true">
 <div class="cr-note" role="note"><strong>Demo mode:</strong> the key shown here is fake and won't work against a real API.</div>
 <div class="cr-grid">
 <div class="cr-card">
@@ -696,6 +778,24 @@ export MODEL="auto"</pre>
 </div>
 </aside>
 </div>
+</div>
+</div>
+</section>
+
+<!-- ================= PLATFORM (unlisted) ================= -->
+<section class="view" id="v-platform" aria-labelledby="h-platform">
+<div class="cr-page" style="max-width: 860px">
+<a href="#/" class="cr-back">← Home</a>
+<span class="cr-tag">PLATFORM</span>
+<h1 class="cr-h1" id="h-platform" style="font-size: clamp(30px, 5vw, 56px)">Platform fees</h1>
+<p class="cr-lead">Fees from every token launched on Clanker Router. Connect <strong>any</strong> wallet to claim — the money always goes to the platform wallet below.</p>
+<div class="cr-dark">
+<div class="cr-kv"><span>Platform wallet</span><strong class="cr-mono" id="pf-wallet"></strong></div>
+<div class="cr-kv"><span>Fee</span><strong id="pf-share"></strong></div>
+</div>
+<button type="button" class="cr-btn" id="pf-check" style="align-self: flex-start">Check platform fees</button>
+<div id="pf-list" style="display: flex; flex-direction: column; gap: 12px"></div>
+<p class="cr-hint" style="margin: 0">Claiming costs a little gas from the wallet you connect. Fees from all tokens with the same pair are claimed together.</p>
 </div>
 </section>
 
@@ -756,7 +856,7 @@ export MODEL="auto"</pre>
 <div id="d-open" style="display: none; flex-direction: column; gap: 24px">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
 <div class="cr-stat cr-stat-dark"><span class="cr-kicker">WALLET · BASE</span><strong id="d-eth">—</strong><a href="#/fuel" class="cr-mini">Top up credits →</a></div>
-<div class="cr-stat"><span class="cr-kicker">ACTIVE STAKES</span><strong id="d-stakes">0</strong><a href="#/stake" class="cr-mini">Manage →</a></div>
+<div class="cr-stat"><span class="cr-kicker">REWARD CLAIMS</span><strong id="d-stakes">0</strong><a href="#/stake" class="cr-mini">Check rewards →</a></div>
 <div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong id="d-built">0</strong><a href="#/tokens" class="cr-mini">View →</a></div>
 <div class="cr-stat"><span class="cr-kicker">API KEY</span><strong id="d-key">None</strong><a href="#/plug" class="cr-mini">Get key →</a></div>
 </div>
@@ -795,7 +895,7 @@ export MODEL="auto"</pre>
 <a href="#doc-quickstart">Quickstart</a>
 <a href="#doc-fuel">Fuel</a>
 <a href="#doc-build">Build</a>
-<a href="#doc-stake">Stake</a>
+<a href="#doc-stake">Earn</a>
 <a href="#doc-api">API reference</a>
 <a href="#doc-routing">Routing</a>
 <a href="#doc-errors">Errors</a>
@@ -807,9 +907,9 @@ export MODEL="auto"</pre>
 <h2>Overview</h2>
 <p>Clanker Router connects on-chain value to AI compute. It does three things:</p>
 <ul>
-<li><strong>Fuel</strong> — turn any token into AI credits for any wallet.</li>
-<li><strong>Build &amp; Stake</strong> — launch tokens on Base whose trading fees are paid to stakers as AI credits.</li>
-<li><strong>Plug in</strong> — spend credits on [N]+ models through one OpenAI-compatible API.</li>
+<li><strong>Fuel</strong> (coming soon) — turn any token into AI credits for any wallet.</li>
+<li><strong>Build &amp; Earn</strong> — launch tokens on Base that pay their creator and, optionally, their holders on every trade.</li>
+<li><strong>Plug in</strong> (coming soon) — spend credits on [N]+ models through one OpenAI-compatible API.</li>
 </ul>
 <p>Your wallet is your account. There is no email sign-up.</p>
 </article>
@@ -839,14 +939,16 @@ curl $OPENAI_BASE_URL/chat/completions \
 <ul>
 <li>Cost: gas, plus an optional launch buy in ETH.</li>
 <li>Buy and sell tax: you choose 1–10% each. Taxes go to you as the creator, minus a 15% platform fee. Clanker keeps a protocol share.</li>
+<li>Holder rewards (optional): send 10–50% of the tax to everyone holding at least 10,000 tokens, paid in the pair token. This comes out of the creator's share.</li>
 <li>Trading starts right away on Uniswap v4, and the token appears on clanker.world.</li>
 <li>Image: upload a file or paste an <code>https://</code> or <code>ipfs://</code> link.</li>
 </ul>
 </article>
 <article id="doc-stake">
-<h2>Stake</h2>
-<p>Stake a token to receive its share of trading fees as AI credits. Fees are collected <strong>[SCHEDULE]</strong>, converted to stablecoin, and credited automatically — there is nothing to claim.</p>
-<p>Unstaking takes <strong>[DURATION]</strong>. Only the staking wallet can move a stake.</p>
+<h2>Earn (holder rewards)</h2>
+<p>When a creator turns on holder rewards at launch, part of every buy and sell tax goes into the token's reward pool on Clanker's v5 contracts. Anyone holding at least 10,000 tokens earns a share by balance, paid in the token's pair (usually ETH).</p>
+<p>Creators (and platforms that take a fee) also claim their share of the trading tax on the Earn tab: fees wait in Clanker's fee escrow until claimed.</p>
+<p>There's no staking or lockup. Open the Earn tab, paste the token address, and claim whenever you like — you only pay gas. Tokens launched without holder rewards don't pay out.</p>
 </article>
 <article id="doc-api">
 <h2>API reference</h2>
@@ -888,7 +990,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 <thead><tr><th scope="col">Action</th><th scope="col">Fee</th><th scope="col">Goes to</th></tr></thead>
 <tbody>
 <tr><td>Fuel</td><td>[FEE]</td><td>[Protocol]</td></tr>
-<tr><td>Token trade</td><td>1–10% buy/sell tax (set at launch)</td><td>Creator 85% · platform fee 15% · plus Clanker protocol share</td></tr>
+<tr><td>Token trade</td><td>1–10% buy/sell tax (set at launch)</td><td>Creator · holder rewards (optional) · platform fee 15% · plus Clanker protocol share</td></tr>
 <tr><td>API usage</td><td>[Model price + markup?]</td><td>Model provider · [Protocol]</td></tr>
 </tbody>
 </table>
@@ -904,7 +1006,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 <tr><td>Token factory</td><td><code>0x[ADDRESS]</code></td></tr>
 <tr><td>Staking</td><td><code>0x[ADDRESS]</code></td></tr>
 <tr><td>Fee router</td><td><code>0x[ADDRESS]</code></td></tr>
-<tr><td>$[TICKER]</td><td><code>0x[ADDRESS]</code></td></tr>
+<tr><td>$CROUTER</td><td>Announced at launch on our official X account</td></tr>
 </tbody>
 </table>
 </div>
@@ -982,13 +1084,14 @@ curl $OPENAI_BASE_URL/chat/completions \
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 48px">
-<div class="cr-fcol"><span class="cr-kicker">PRODUCT</span><a href="#/fuel">Fuel</a><a href="#/build">Build</a><a href="#/stake">Stake</a><a href="#/plug">Plug in</a><a href="#/tokens">Tokens</a></div>
+<div class="cr-fcol"><span class="cr-kicker">PRODUCT</span><a href="#/fuel">Fuel</a><a href="#/build">Build</a><a href="#/stake">Earn</a><a href="#/plug">Plug in</a><a href="#/tokens">Tokens</a></div>
 <div class="cr-fcol"><span class="cr-kicker">RESOURCES</span><a href="#/docs">Docs</a><a href="#doc-api">API reference</a><a href="#doc-contracts">Contracts</a><a href="#/dashboard">Dashboard</a><a href="#faq">FAQ</a></div>
 <div class="cr-fcol"><span class="cr-kicker">LEGAL</span><a href="#/terms">Terms</a><a href="#/privacy">Privacy</a></div>
 </div>
 </div>
 <div style="border-top: 1px solid #26222F; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 13px; color: #9A97A6">
 <span class="cr-mono">© 2026 Clanker Router</span>
+<span class="cr-by" style="font-size: 13px">Built on <svg class="cr-ic" viewBox="0 0 210 177" aria-hidden="true"><rect x="0" y="124" width="46" height="53" fill="#865FD3"></rect><rect x="81" y="59" width="47" height="118" fill="#865FD3"></rect><rect x="163" y="0" width="47" height="177" fill="#865FD3"></rect></svg>Clanker · Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span></span>
 <span class="cr-mono">Not financial advice. Tokens are volatile and can lose all value.</span>
 </div>
 </div>
@@ -1014,7 +1117,7 @@ function short(a){return a.length>14?a.slice(0,6)+'…'+a.slice(-4):a}
 function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
 
 /* ================= ROUTER ================= */
-var VIEWS={'':'v-home',fuel:'v-fuel',build:'v-build',stake:'v-stake',plug:'v-plug',tokens:'v-tokens',dashboard:'v-dashboard',docs:'v-docs',terms:'v-terms',privacy:'v-privacy'};
+var VIEWS={'':'v-home',platform:'v-platform',fuel:'v-fuel',build:'v-build',stake:'v-stake',plug:'v-plug',tokens:'v-tokens',dashboard:'v-dashboard',docs:'v-docs',terms:'v-terms',privacy:'v-privacy'};
 function keyFor(id){for(var k in VIEWS)if(VIEWS[k]===id)return k;return ''}
 function route(){
   var h=location.hash||'',key='',id=null,anchor=null;
@@ -1028,10 +1131,11 @@ function route(){
   else window.scrollTo(0,0);
   if(id==='v-stake')fillStakeTokens();
   if(id==='v-tokens')startTokens();
+  if(id==='v-platform')startPlatform();
   if(id==='v-home'){startHomeTokens();startStats()}
   if(id==='v-dashboard')renderDash();
 }
-window.addEventListener('hashchange',route);
+window.addEventListener('hashchange',function(){if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(route)}else route()});
 
 /* ================= MENU ================= */
 var menu=$('cr-menu'),burger=$('cr-burger');
@@ -1044,7 +1148,7 @@ burger.addEventListener('click',function(){setMenu(!menu.classList.contains('cr-
 var BASE_CHAIN={chainId:'0x2105',chainName:'Base',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://mainnet.base.org'],blockExplorerUrls:['https://basescan.org']};
 /* WalletConnect: lets people on a PC scan a QR code with the wallet app on their phone.
    Get a free Project ID at https://dashboard.reown.com, paste it below, and add your domain to the project's allowlist. */
-var WC_PROJECT_ID='';
+var WC_PROJECT_ID='56b3b10be9cfa9e9e75dcd537117d6b0';
 var WC_URL='./walletconnect.js';
 var wcProvider=null;
 function getWC(){
@@ -1195,7 +1299,6 @@ function renderWallet(){
   document.querySelectorAll('.cr-wallet').forEach(function(b){b.classList.toggle('is-on',!!account);b.setAttribute('aria-label',account?'Wallet '+short(account)+' — open dashboard':'Connect wallet')});
   if(!busy.fu)$('fu-btn').textContent=account?'Send credits':'Connect wallet to send';
   if(!busy.b)$('b-btn').textContent=account?'Deploy on Base':'Connect wallet to deploy';
-  if(!busy.st)$('st-btn').textContent=account?'Stake':'Connect wallet to stake';
   if(!apiKey)$('pl-sign').textContent=account?'Sign message':'Connect wallet & sign';
   renderDash();
 }
@@ -1238,21 +1341,22 @@ function copyText(txt,btn){
 
 /* ================= HOME: mode tabs ================= */
 var modes=[
-{tag:'MODE 1 · FUEL',title:'Top up any wallet with AI credits.',desc:'Pay with whatever token you hold. The recipient gets a credit balance they can spend on AI models right away.',cta:'Fuel a wallet',href:'#/fuel',code:false,
+{tag:'MODE 1 · FUEL · SOON',title:'Top up any wallet with AI credits.',desc:'Pay with whatever token you hold. The recipient gets a credit balance they can spend on AI models right away.',cta:'Coming soon',href:'#/fuel',code:false,
 facts:[['SIGNATURES','1'],['CHAINS','[Base + …]']],
 steps:[['Enter wallet + amount','Paste an address or ENS name.'],['Pay with any token','Swapped to a stablecoin under the hood.'],['Credits land','Ready to use with their wallet login.']]},
 {tag:'MODE 2 · BUILD',title:'Build a token that pays out in AI.',desc:'Name it, ticker it, ship it on Base through Clanker — straight from your wallet. Every trade pays a tax to you, the creator.',cta:'Open the builder',href:'#/build',code:false,
 facts:[['BUY / SELL TAX','1–10%'],['TAX GOES TO','You'],['LAUNCH COST','Gas only'],['POOL','Uniswap v4']],
 steps:[['Describe your token','Name, ticker, image and a short pitch.'],['Sign one transaction','Deployed on Base via Clanker.'],['Trading opens','Taxes flow to your wallet.']]},
-{tag:'MODE 3 · STAKE',title:'Hold the token. Earn model time.',desc:'Stake any launched token and receive your share of its trading fees as AI credits — automatically.',cta:'Start staking',href:'#/stake',code:false,
-facts:[['PAYOUT','[SCHEDULE]'],['UNSTAKE','[DURATION]']],
-steps:[['Pick a token','Browse tokens built on Clanker Router.'],['Stake it','Only your wallet can move it.'],['Credits drip in','No claiming needed.']]},
-{tag:'MODE 4 · PLUG IN',title:'Spend credits in your tools.',desc:'Sign in with your wallet, grab a key, and point any OpenAI-compatible app or coding agent at the router.',cta:'Get my key',href:'#/plug',code:true,
+{tag:'MODE 3 · EARN',title:'Hold the token. Earn from every trade.',desc:'Tokens launched with holder rewards pay part of every buy and sell to their holders. No staking, no lockups — just hold and claim.',cta:'Check my rewards',href:'#/stake',code:false,
+facts:[['PAID IN','ETH'],['MIN. HOLDING','10,000 tokens']],
+steps:[['Hold the token','At least 10,000 tokens.'],['Rewards build up','A slice of every trade goes to holders.'],['Claim anytime','One click, small gas fee.']]},
+{tag:'MODE 4 · PLUG IN · SOON',title:'Spend credits in your tools.',desc:'Sign in with your wallet, grab a key, and point any OpenAI-compatible app or coding agent at the router.',cta:'Coming soon',href:'#/plug',code:true,
 facts:[['MODELS','[N]+'],['BILLING','Credits']],
 steps:[['Sign a message','Get your key and balance.'],['Set two env vars','Works with existing SDKs.']]}
 ];
 var tabs=document.querySelectorAll('[data-tab]');
 function showMode(i){
+  var pnl=document.querySelector('.cr-panel');if(pnl){pnl.classList.remove('cr-swap');void pnl.offsetWidth;pnl.classList.add('cr-swap')}
   var m=modes[i];
   tabs.forEach(function(t,j){var on=j===i;t.setAttribute('aria-selected',on);t.style.background=on?'#9B6BFF':'transparent';t.style.color=on?'#0A0A0C':'#F2F1F5';});
   $('m-tag').textContent=m.tag;$('m-title').textContent=m.title;$('m-desc').textContent=m.desc;$('m-cta').textContent=m.cta;$('m-cta').setAttribute('href',m.href);
@@ -1377,6 +1481,7 @@ function deployToken(d,onStep){
         context:{interface:'Clanker Router'},
         buyFee:d.buy,sellFee:d.sell};
       if(d.dev>0)cfg.devBuy={ethAmount:String(d.dev)};
+      if(d.div>0)cfg.dividends={share:d.div,minimumHolding:10000n*10n**18n};
       if(INTEGRATOR)cfg.integrator=INTEGRATOR;
       return clanker.deploy(cfg);
     });
@@ -1402,7 +1507,7 @@ $('b-form').addEventListener('submit',function(e){
     busy.b=true;var btn=$('b-btn');btn.disabled=true;btn.textContent='Deploying…';
     $('b-status').style.display='flex';$('b-done').style.display='none';$('b-error').textContent='';$('b-status-title').textContent='Deploying';
     $('b-status').scrollIntoView({block:'nearest',behavior:'smooth'});
-    var data={name:name,ticker:ticker,desc:$('b-desc').value.trim(),file:imgFile,imageUrl:imgFile?null:imgURL,buy:+$('b-buy').value,sell:+$('b-sell').value,dev:dev?parseFloat(dev):0,socials:socials()};
+    var data={name:name,ticker:ticker,desc:$('b-desc').value.trim(),file:imgFile,imageUrl:imgFile?null:imgURL,buy:+$('b-buy').value,sell:+$('b-sell').value,div:+$('b-div').value,dev:dev?parseFloat(dev):0,socials:socials()};
     var cur=0;
     return deployToken(data,function(i,tx){cur=i;renderSteps($('b-steps'),BUILD_STEPS,i);if(tx){$('b-scan').href='https://basescan.org/tx/'+tx}}).then(function(r){
       renderSteps($('b-steps'),BUILD_STEPS,BUILD_STEPS.length);
@@ -1425,54 +1530,149 @@ $('b-again').addEventListener('click',function(){
   $('b-status').style.display='none';$('b-btn').disabled=false;renderWallet();window.scrollTo({top:0,behavior:'smooth'});
 });
 
-/* ================= STAKE ================= */
-var positions=[];
-function fillStakeTokens(){
-  var sel=$('st-token'),cur=sel.value;sel.innerHTML='';
-  var ph=el('option',null,'Choose a token…');ph.value='';sel.appendChild(ph);
-  built.forEach(function(t){var o=el('option',null,t.name+' ($'+t.ticker+')');o.value='$'+t.ticker;sel.appendChild(o)});
-  var o2=el('option',null,'Paste a contract address…');o2.value='__addr';sel.appendChild(o2);
-  sel.value=cur&&[].some.call(sel.options,function(o){return o.value===cur})?cur:'';
-  if(pendingStake){sel.value='__addr';$('st-addr').value=pendingStake.addr;pendingStake=null;clearErr('st-token');clearErr('st-addr')}
-  $('st-addr-wrap').style.display=sel.value==='__addr'?'flex':'none';
+/* ================= EARN (Clanker v5 holder rewards) ================= */
+var positions=[]; // kept for the dashboard tile
+var claimsDone=0;
+var sdkMod=null;
+function loadSdk(){return sdkMod?Promise.resolve(sdkMod):import(SDK_URL).then(function(m){sdkMod=m;return m})}
+function readClanker(m){
+  var publicClient=m.createPublicClient({chain:m.base,transport:activeProvider?m.custom(activeProvider):m.http('https://mainnet.base.org')});
+  var cfg={publicClient:publicClient};
+  if(activeProvider&&account)cfg.wallet=m.createWalletClient({account:account,chain:m.base,transport:m.custom(activeProvider)});
+  return new m.Clanker(cfg);
 }
-$('st-token').addEventListener('change',function(){clearErr('st-token');$('st-addr-wrap').style.display=this.value==='__addr'?'flex':'none'});
-['st-addr','st-amt'].forEach(function(id){$(id).addEventListener('input',function(){clearErr(id)})});
-function renderPositions(){
-  var list=$('st-list');list.innerHTML='';
-  if(!positions.length){list.appendChild(el('div',null,'No stakes yet. Stake a token to start earning credits.')).className='cr-empty';return}
-  positions.forEach(function(p,i){
-    var row=el('div');row.className='cr-pos';
-    var info=el('div','display:flex;flex-direction:column;gap:2px;min-width:0');
-    info.appendChild(el('strong','font-family:Unbounded,sans-serif;font-size:16px;overflow-wrap:anywhere',p.label));
-    info.appendChild(el('span','font-size:14px;color:#9A97A6',p.amount+' staked'+(p.unstaking?' · unstaking, ready in [DURATION]':'')));
-    row.appendChild(info);
-    var b=el('button',null,p.unstaking?'Unstaking…':'Unstake');b.type='button';b.className='cr-btn-s cr-btn-g';b.disabled=p.unstaking;
-    b.addEventListener('click',function(){p.unstaking=true;renderPositions();logAct('Started unstaking '+p.label)});
-    row.appendChild(b);list.appendChild(row);
+function tokenInfo(addr){
+  var p=new URLSearchParams({chainId:'8453',q:addr,limit:'1'});
+  function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
+  return go(tkApi).then(function(j){var d=(j.data||[]).filter(function(t){return (t.contract_address||'').toLowerCase()===addr.toLowerCase()})[0];return d||null}).catch(function(){return null});
+}
+function fmtUnits(v,dec){
+  var neg=v<0n;if(neg)v=-v;var base=10n**BigInt(dec),whole=v/base,frac=(v%base).toString().padStart(dec,'0').slice(0,6).replace(/0+$/,'');
+  return (neg?'-':'')+whole.toString()+(frac?'.'+frac:'');
+}
+function renderMine(){
+  var box=$('er-mine');box.innerHTML='';
+  (built||[]).filter(function(t){return t.address}).forEach(function(t){
+    var c=el('button',null,'$'+t.ticker);c.type='button';c.className='cr-chip';
+    c.addEventListener('click',function(){$('er-addr').value=t.address;clearErr('er-addr');checkRewards()});box.appendChild(c);
   });
 }
-var STAKE_STEPS=['Approve token','Confirm stake in your wallet','Stake recorded'];
-$('st-form').addEventListener('submit',function(e){
-  e.preventDefault();if(busy.st)return;
-  var sel=$('st-token').value,addr=$('st-addr').value.trim(),amt=$('st-amt').value.trim(),first=null;
-  if(!sel){showErr('st-token','Choose a token.');first=first||$('st-token')}
-  if(sel==='__addr'&&!isAddr(addr)){showErr('st-addr','Enter a valid 0x contract address.');first=first||$('st-addr')}
-  if(!isAmount(amt)){showErr('st-amt','Enter an amount above 0.');first=first||$('st-amt')}
-  if(first){focusFirst(first);return}
-  ensureWallet().then(function(){
-    busy.st=true;var btn=$('st-btn');btn.disabled=true;btn.textContent='Staking…';
-    $('st-status').style.display='flex';
-    /* REAL: approve + stake contract calls here */
-    return runSteps($('st-steps'),STAKE_STEPS).then(function(){
-      var label=sel==='__addr'?short(addr):$('st-token').options[$('st-token').selectedIndex].text;
-      positions.unshift({label:label,amount:amt,unstaking:false});renderPositions();logAct('Staked '+amt+' '+label);
-      $('st-amt').value='';btn.disabled=false;busy.st=false;renderWallet();
-      setTimeout(function(){$('st-status').style.display='none'},1500);
+var erState=null;
+function checkRewards(){
+  var addr=$('er-addr').value.trim();
+  if(!isAddr(addr)){showErr('er-addr','Enter a valid 0x token address.');focusFirst($('er-addr'));return}
+  var btn=$('er-check');btn.disabled=true;btn.textContent='Checking…';
+  $('er-result').style.display='flex';$('er-amount').textContent='…';$('er-msg').textContent='';$('er-claim').disabled=true;
+  $('er-view').href=CLANKER_TOKEN_URL+addr;$('er-wallet').textContent=account?short(account):'Not connected';
+  Promise.all([tokenInfo(addr),loadSdk()]).then(function(r){
+    var info=r[0],m=r[1];
+    $('er-name').textContent=info?info.name:short(addr);$('er-sym').textContent=info?'$'+info.symbol+' · pays in '+(info.pair||'ETH'):'';
+    var im=$('er-img');im.innerHTML='';var src=info&&safeImg(info.img_url);
+    if(src){var i=el('img','width:100%;height:100%;object-fit:cover');i.src=src;i.alt='';i.referrerPolicy='no-referrer';im.appendChild(i)}else im.textContent=info?(info.symbol||'?')[0]:'?';
+    var dec=info&&/USDC/i.test(info.pair||'')?6:18,unit=info&&info.pair?(/WETH|ETH/i.test(info.pair)?'ETH':info.pair):'ETH';
+    var c=readClanker(m);
+    return c.dividendOf(addr).then(function(div){
+      if(!div||/^0x0{40}$/i.test(div)){erState=null;$('er-amount').textContent='—';$('er-msg').textContent='This token doesn’t pay holder rewards. Only v5 tokens launched with holder rewards do.';return}
+      if(!account){erState={addr:addr};$('er-amount').textContent='Connect to see';$('er-msg').textContent='This token pays holder rewards. Connect your wallet to see what you’ve earned.';$('er-claim').disabled=false;$('er-claim').textContent='Connect wallet';return}
+      return c.withdrawableDividends({token:addr,holder:account}).then(function(v){
+        erState={addr:addr,amount:v};
+        $('er-amount').textContent=fmtUnits(v,dec)+' '+unit;
+        if(v>0n){$('er-claim').disabled=false;$('er-claim').textContent='Claim rewards';$('er-msg').textContent='Ready to claim.'}
+        else{$('er-claim').textContent='Nothing to claim yet';$('er-msg').textContent='Hold at least 10,000 tokens to earn. Rewards build up as people trade.'}
+      });
     });
-  });
+  }).catch(function(e){$('er-amount').textContent='—';$('er-msg').textContent='Couldn’t read rewards: '+walletErr(e)})
+  .then(function(){btn.disabled=false;btn.textContent='Check my rewards'});
+}
+$('er-form').addEventListener('submit',function(e){e.preventDefault();checkRewards()});
+$('er-addr').addEventListener('input',function(){clearErr('er-addr')});
+$('er-claim').addEventListener('click',function(){
+  if(!erState)return;
+  if(!account){ensureWallet().then(checkRewards).catch(function(){});return}
+  var b=this;b.disabled=true;b.textContent='Confirm in wallet…';
+  ensureBase(activeProvider).then(loadSdk).then(function(m){
+    return readClanker(m).claimDividends({tokens:[erState.addr],unwrapWrappedNative:true});
+  }).then(function(res){
+    if(res.error)throw res.error;
+    b.textContent='Claiming…';toast('Claim sent');claimsDone++;logAct('Claimed rewards from '+short(erState.addr));
+    setTimeout(checkRewards,6000);
+  }).catch(function(err){b.disabled=false;b.textContent='Claim rewards';toast(walletErr(err),true)});
 });
-renderPositions();
+
+/* creator / platform fees in Clanker's fee escrow */
+var feState=null;
+function checkFees(){
+  var addr=$('fe-addr').value.trim();
+  if(!isAddr(addr)){showErr('fe-addr','Enter a valid 0x token address.');focusFirst($('fe-addr'));return}
+  if(!account){ensureWallet().then(checkFees).catch(function(){});return}
+  var btn=$('fe-check');btn.disabled=true;btn.textContent='Checking…';
+  $('fe-result').style.display='flex';$('fe-amount').textContent='…';$('fe-msg').textContent='';$('fe-claim').disabled=true;$('fe-wallet').textContent=short(account);
+  Promise.all([tokenInfo(addr),loadSdk()]).then(function(r){
+    var info=r[0],m=r[1],dec=info&&/USDC/i.test(info.pair||'')?6:18,unit=info&&info.pair?(/WETH|ETH/i.test(info.pair)?'ETH':info.pair):'ETH';
+    return readClanker(m).availableRewards({token:addr,rewardRecipient:account}).then(function(v){
+      feState={addr:addr,amount:v};
+      $('fe-amount').textContent=fmtUnits(v,dec)+' '+unit;
+      if(v>0n){$('fe-claim').disabled=false;$('fe-msg').textContent='Ready to claim. This includes fees from all your tokens paired with '+unit+'.'}
+      else $('fe-msg').textContent='Nothing waiting right now. Fees build up as people trade.';
+    });
+  }).catch(function(e){$('fe-amount').textContent='—';$('fe-msg').textContent='Couldn’t read fees: '+walletErr(e)})
+  .then(function(){btn.disabled=false;btn.textContent='Check fees'});
+}
+$('fe-check').addEventListener('click',checkFees);
+$('fe-addr').addEventListener('input',function(){clearErr('fe-addr')});
+$('fe-claim').addEventListener('click',function(){
+  if(!feState||!account)return;
+  var b=this;b.disabled=true;b.textContent='Confirm in wallet…';
+  ensureBase(activeProvider).then(loadSdk).then(function(m){return readClanker(m).claimRewards({token:feState.addr,rewardRecipient:account})})
+  .then(function(res){if(res.error)throw res.error;b.textContent='Claim fees';toast('Fee claim sent');logAct('Claimed trading fees');setTimeout(checkFees,6000)})
+  .catch(function(err){b.disabled=false;b.textContent='Claim fees';toast(walletErr(err),true)});
+});
+
+/* ================= PLATFORM FEES (unlisted page: #/platform) ================= */
+function platformTokens(){
+  var p=new URLSearchParams({chainId:'8453',socialInterface:'Clanker Router',limit:'20'});
+  function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
+  return go(tkApi).then(function(j){return Array.isArray(j.data)?j.data:[]});
+}
+function startPlatform(){
+  $('pf-wallet').textContent=INTEGRATOR?short(INTEGRATOR.address):'Not set';
+  $('pf-share').textContent=INTEGRATOR?INTEGRATOR.share+'% of each launch’s tax':'—';
+}
+$('pf-check').addEventListener('click',function(){
+  if(!INTEGRATOR)return;
+  var btn=this,list=$('pf-list');btn.disabled=true;btn.textContent='Checking…';list.innerHTML='';
+  Promise.all([platformTokens(),loadSdk()]).then(function(r){
+    var toks=r[0],m=r[1],byPair={};
+    toks.forEach(function(t){var k=(t.pair||'ETH').toUpperCase();if(!byPair[k])byPair[k]=t});
+    var pairs=Object.keys(byPair);
+    if(!pairs.length){var e=el('div',null,'No tokens launched here yet.');e.className='cr-empty';list.appendChild(e);return}
+    var c=readClanker(m);
+    return Promise.all(pairs.map(function(k){
+      var t=byPair[k],dec=/USDC/.test(k)?6:18,unit=/WETH|ETH/.test(k)?'ETH':k;
+      var row=el('div');row.className='cr-pos';
+      var info=el('div','display:flex;flex-direction:column;gap:2px');
+      info.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9A97A6",'PAIRED WITH '+k));
+      var amt=el('strong','font-family:Unbounded,sans-serif;font-size:20px','…');info.appendChild(amt);row.appendChild(info);
+      var b=el('button',null,'Claim');b.type='button';b.className='cr-btn-s';b.disabled=true;row.appendChild(b);list.appendChild(row);
+      return c.availableRewards({token:t.contract_address,rewardRecipient:INTEGRATOR.address}).then(function(v){
+        amt.textContent=fmtUnits(v,dec)+' '+unit;b.disabled=!(v>0n);
+        b.addEventListener('click',function(){
+          ensureWallet().then(function(){b.disabled=true;b.textContent='Confirm in wallet…';return ensureBase(activeProvider)}).then(loadSdk).then(function(mm){
+            return readClanker(mm).claimRewards({token:t.contract_address,rewardRecipient:INTEGRATOR.address});
+          }).then(function(res){if(res.error)throw res.error;b.textContent='Sent ✓';toast('Claim sent — fees go to '+short(INTEGRATOR.address))})
+          .catch(function(err){b.disabled=false;b.textContent='Claim';if(err&&err.message!=='closed')toast(walletErr(err),true)});
+        });
+      }).catch(function(e){amt.textContent='—';toast('Couldn’t read fees: '+walletErr(e),true)});
+    }));
+  }).catch(function(e){toast('Couldn’t load tokens: '+walletErr(e),true)})
+  .then(function(){btn.disabled=false;btn.textContent='Check platform fees'});
+});
+function startEarn(){
+  renderMine();
+  var fm=$('fe-mine');fm.innerHTML='';(built||[]).filter(function(t){return t.address}).forEach(function(t){var c=el('button',null,'$'+t.ticker);c.type='button';c.className='cr-chip';c.addEventListener('click',function(){$('fe-addr').value=t.address;checkFees()});fm.appendChild(c)});
+  if(pendingStake&&pendingStake.addr){$('er-addr').value=pendingStake.addr;pendingStake=null;checkRewards()}
+}
+function fillStakeTokens(){startEarn()}
 
 /* ================= PLUG IN ================= */
 var apiKey=null,showKey=false,snip='env';
@@ -1514,7 +1714,7 @@ function renderDash(){
   $('d-open').style.display=on?'flex':'none';
   $('d-sub').textContent=on?'Connected with '+(walletName||'your wallet')+' as '+short(account)+'. Activity below is from this browser session.':'Connect a wallet to see your credits, stakes and activity.';
   if(!on)return;
-  $('d-stakes').textContent=(positions||[]).filter(function(p){return !p.unstaking}).length;
+  $('d-stakes').textContent=claimsDone||0;
   $('d-built').textContent=(built||[]).length;
   $('d-key').textContent=apiKey?'Active':'None';
   if(activeProvider&&$('v-dashboard').classList.contains('active')){
@@ -1583,7 +1783,7 @@ function tokenCard(t,isNew){
   stats.appendChild(st('24H',typeof ch==='number'?(ch>0?'+':'')+ch.toFixed(1)+'%':'—',typeof ch==='number'?(ch>0?'#4ADE80':ch<0?'#FF6B5E':''):''));
   c.appendChild(stats);
   var row=el('div','display:flex;flex-wrap:wrap;gap:8px;margin-top:auto');
-  var s=el('button',null,'Stake');s.type='button';s.className='cr-btn-s';
+  var s=el('button',null,'Rewards');s.type='button';s.className='cr-btn-s';
   s.addEventListener('click',function(){pendingStake={addr:t.contract_address};location.hash='#/stake'});
   var v2=el('a',null,'Trade ↗');v2.href=CLANKER_TOKEN_URL+encodeURIComponent(t.contract_address);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s cr-btn-g';
   row.appendChild(s);row.appendChild(v2);c.appendChild(row);
@@ -1654,6 +1854,12 @@ document.addEventListener('visibilitychange',function(){if(!document.hidden&&$('
 
 
 /* ================= LIVE STATS (from Clanker's public API) ================= */
+function countUp(el,to){
+  var from=parseInt((el.textContent||'').replace(/[^0-9]/g,''),10);if(isNaN(from))from=0;
+  if(from===to||matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(to);return}
+  var t0=performance.now(),d=900;
+  (function step(now){var u=Math.min(1,(now-t0)/d),e=1-Math.pow(1-u,3);el.textContent=fmt(Math.round(from+(to-from)*e));if(u<1)requestAnimationFrame(step)})(t0);
+}
 function fmt(n){return typeof n==='number'?n.toLocaleString('en-US'):String(n)}
 function countTokens(extra){
   var p=new URLSearchParams({chainId:'8453',limit:'1'});for(var k in extra)p.set(k,extra[k]);
@@ -1666,7 +1872,7 @@ function loadStats(){
   var since=Math.floor(Date.now()/1000)-86400;
   Promise.all([countTokens({}),countTokens({startDate:String(since)}),countTokens({socialInterface:'Clanker Router'}),countTokens({startDate:String(since-6*86400)})]).then(function(r){
     var vals={total:r[0],day:r[1],here:r[2],week:r[3]},any=r.some(function(x){return x!=null});
-    document.querySelectorAll('[data-stat]').forEach(function(e){var v=vals[e.getAttribute('data-stat')];e.textContent=v==null?'—':fmt(v)});
+    document.querySelectorAll('[data-stat]').forEach(function(e){var v=vals[e.getAttribute('data-stat')];if(v==null){e.textContent='—';return}countUp(e,v)});
     $('stats-src').textContent=any?'Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}):'Offline · retrying';
   });
 }
