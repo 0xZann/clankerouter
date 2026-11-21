@@ -1174,7 +1174,8 @@ function allWallets(){
 }
 function isMobile(){return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)}
 function walletErr(e){
-  if(e&&(e.code===4001||e.code==='ACTION_REJECTED'||/reject|denied|cancel/i.test(e.message||'')))return 'You cancelled in your wallet.';
+  if(e&&e.isUpload)return e.message;
+  if(e&&(e.code===4001||e.code==='ACTION_REJECTED'||/user (rejected|denied|cancel)|request rejected|rejected the request/i.test(e.message||'')))return 'You cancelled in your wallet.';
   return (e&&(e.shortMessage||e.message))||'Something went wrong with your wallet.';
 }
 /* --- modal --- */
@@ -1455,9 +1456,10 @@ drop.addEventListener('drop',function(ev){var file=ev.dataTransfer.files[0];if(f
 $('b-ack').addEventListener('change',function(){$('e-b-ack').textContent=''});
 
 function uploadImage(file){
+  function up(m){var er=new Error(m);er.isUpload=true;return er}
   return fetch(UPLOAD_API,{method:'POST',headers:{'content-type':file.type,'x-filename':encodeURIComponent(file.name)},body:file})
-    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||!j.url)throw new Error(j.error||'Image upload failed ('+r.status+'). Paste an image link instead.');return j.url})},
-          function(){throw new Error('Image upload isn’t available here. Paste an image link instead.')});
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||!j.url)throw up(j.error||'Image upload failed ('+r.status+'). Paste an image link instead.');return j.url})},
+          function(){throw up('Image upload isn\u2019t available here. Paste an image link instead.')});
 }
 function socials(){
   var out=[],w=$('b-web').value.trim(),x=$('b-x').value.trim().replace(/^@/,''),t=$('b-tg').value.trim();
