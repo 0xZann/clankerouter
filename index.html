@@ -1452,6 +1452,23 @@ var drop=$('b-drop');
 drop.addEventListener('drop',function(ev){var file=ev.dataTransfer.files[0];if(file){try{var dt=new DataTransfer();dt.items.add(file);$('b-img').files=dt.files}catch(x){}setImage(file)}});
 $('b-ack').addEventListener('change',function(){$('e-b-ack').textContent=''});
 
+var BASE_RPCS=['https://mainnet.base.org','https://base-rpc.publicnode.com','https://base.llamarpc.com'];
+var _rpcId=1;
+function baseReadTransport(m){
+  // Reads go straight to public Base RPCs (not the wallet), so in-app wallet browsers can't break decoding.
+  return m.custom({request:function(a){
+    var i=0;
+    function next(err){
+      if(i>=BASE_RPCS.length)return Promise.reject(err||new Error('Base RPC unavailable'));
+      var url=BASE_RPCS[i++];
+      return fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:_rpcId++,method:a.method,params:a.params||[]})})
+        .then(function(r){if(!r.ok)throw new Error('RPC '+r.status);return r.json()})
+        .then(function(j){if(j.error){var e=new Error(j.error.message||'RPC error');e.code=j.error.code;e.data=j.error.data;if(j.error.code===3||/revert/i.test(e.message))throw Object.assign(e,{fatal:true});throw e}return j.result})
+        .catch(function(e){if(e&&e.fatal)throw e;return next(e)});
+    }
+    return next();
+  }});
+}
 function uploadImage(file){
   function up(m){var er=new Error(m);er.isUpload=true;return er}
   return fetch(UPLOAD_API,{method:'POST',headers:{'content-type':file.type,'x-filename':encodeURIComponent(file.name)},body:file})
@@ -1475,7 +1492,7 @@ function deployToken(d,onStep){
       onStep(1);
       var transport=m.custom(activeProvider);
       var wallet=m.createWalletClient({account:account,chain:m.base,transport:transport});
-      var publicClient=m.createPublicClient({chain:m.base,transport:transport});
+      var publicClient=m.createPublicClient({chain:m.base,transport:baseReadTransport(m)});
       var clanker=new m.Clanker({wallet:wallet,publicClient:publicClient});
       var cfg={name:d.name,symbol:d.ticker,image:image,tokenAdmin:account,
         metadata:{description:d.desc||'',socialMediaUrls:d.socials},
@@ -1537,7 +1554,7 @@ var claimsDone=0;
 var sdkMod=null;
 function loadSdk(){return sdkMod?Promise.resolve(sdkMod):import(SDK_URL).then(function(m){sdkMod=m;return m})}
 function readClanker(m){
-  var publicClient=m.createPublicClient({chain:m.base,transport:activeProvider?m.custom(activeProvider):m.http('https://mainnet.base.org')});
+  var publicClient=m.createPublicClient({chain:m.base,transport:baseReadTransport(m)});
   var cfg={publicClient:publicClient};
   if(activeProvider&&account)cfg.wallet=m.createWalletClient({account:account,chain:m.base,transport:m.custom(activeProvider)});
   return new m.Clanker(cfg);
