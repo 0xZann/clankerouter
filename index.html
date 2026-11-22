@@ -821,9 +821,9 @@ export MODEL="auto"</pre>
 <div class="cr-field" style="flex: 1 1 180px">
 <label for="tk-sort">Sort by</label>
 <select id="tk-sort">
+<option value="volume-h24" selected>24h volume</option>
 <option value="new">Newest</option>
 <option value="market-cap">Market cap</option>
-<option value="volume-h24">24h volume</option>
 <option value="price-percent-h24">24h change</option>
 <option value="tx-h24">24h trades</option>
 </select>
@@ -1128,6 +1128,7 @@ function route(){
   else window.scrollTo(0,0);
   if(id==='v-stake')fillStakeTokens();
   if(id==='v-tokens')startTokens();
+  if(id==='v-build')loadSdk().catch(function(){});
   if(id==='v-platform')startPlatform();
   if(id==='v-home'){startHomeTokens();startStats()}
   if(id==='v-dashboard')renderDash();
@@ -1440,6 +1441,7 @@ function setImage(file){
   if(imgURL&&imgURL.indexOf('blob:')===0)URL.revokeObjectURL(imgURL);
   imgFile=file;imgURL=URL.createObjectURL(file);showPreview(imgURL);
   $('b-drop-title').textContent=file.name;$('b-imgurl').value='';
+  if(UPLOAD_API){var pp=uploadImage(file);pp.catch(function(){});preUp={file:file,p:pp}}
 }
 $('b-img').addEventListener('change',function(){setImage(this.files[0])});
 $('b-imgurl').addEventListener('input',function(){
@@ -1461,7 +1463,9 @@ function baseReadTransport(m){
     function next(err){
       if(i>=BASE_RPCS.length)return Promise.reject(err||new Error('Base RPC unavailable'));
       var url=BASE_RPCS[i++];
-      return fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:_rpcId++,method:a.method,params:a.params||[]})})
+      var ac=typeof AbortController!=='undefined'?new AbortController():null,tm=ac&&setTimeout(function(){ac.abort()},6000);
+      return fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:_rpcId++,method:a.method,params:a.params||[]}),signal:ac?ac.signal:undefined})
+        .finally(function(){if(tm)clearTimeout(tm)})
         .then(function(r){if(!r.ok)throw new Error('RPC '+r.status);return r.json()})
         .then(function(j){if(j.error){var e=new Error(j.error.message||'RPC error');e.code=j.error.code;e.data=j.error.data;if(j.error.code===3||/revert/i.test(e.message))throw Object.assign(e,{fatal:true});throw e}return j.result})
         .catch(function(e){if(e&&e.fatal)throw e;return next(e)});
@@ -1482,15 +1486,46 @@ function socials(){
   if(t)out.push({platform:'telegram',url:/^https?:\/\//.test(t)?t:'https://'+t.replace(/^\/+/,'')});
   return out;
 }
-var BUILD_STEPS=['Uploading image','Confirm in your wallet','Deploying on Base','Token is live'];
+var BUILD_STEPS=['Uploading image','Preparing launch','Confirm in your wallet','Deploying on Base','Token is live'];
+/* Clanker v5 needs a token address ending in ...cccc. The SDK searches for it on one thread;
+   we search on several Web Workers at once so the wallet prompt shows up much sooner. */
+function mineSaltParallel(input){
+  if(typeof Worker==='undefined')return null;
+  var n=Math.max(2,Math.min(navigator.hardwareConcurrency||4,6)),ws=[],done=false;
+  return new Promise(function(res,rej){
+    var failed=0;
+    function stop(){ws.forEach(function(w){try{w.terminate()}catch(e){}})}
+    for(var i=0;i<n;i++){
+      var w;try{w=new Worker('./salt-worker.js')}catch(e){failed++;continue}
+      ws.push(w);
+      w.onmessage=function(e){
+        if(done)return;
+        if(e.data&&e.data.creatorSalt){done=true;stop();res({creatorSalt:e.data.creatorSalt,token:e.data.token})}
+        else if(++failed>=n){stop();rej(new Error('Could not prepare the token address. Try again.'))}
+      };
+      w.onerror=function(){if(!done&&++failed>=n){stop();rej(new Error('Could not prepare the token address. Try again.'))}};
+      w.postMessage({caller:input.caller,tokenDeployer:input.tokenDeployer,initCodeHash:input.initCodeHash,maxTries:1000000});
+    }
+    if(!ws.length)rej(new Error('workers unavailable'));
+  });
+}
+var preUp=null; // image upload started as soon as the creator picks a file
+function imageFor(d){
+  if(!d.file)return Promise.resolve(d.imageUrl);
+  if(preUp&&preUp.file===d.file)return preUp.p.catch(function(){preUp=null;return uploadImage(d.file)});
+  return uploadImage(d.file);
+}
 function deployToken(d,onStep){
   var image;
   onStep(0);
-  var imgP=d.file?uploadImage(d.file):Promise.resolve(d.imageUrl);
-  return imgP.then(function(u){image=u;return import(SDK_URL)}).then(function(m){
+  return Promise.all([imageFor(d),loadSdk()]).then(function(r){image=r[0];var m=r[1];
     return ensureBase(activeProvider).then(function(){
       onStep(1);
-      var transport=m.custom(activeProvider);
+      var prompted=false;
+      var transport=m.custom({request:function(a){
+        if(!prompted&&(a.method==='eth_sendTransaction'||a.method==='eth_signTransaction')){prompted=true;onStep(2)}
+        return activeProvider.request(a);
+      }});
       var wallet=m.createWalletClient({account:account,chain:m.base,transport:transport});
       var publicClient=m.createPublicClient({chain:m.base,transport:baseReadTransport(m)});
       var clanker=new m.Clanker({wallet:wallet,publicClient:publicClient});
@@ -1501,11 +1536,12 @@ function deployToken(d,onStep){
       if(d.dev>0)cfg.devBuy={ethAmount:String(d.dev)};
       if(d.div>0)cfg.dividends={share:d.div,minimumHolding:10000n*10n**18n};
       if(INTEGRATOR)cfg.integrator=INTEGRATOR;
-      return clanker.deploy(cfg);
+      var opts={};if(typeof Worker!=='undefined')opts.mineSalt=function(input){return mineSaltParallel(input)};
+      return clanker.deploy(cfg,opts);
     });
   }).then(function(res){
     if(res.error)throw res.error;
-    onStep(2,res.txHash);
+    onStep(3,res.txHash);
     return res.waitForTransaction().then(function(r){
       if(r.error)throw r.error;
       return {address:r.address||res.expectedAddress,txHash:res.txHash};
@@ -1754,6 +1790,25 @@ var POLL_MS=8000;
 var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqId:0};
 var pendingStake=null;
 var tkSrc='all';
+/* Hidden: test launches that should never show on the site (fees are still collected). */
+var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc'];
+/* Pinned: always shown first on Home and Tokens. Add contract addresses here (any case). */
+var PINNED_TOKENS=[];
+function lc(a){return String(a||'').toLowerCase()}
+function isHidden(t){return HIDDEN_TOKENS.indexOf(lc(t.contract_address))>=0}
+function isPinned(t){return PINNED_TOKENS.some(function(a){return lc(a)===lc(t.contract_address)})}
+var pinned={list:[],at:0,p:null};
+function loadPinned(){
+  if(!PINNED_TOKENS.length)return Promise.resolve([]);
+  if(pinned.p)return pinned.p;
+  if(Date.now()-pinned.at<20000)return Promise.resolve(pinned.list);
+  pinned.p=Promise.all(PINNED_TOKENS.map(function(addr){
+    var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'5',q:addr});
+    function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
+    return go(tkApi).then(function(j){return (j.data||[]).filter(function(t){return lc(t.contract_address)===lc(addr)})[0]||null}).catch(function(){return null});
+  })).then(function(r){pinned.list=r.filter(Boolean);pinned.at=Date.now();pinned.p=null;return pinned.list});
+  return pinned.p;
+}
 function tkParams(cursor){
   var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'20'});
   if(tkSrc==='here')p.set('socialInterface','Clanker Router');
@@ -1776,7 +1831,7 @@ function ago(iso){
   if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';
 }
 function safeImg(u){return typeof u==='string'&&/^https:\/\//.test(u)?u:null}
-function tokenCard(t,isNew){
+function tokenCard(t,isNew,pin){
   var m=(t.related&&t.related.market)||{};
   var c=el('div');c.className='cr-tok'+(isNew?' cr-new':'');
   var top=el('div','display:flex;gap:14px;align-items:center;min-width:0');
@@ -1789,7 +1844,8 @@ function tokenCard(t,isNew){
   var nrow=el('div','display:flex;gap:6px;align-items:center;min-width:0');
   nrow.appendChild(el('strong','font-family:Unbounded,sans-serif;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap',t.name||'Unnamed'));
   if(t.tags&&t.tags.verified){var v=el('span',null,'✓');v.className='cr-badge';v.title='Verified on Clanker';v.setAttribute('aria-label','Verified');nrow.appendChild(v)}
-  if(isNew){var nb=el('span',null,'NEW');nb.className='cr-badge cr-badge-new';nrow.appendChild(nb)}
+  if(pin){var pb=el('span',null,'PINNED');pb.className='cr-badge cr-badge-new';nrow.appendChild(pb)}
+  if(isNew&&!pin){var nb=el('span',null,'NEW');nb.className='cr-badge cr-badge-new';nrow.appendChild(nb)}
   nm.appendChild(nrow);
   nm.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:13px;color:#B79BFF;overflow:hidden;text-overflow:ellipsis;white-space:nowrap",'$'+(t.symbol||'')+' · '+ago(t.deployed_at||t.created_at)));
   top.appendChild(nm);c.appendChild(top);
@@ -1814,7 +1870,9 @@ function renderTokenGrid(newIds){
     e.textContent=tk.loading?'Loading tokens…':($('tk-q').value.trim()?'No tokens match your search.':'No tokens found.');
     g.appendChild(e);return;
   }
-  tk.list.forEach(function(t){g.appendChild(tokenCard(t,newIds&&newIds[t.contract_address]))});
+  var showPins=$('tk-q').value.trim().length<2;
+  if(showPins)pinned.list.forEach(function(t){g.appendChild(tokenCard(t,false,true))});
+  tk.list.forEach(function(t){if(isHidden(t)||(showPins&&isPinned(t)))return;g.appendChild(tokenCard(t,newIds&&newIds[t.contract_address]))});
   $('tk-more').style.display=tk.cursor?'':'none';
 }
 function setLive(state,text){var l=$('tk-live');l.className='cr-live cr-live-'+state;$('tk-live-text').textContent=text}
@@ -1831,7 +1889,7 @@ function fetchTokens(cursor){
 function loadTokens(reset){
   if(reset){tk.list=[];tk.cursor=null;tk.seen={};tk.firstLoad=true}
   tk.loading=true;if(reset)renderTokenGrid();
-  return fetchTokens(reset?null:tk.cursor).then(function(j){
+  return Promise.all([fetchTokens(reset?null:tk.cursor),loadPinned()]).then(function(rr){var j=rr[0];
     tk.loading=false;if(!j)return;
     $('tk-err').style.display='none';
     var data=Array.isArray(j.data)?j.data:[];
@@ -1849,7 +1907,7 @@ function loadTokens(reset){
 /* poll the first page and merge in fresh tokens + updated market data */
 function pollTokens(){
   if(document.hidden||tk.loading||!$('v-tokens').classList.contains('active'))return;
-  fetchTokens(null).then(function(j){
+  Promise.all([fetchTokens(null),loadPinned()]).then(function(rr){var j=rr[0];
     if(!j)return;$('tk-err').style.display='none';
     var data=Array.isArray(j.data)?j.data:[],fresh={},byAddr={};
     tk.list.forEach(function(t){byAddr[t.contract_address]=t});
@@ -1889,7 +1947,7 @@ function loadStats(){
   if(document.hidden||!$('v-home').classList.contains('active'))return;
   var since=Math.floor(Date.now()/1000)-86400;
   Promise.all([countTokens({}),countTokens({startDate:String(since)}),countTokens({socialInterface:'Clanker Router'}),countTokens({startDate:String(since-6*86400)})]).then(function(r){
-    var vals={total:r[0],day:r[1],here:r[2],week:r[3]},any=r.some(function(x){return x!=null});
+    var vals={total:r[0],day:r[1],here:r[2]==null?null:Math.max(0,r[2]-HIDDEN_TOKENS.length),week:r[3]},any=r.some(function(x){return x!=null});
     document.querySelectorAll('[data-stat]').forEach(function(e){var v=vals[e.getAttribute('data-stat')];if(v==null){e.textContent='—';return}countUp(e,v)});
     $('stats-src').textContent=any?'Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}):'Offline · retrying';
   });
@@ -1905,12 +1963,13 @@ document.querySelectorAll('[data-src]').forEach(function(b){b.addEventListener('
 var hlTimer=null;
 function loadHomeTokens(){
   if(document.hidden||!$('v-home').classList.contains('active'))return;
-  var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'6'});
+  var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'12'});
   function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
-  go(tkApi).then(function(j){
-    var data=(Array.isArray(j.data)?j.data:[]).slice(0,6),g=$('hl-grid'),prev=g.getAttribute('data-ids')||'';
+  Promise.all([go(tkApi),loadPinned()]).then(function(rr){var j=rr[0],pins=rr[1];
+    var rest=(Array.isArray(j.data)?j.data:[]).filter(function(t){return !isHidden(t)&&!isPinned(t)});
+    var data=pins.concat(rest).slice(0,6),g=$('hl-grid'),prev=g.getAttribute('data-ids')||'';
     var ids=data.map(function(t){return t.contract_address}).join(',');
-    g.innerHTML='';data.forEach(function(t){g.appendChild(tokenCard(t,prev&&prev.indexOf(t.contract_address)<0))});
+    g.innerHTML='';data.forEach(function(t){var pin=isPinned(t);g.appendChild(tokenCard(t,!pin&&prev&&prev.indexOf(t.contract_address)<0,pin))});
     g.setAttribute('data-ids',ids);
     $('hl-live').className='cr-live cr-live-on';$('hl-live-text').textContent='Live · '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   }).catch(function(){
