@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "clanker-sdk": "5.1.0",
-    "viem": "^2.49.0"
+    "viem": "^2.49.0",
+    "@vercel/blob": "^2.0.0"
   }
 }

@@ -553,14 +553,11 @@ export MODEL="auto"</pre>
 <span id="b-drop-preview" style="width: 64px; height: 64px; border-radius: 16px; background: #0A0A0C; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: 0 0 auto"></span>
 <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
 <strong id="b-drop-title" style="font-size: 15px; overflow-wrap: anywhere">Upload an image</strong>
-<span class="cr-hint">PNG, JPG, GIF or WEBP · max 2 MB · square works best</span>
+<span class="cr-hint">Tap to choose · PNG, JPG, GIF or WEBP · max 2 MB · square works best</span>
 </span>
 </label>
 <input id="b-img" type="file" accept="image/png,image/jpeg,image/gif,image/webp" aria-labelledby="l-b-img" aria-describedby="e-b-img" style="position: absolute; width: 1px; height: 1px; opacity: 0">
-<div class="cr-field" style="margin-top: 4px">
-<label for="b-imgurl" style="font-weight: 500; font-size: 14px; color: #B4B1BF">…or paste an image link (https:// or ipfs://)</label>
-<input id="b-imgurl" type="url" autocomplete="off" spellcheck="false" placeholder="https://… or ipfs://…">
-</div>
+<input id="b-imgurl" type="hidden">
 <span class="cr-err" id="e-b-img"></span>
 </div>
 
@@ -941,7 +938,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 <li>Buy and sell tax: you choose 1–10% each. Taxes go to you as the creator, minus a 15% platform fee. Clanker keeps a protocol share.</li>
 <li>Holder rewards (optional): send 10–50% of the tax to everyone holding at least 10,000 tokens, paid in the pair token. This comes out of the creator's share.</li>
 <li>Trading starts right away on Uniswap v4, and the token appears on clanker.world.</li>
-<li>Image: upload a file or paste an <code>https://</code> or <code>ipfs://</code> link.</li>
+<li>Image: upload a PNG, JPG, GIF or WEBP up to 2 MB.</li>
 </ul>
 </article>
 <article id="doc-stake">
@@ -1413,7 +1410,7 @@ $('fu-again').addEventListener('click',function(){
 /* ================= BUILD (real deploy via Clanker SDK v5) =================
    clanker-sdk.js (bundled Clanker SDK + viem) is loaded only when someone deploys.
    UPLOAD_API: endpoint that pins an image to IPFS and returns {url:"ipfs://…"} (see api/upload.js). */
-var UPLOAD_API='/api/upload';
+var UPLOAD_API='/api/upload'; // Vercel Blob (api/upload.js)
 var SDK_URL='./clanker-sdk.js';
 /* Platform cut: share = % of the creator's tax that goes to Clanker Router (0–100). */
 var INTEGRATOR={address:'0xEAE6B9Cd34253850ce3c3Bbb637dAD093E8b4685',share:15};
@@ -1447,7 +1444,7 @@ function setImage(file){
 $('b-img').addEventListener('change',function(){setImage(this.files[0])});
 $('b-imgurl').addEventListener('input',function(){
   $('e-b-img').textContent='';var u=this.value.trim();
-  if(/^(https:\/\/|ipfs:\/\/)\S+$/.test(u)){imgFile=null;imgURL=u;showPreview(gatewayOf(u));$('b-drop-title').textContent='Using image link'}
+  if(/^(https:\/\/|ipfs:\/\/)\S+$/.test(u)){imgFile=null;imgURL=u;showPreview(gatewayOf(u));0}
 });
 var drop=$('b-drop');
 ['dragenter','dragover'].forEach(function(n){drop.addEventListener(n,function(ev){ev.preventDefault();drop.classList.add('drag')})});
@@ -1468,7 +1465,7 @@ function socials(){
   if(t)out.push({platform:'telegram',url:/^https?:\/\//.test(t)?t:'https://'+t.replace(/^\/+/,'')});
   return out;
 }
-var BUILD_STEPS=['Preparing image','Confirm in your wallet','Deploying on Base','Token is live'];
+var BUILD_STEPS=['Uploading image','Confirm in your wallet','Deploying on Base','Token is live'];
 function deployToken(d,onStep){
   var image;
   onStep(0);
@@ -1503,7 +1500,7 @@ $('b-form').addEventListener('submit',function(e){
   var first=null,name=$('b-name').value.trim(),ticker=$('b-ticker').value,dev=$('b-dev').value.trim();
   if(name.length<2){showErr('b-name','Give it a name (2–32 characters).');first=first||$('b-name')}
   if(!/^[A-Z0-9]{2,10}$/.test(ticker)){showErr('b-ticker','2–10 letters or numbers.');first=first||$('b-ticker')}
-  if(!imgURL){$('e-b-img').textContent='Add an image or paste an image link.';first=first||drop}
+  if(!imgFile){$('e-b-img').textContent='Add an image.';first=first||drop}
   if(dev&&!(/^\d+(\.\d+)?$/.test(dev))){showErr('b-dev','Enter an ETH amount, e.g. 0.01');first=first||$('b-dev')}
   if(!$('b-ack').checked){$('e-b-ack').textContent='Please confirm before deploying.';first=first||$('b-ack')}
   if(first){focusFirst(first);return}
