@@ -26,8 +26,9 @@ export default async function handler(req, res) {
   if (!secret || req.headers.authorization !== `Bearer ${secret}`) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  const key = process.env.GAS_WALLET_KEY;
-  if (!key || !/^0x[0-9a-fA-F]{64}$/.test(key)) {
+  let key = (process.env.GAS_WALLET_KEY || '').trim();
+  if (/^[0-9a-fA-F]{64}$/.test(key)) key = '0x' + key;
+  if (!/^0x[0-9a-fA-F]{64}$/.test(key)) {
     return res.status(500).json({ error: 'GAS_WALLET_KEY is missing or invalid' });
   }
 
