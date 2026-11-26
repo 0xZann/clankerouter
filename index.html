@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clanker Router — Launch tokens on Base, earn from every trade</title>
-<meta name="description" content="Launch a token on Base in one click, reward your holders, and browse every Clanker token live.">
+<meta name="description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
 <meta name="theme-color" content="#0A0A0C">
 <link rel="apple-touch-icon" href="/logo.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 fill=%22%230A0A0C%22/%3E%3Cg fill=%22none%22 stroke=%22%239B6BFF%22 stroke-width=%2228%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%2292%22 y=%22168%22 width=%22328%22 height=%22236%22 rx=%2264%22/%3E%3Cpath d=%22M256 168v-58%22/%3E%3C/g%3E%3Ccircle cx=%22256%22 cy=%2294%22 r=%2222%22 fill=%22%239B6BFF%22/%3E%3Cg fill=%22none%22 stroke=%22%23F4F0FF%22 stroke-width=%2218%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M168 286h56%22/%3E%3Cpath d=%22M224 286C262 286 262 236 300 236h12%22/%3E%3Cpath d=%22M224 286h88%22/%3E%3Cpath d=%22M224 286C262 286 262 336 300 336h12%22/%3E%3C/g%3E%3Ccircle cx=%22164%22 cy=%22286%22 r=%2220%22 fill=%22%23F4F0FF%22/%3E%3Ccircle cx=%22340%22 cy=%22236%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3Ccircle cx=%22340%22 cy=%22286%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3Ccircle cx=%22340%22 cy=%22336%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Clanker Router — Launch tokens on Base, earn from every trade">
 <meta property="og:site_name" content="Clanker Router">
-<meta property="og:description" content="Launch a token on Base in one click, reward your holders, and browse every Clanker token live.">
+<meta property="og:description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
 <meta property="og:url" content="https://clankerouter.xyz/">
 <meta property="og:image" content="https://clankerouter.xyz/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Clanker Router — Launch tokens on Base, earn from every trade">
-<meta name="twitter:description" content="Launch a token on Base in one click, reward your holders, and browse every Clanker token live.">
+<meta name="twitter:description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
 <meta name="twitter:image" content="https://clankerouter.xyz/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
@@ -164,6 +164,12 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-ic{width:1em;height:1em;flex:0 0 auto}
 .cr-base{display:inline-flex;align-items:center;gap:.3em;color:#FFFFFF;font-weight:500;vertical-align:baseline;white-space:nowrap}
 .cr-base .cr-ic{width:.85em;height:.85em}
+.cr-rh{border-radius:22%;object-fit:cover}
+.cr-chainpick{display:flex;gap:10px;flex-wrap:wrap}
+.cr-chainpick button{flex:1 1 auto;white-space:nowrap;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 16px;border-radius:14px;border:1.5px solid #2E2840;background:#0A0A0C;color:#F4F4F6;font:inherit;font-weight:600;cursor:pointer}
+.cr-chainpick button[aria-checked="true"]{border-color:#9B6BFF;background:#1A1625;box-shadow:0 0 0 1px #9B6BFF inset}
+.cr-chainpick .cr-ic{width:24px;height:24px}
+[data-chain] .cr-ic{width:16px;height:16px;margin-right:6px;vertical-align:-3px}
 .cr-builton{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-top:6px}
 .cr-by{display:inline-flex;align-items:center;gap:.45em;font-size:15px;color:#B4B1BF;text-decoration:none}
 .cr-by strong{color:#F2F1F5}
@@ -281,41 +287,41 @@ html{scroll-behavior:auto}
 <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
 <h1 style="flex: 1 1 640px; min-width: 0; margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(36px, 7vw, 104px); line-height: 1.02; letter-spacing: -0.04em; text-transform: uppercase">Every<br>clanker.<br><span class="cr-hl">One router.</span></h1>
 <div style="flex: 1 1 320px; min-width: 0; max-width: 400px; display: flex; flex-direction: column; gap: 18px">
-<p style="margin: 0; font-size: 18px; color: #B4B1BF">Launch a token on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> in one click, reward the people who hold it, and browse every Clanker token live. AI credits are coming soon.</p>
+<p style="margin: 0; font-size: 18px; color: #B4B1BF">Launch a token on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> or <span class="cr-base" style="white-space:nowrap"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood Chain</span> in one click, reward the people who hold it, and browse every Clanker token live.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
 <a href="#/build" style="text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Launch a token →</a>
 <a href="#/docs" style="text-decoration: none; border: 1.5px solid #2E2840; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Docs</a>
 </div>
 <div class="cr-builton" aria-label="Built on Clanker, live on Base">
 <a href="https://www.clanker.world" target="_blank" rel="noopener" class="cr-by">Built on <svg class="cr-ic" viewBox="0 0 210 177" aria-hidden="true"><rect x="0" y="124" width="46" height="53" fill="#865FD3"></rect><rect x="81" y="59" width="47" height="118" fill="#865FD3"></rect><rect x="163" y="0" width="47" height="177" fill="#865FD3"></rect></svg><strong>Clanker</strong></a>
-<span class="cr-by">Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span></span>
+<span class="cr-by">Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> &amp; <span class="cr-base"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood</span></span>
 </div>
 
 </div>
 </div>
 
-<!-- machine diagram -->
+<!-- launch flow -->
 <div class="cr-diagram" style="background: #17141F; color: #ECEAF2; border-radius: 28px; padding: clamp(18px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
 <div style="flex: 1 1 220px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">INPUT</span>
-<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">Any token</span>
-<span style="font-size: 14px; color: #A9ACB3">ETH, stables, memecoins on Base</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">01 · LAUNCH</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1">Name, ticker, image</span>
+<span style="font-size: 14px; color: #A9ACB3">One tap. Live on Base or Robinhood Chain in seconds.</span>
 </div>
 <div class="cr-arrow-wrap" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 4px">
 <svg class="cr-arrow" width="36" height="36" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg>
 </div>
-<div style="flex: 1.3 1 260px; min-width: 0; background: var(--accent); color: #0A0A0C; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600">THE ROUTER</span>
-<span style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1">Swap → credit → route</span>
-<span style="font-size: 14px">One signature. Picks the best model for each call.</span>
+<div style="flex: 1 1 220px; min-width: 0; background: var(--accent); color: #0A0A0C; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600">02 · TRADE</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1">Every buy &amp; sell</span>
+<span style="font-size: 14px;">Liquidity is ready from the first block on Uniswap.</span>
 </div>
 <div class="cr-arrow-wrap" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 4px">
 <svg class="cr-arrow" width="36" height="36" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"></path></svg>
 </div>
 <div style="flex: 1 1 220px; min-width: 0; border: 1.5px dashed #5A4B7A; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">OUTPUT</span>
-<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px">Top AI models</span>
-<span style="font-size: 14px; color: #A9ACB3">One key, OpenAI-compatible API</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9ACB3">03 · EARN</span>
+<span style="font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1">Creator &amp; holders</span>
+<span style="font-size: 14px; color: #A9ACB3">You earn from every trade. Holders of 10,000+ tokens earn ETH.</span>
 </div>
 </div>
 </section>
@@ -414,7 +420,7 @@ export MODEL="auto"</pre>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">What's an AI credit?</h3><p style="margin: 0; color: #9A97A6">Prepaid balance for AI model calls, spent through one API key. [Pricing details.]</p></div>
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Do I need an account?</h3><p style="margin: 0; color: #9A97A6">No. Connect a wallet and sign a message — that's your login.</p></div>
-<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">How do holders earn?</h3><p style="margin: 0; color: #9A97A6">If a token launches with holder rewards, part of every buy and sell tax goes to holders. Hold at least 10,000 tokens, no staking or lockups, and claim your share in ETH (or the token’s pair) anytime on the Earn tab.</p></div>
+<div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">How do holders earn?</h3><p style="margin: 0; color: #9A97A6">A share of trading fees is converted into credits for stakers. [Schedule &amp; rules.]</p></div>
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Which chains?</h3><p style="margin: 0; color: #9A97A6">Base for building tokens. [Other chains for Fuel.]</p></div>
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Which models?</h3><p style="margin: 0; color: #9A97A6">[List of supported models and providers.]</p></div>
 <div style="background: var(--accent); border: 1.5px solid #2E2840; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; justify-content: space-between; color: #0A0A0C"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Still stuck?</h3><a href="#/docs" style="align-self: flex-start; text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 18px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Read the docs →</a></div>
@@ -577,6 +583,15 @@ export MODEL="auto"</pre>
 </div>
 </details>
 
+<div class="cr-field">
+<span class="cr-label" id="l-b-chain">Chain</span>
+<div class="cr-chainpick" role="radiogroup" aria-labelledby="l-b-chain">
+<button type="button" role="radio" aria-checked="true" data-pick="base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</button>
+<button type="button" role="radio" aria-checked="false" data-pick="robinhood"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood Chain</button>
+</div>
+<input type="hidden" id="b-chain" value="base">
+<span class="cr-hint">Gas and launch buy are paid in ETH on the chain you pick.</span>
+</div>
 <div style="background: #0A0A0C; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
 <span class="cr-kicker">TRADING TAX</span>
 <div class="cr-row">
@@ -621,7 +636,7 @@ export MODEL="auto"</pre>
 </div>
 <p id="b-p-desc" style="margin: 0; color: #C9C3DB; font-size: 15px; overflow-wrap: anywhere">Your narrative shows up here.</p>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
-<div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">CHAIN</span><strong>Base</strong></div>
+<div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">CHAIN</span><strong id="b-p-chain" class="cr-base" style="gap:.4em"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</strong></div>
 <div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">TAX</span><strong id="b-p-tax">3% / 3%</strong></div>
 </div>
 </div>
@@ -803,7 +818,7 @@ export MODEL="auto"</pre>
 <a href="#/" class="cr-back">← Home</a>
 <span class="cr-tag">EXPLORE</span>
 <h1 class="cr-h1" id="h-tokens">Tokens</h1>
-<p class="cr-lead">Live tokens deployed through Clanker on Base. Updates on its own every few seconds.</p>
+<p class="cr-lead">Live tokens deployed through Clanker on Base and Robinhood Chain. Updates on its own every few seconds.</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
 <span class="cr-live" id="tk-live"><span class="cr-live-dot" aria-hidden="true"></span><span id="tk-live-text">Connecting…</span></span>
@@ -812,6 +827,10 @@ export MODEL="auto"</pre>
 <div class="cr-seg cr-seg-light" role="tablist" aria-label="Which tokens" style="align-self: flex-start">
 <button type="button" role="tab" data-src="all" aria-selected="true">All Clanker</button>
 <button type="button" role="tab" data-src="here" aria-selected="false">Launched here</button>
+</div>
+<div class="cr-seg cr-seg-light" role="tablist" aria-label="Which chain" style="align-self: flex-start">
+<button type="button" role="tab" data-chain="base" aria-selected="true"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</button>
+<button type="button" role="tab" data-chain="robinhood" aria-selected="false"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood Chain</button>
 </div>
 <div class="cr-row" style="align-items: flex-end">
 <div class="cr-field" style="flex: 3 1 260px">
@@ -902,10 +921,10 @@ export MODEL="auto"</pre>
 <div class="cr-doc">
 <article id="doc-overview">
 <h2>Overview</h2>
-<p>Clanker Router connects on-chain value to AI compute. It does three things:</p>
+<p>Clanker Router is a launchpad built on Clanker v5, live on Base and Robinhood Chain. It does three things:</p>
 <ul>
 <li><strong>Fuel</strong> (coming soon) — turn any token into AI credits for any wallet.</li>
-<li><strong>Build &amp; Earn</strong> — launch tokens on Base that pay their creator and, optionally, their holders on every trade.</li>
+<li><strong>Build &amp; Earn</strong> — launch tokens on Base or Robinhood Chain that pay their creator and, optionally, their holders on every trade.</li>
 <li><strong>Plug in</strong> (coming soon) — spend credits on [N]+ models through one OpenAI-compatible API.</li>
 </ul>
 <p>Your wallet is your account. There is no email sign-up.</p>
@@ -1076,8 +1095,8 @@ curl $OPENAI_BASE_URL/chat/completions \
 </a>
 <p style="margin: 0; color: #9A97A6; font-size: 15px">Every clanker, one router. Launch and earn on Base.</p>
 <div style="display: flex; gap: 10px">
-<a href="https://x.com/clankerouter_" class="cr-social" aria-label="X (Twitter)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M17.7 3H21l-7.2 8.2L22.3 21h-6.6l-5.2-6.8L4.6 21H1.3l7.7-8.8L1 3h6.8l4.7 6.2L17.7 3zm-1.2 16h1.8L7.6 4.9H5.7L16.5 19z"></path></svg></a>
-<a href="https://t.me/clankerouter" class="cr-social" aria-label="Telegram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M21.9 4.6 18.8 19.3c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.7 13.2 2 11.7c-1-.3-1-1 .2-1.5l18.3-7c.9-.3 1.6.2 1.4 1.4z"></path></svg></a>
+<a href="https://x.com/[HANDLE]" class="cr-social" aria-label="X (Twitter)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M17.7 3H21l-7.2 8.2L22.3 21h-6.6l-5.2-6.8L4.6 21H1.3l7.7-8.8L1 3h6.8l4.7 6.2L17.7 3zm-1.2 16h1.8L7.6 4.9H5.7L16.5 19z"></path></svg></a>
+<a href="https://t.me/[GROUP]" class="cr-social" aria-label="Telegram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M21.9 4.6 18.8 19.3c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.7 13.2 2 11.7c-1-.3-1-1 .2-1.5l18.3-7c.9-.3 1.6.2 1.4 1.4z"></path></svg></a>
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 48px">
@@ -1152,7 +1171,7 @@ var wcProvider=null;
 function getWC(){
   if(wcProvider)return Promise.resolve(wcProvider);
   return import(WC_URL).then(function(m){
-    return m.EthereumProvider.init({projectId:WC_PROJECT_ID,chains:[8453],showQrModal:true,
+    return m.EthereumProvider.init({projectId:WC_PROJECT_ID,chains:[8453],optionalChains:[4663],showQrModal:true,
       metadata:{name:'Clanker Router',description:'Launch tokens on Base',url:location.origin,icons:[location.origin+'/logo.png']},
       qrModalOptions:{themeMode:'dark',themeVariables:{'--wcm-accent-color':'#9B6BFF','--wcm-background-color':'#9B6BFF','--wcm-z-index':'100'}}});
   }).then(function(p){wcProvider=p;p.on('disconnect',function(){if(walletName==='WalletConnect')disconnectWallet()});return p});
@@ -1238,11 +1257,12 @@ function wcButton(resolve){
   b.addEventListener('click',function(){modalReject=null;closeModal();resolve(WC_ITEM)});
   return b;
 }
-function ensureBase(p){
+function ensureBase(p,k){
+  var C=k&&typeof CHAINS!=='undefined'?chainOf(k).add:BASE_CHAIN;
   return p.request({method:'eth_chainId'}).then(function(id){
-    if(String(id).toLowerCase()===BASE_CHAIN.chainId)return;
-    return p.request({method:'wallet_switchEthereumChain',params:[{chainId:BASE_CHAIN.chainId}]}).catch(function(e){
-      if(e&&(e.code===4902||e.code===-32603))return p.request({method:'wallet_addEthereumChain',params:[BASE_CHAIN]});
+    if(String(id).toLowerCase()===C.chainId)return;
+    return p.request({method:'wallet_switchEthereumChain',params:[{chainId:C.chainId}]}).catch(function(e){
+      if(e&&(e.code===4902||e.code===-32603||/unrecognized|not (been )?added|unknown chain/i.test(e.message||'')))return p.request({method:'wallet_addEthereumChain',params:[C]});
       throw e;
     });
   });
@@ -1427,7 +1447,12 @@ $('b-ticker').addEventListener('input',function(){
 });
 $('b-desc').addEventListener('input',function(){$('b-count').textContent=this.value.length;$('b-p-desc').textContent=this.value.trim()||'Your narrative shows up here.'});
 function taxText(){$('b-p-tax').textContent=$('b-buy').value+'% / '+$('b-sell').value+'%'}
-$('b-buy').addEventListener('change',taxText);$('b-sell').addEventListener('change',taxText);
+$('b-buy').addEventListener('change',taxText);
+document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
+  $('b-chain').value=b.dataset.pick;
+  document.querySelectorAll('[data-pick]').forEach(function(x){x.setAttribute('aria-checked',x===b)});
+  $('b-p-chain').innerHTML=(b.dataset.pick==='robinhood'?'<img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">':'<svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>')+chainOf(b.dataset.pick).name;
+})});$('b-sell').addEventListener('change',taxText);
 $('b-dev').addEventListener('input',function(){clearErr('b-dev')});
 function showPreview(src){
   [$('b-p-img'),$('b-drop-preview')].forEach(function(box){box.innerHTML='';var i=el('img','width:100%;height:100%;object-fit:cover');i.src=src;i.alt='';i.referrerPolicy='no-referrer';box.appendChild(i)});
@@ -1455,14 +1480,28 @@ drop.addEventListener('drop',function(ev){var file=ev.dataTransfer.files[0];if(f
 $('b-ack').addEventListener('change',function(){$('e-b-ack').textContent=''});
 
 var BASE_RPCS=['https://mainnet.base.org','https://base-rpc.publicnode.com','https://base.llamarpc.com'];
+/* Chains this launchpad deploys to. Both run Clanker v5 with the same contracts. */
+var CHAINS={
+  base:{key:'base',id:8453,hex:'0x2105',name:'Base',rpcs:BASE_RPCS,explorer:'https://basescan.org',add:BASE_CHAIN},
+  robinhood:{key:'robinhood',id:4663,hex:'0x1237',name:'Robinhood Chain',rpcs:['https://rpc.mainnet.chain.robinhood.com'],explorer:'https://robinhoodchain.blockscout.com',
+    add:{chainId:'0x1237',chainName:'Robinhood Chain',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://rpc.mainnet.chain.robinhood.com'],blockExplorerUrls:['https://robinhoodchain.blockscout.com']}}
+};
+var CHAIN_KEYS=['base','robinhood'];
+function chainOf(k){return CHAINS[k]||CHAINS.base}
+function chainKeyById(id){for(var k in CHAINS)if(CHAINS[k].id===+id)return k;return 'base'}
+function viemChain(m,k){
+  var c=chainOf(k);if(c.key==='base')return m.base;
+  return {id:c.id,name:c.name,nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:{default:{http:c.rpcs}},blockExplorers:{default:{name:'Blockscout',url:c.explorer}},contracts:{}};
+}
 var _rpcId=1;
-function baseReadTransport(m){
+function baseReadTransport(m,k){
+  var RPCS=chainOf(k).rpcs;
   // Reads go straight to public Base RPCs (not the wallet), so in-app wallet browsers can't break decoding.
   return m.custom({request:function(a){
     var i=0;
     function next(err){
-      if(i>=BASE_RPCS.length)return Promise.reject(err||new Error('Base RPC unavailable'));
-      var url=BASE_RPCS[i++];
+      if(i>=RPCS.length)return Promise.reject(err||new Error(chainOf(k).name+' RPC unavailable'));
+      var url=RPCS[i++];
       var ac=typeof AbortController!=='undefined'?new AbortController():null,tm=ac&&setTimeout(function(){ac.abort()},6000);
       return fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:_rpcId++,method:a.method,params:a.params||[]}),signal:ac?ac.signal:undefined})
         .finally(function(){if(tm)clearTimeout(tm)})
@@ -1519,15 +1558,15 @@ function deployToken(d,onStep){
   var image;
   onStep(0);
   return Promise.all([imageFor(d),loadSdk()]).then(function(r){image=r[0];var m=r[1];
-    return ensureBase(activeProvider).then(function(){
+    return ensureBase(activeProvider,d.chain).then(function(){
       onStep(1);
       var prompted=false;
       var transport=m.custom({request:function(a){
         if(!prompted&&(a.method==='eth_sendTransaction'||a.method==='eth_signTransaction')){prompted=true;onStep(2)}
         return activeProvider.request(a);
       }});
-      var wallet=m.createWalletClient({account:account,chain:m.base,transport:transport});
-      var publicClient=m.createPublicClient({chain:m.base,transport:baseReadTransport(m)});
+      var wallet=m.createWalletClient({account:account,chain:viemChain(m,d.chain),transport:transport});
+      var publicClient=m.createPublicClient({chain:viemChain(m,d.chain),transport:baseReadTransport(m,d.chain)});
       var clanker=new m.Clanker({wallet:wallet,publicClient:publicClient});
       var cfg={name:d.name,symbol:d.ticker,image:image,tokenAdmin:account,
         metadata:{description:d.desc||'',socialMediaUrls:d.socials},
@@ -1561,12 +1600,12 @@ $('b-form').addEventListener('submit',function(e){
     busy.b=true;var btn=$('b-btn');btn.disabled=true;btn.textContent='Deploying…';
     $('b-status').style.display='flex';$('b-done').style.display='none';$('b-error').textContent='';$('b-status-title').textContent='Deploying';
     $('b-status').scrollIntoView({block:'nearest',behavior:'smooth'});
-    var data={name:name,ticker:ticker,desc:$('b-desc').value.trim(),file:imgFile,imageUrl:imgFile?null:imgURL,buy:+$('b-buy').value,sell:+$('b-sell').value,div:+$('b-div').value,dev:dev?parseFloat(dev):0,socials:socials()};
+    var data={name:name,ticker:ticker,desc:$('b-desc').value.trim(),file:imgFile,imageUrl:imgFile?null:imgURL,chain:$('b-chain').value,buy:+$('b-buy').value,sell:+$('b-sell').value,div:+$('b-div').value,dev:dev?parseFloat(dev):0,socials:socials()};
     var cur=0;
-    return deployToken(data,function(i,tx){cur=i;renderSteps($('b-steps'),BUILD_STEPS,i);if(tx){$('b-scan').href='https://basescan.org/tx/'+tx}}).then(function(r){
+    return deployToken(data,function(i,tx){cur=i;renderSteps($('b-steps'),BUILD_STEPS,i);if(tx){$('b-scan').href=chainOf($('b-chain').value).explorer+'/tx/'+tx}}).then(function(r){
       renderSteps($('b-steps'),BUILD_STEPS,BUILD_STEPS.length);
       $('b-status-title').textContent='Your token is live 🎉';
-      $('b-addr').textContent=r.address;$('b-view').href=CLANKER_TOKEN_URL+r.address;$('b-scan').href='https://basescan.org/tx/'+r.txHash;
+      $('b-addr').textContent=r.address;$('b-view').href=CLANKER_TOKEN_URL+r.address;$('b-scan').href=chainOf($('b-chain').value).explorer+'/tx/'+r.txHash;
       $('b-done').style.display='flex';btn.textContent='Deployed ✓';busy.b=false;
       built.push({name:name,ticker:ticker,img:imgFile?imgURL:gatewayOf(imgURL),desc:data.desc,address:r.address});
       logAct('Launched $'+ticker+' at '+short(r.address));toast('$'+ticker+' is live on Base');
@@ -1589,14 +1628,19 @@ var positions=[]; // kept for the dashboard tile
 var claimsDone=0;
 var sdkMod=null;
 function loadSdk(){return sdkMod?Promise.resolve(sdkMod):import(SDK_URL).then(function(m){sdkMod=m;return m})}
-function readClanker(m){
-  var publicClient=m.createPublicClient({chain:m.base,transport:baseReadTransport(m)});
+function readClanker(m,k){
+  var publicClient=m.createPublicClient({chain:viemChain(m,k),transport:baseReadTransport(m,k)});
   var cfg={publicClient:publicClient};
-  if(activeProvider&&account)cfg.wallet=m.createWalletClient({account:account,chain:m.base,transport:m.custom(activeProvider)});
+  if(activeProvider&&account)cfg.wallet=m.createWalletClient({account:account,chain:viemChain(m,k),transport:m.custom(activeProvider)});
   return new m.Clanker(cfg);
 }
 function tokenInfo(addr){
-  var p=new URLSearchParams({chainId:'8453',q:addr,limit:'1'});
+  // look the token up on every chain we support; the result tells us which chain to read from
+  return Promise.all(CHAIN_KEYS.map(function(k){return tokenInfoOn(addr,k).then(function(t){if(t)t._chain=k;return t})}))
+    .then(function(r){return r.filter(Boolean)[0]||null});
+}
+function tokenInfoOn(addr,k){
+  var p=new URLSearchParams({chainId:String(chainOf(k).id),q:addr,limit:'1'});
   function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
   return go(tkApi).then(function(j){var d=(j.data||[]).filter(function(t){return (t.contract_address||'').toLowerCase()===addr.toLowerCase()})[0];return d||null}).catch(function(){return null});
 }
@@ -1624,12 +1668,12 @@ function checkRewards(){
     var im=$('er-img');im.innerHTML='';var src=info&&safeImg(info.img_url);
     if(src){var i=el('img','width:100%;height:100%;object-fit:cover');i.src=src;i.alt='';i.referrerPolicy='no-referrer';im.appendChild(i)}else im.textContent=info?(info.symbol||'?')[0]:'?';
     var dec=info&&/USDC/i.test(info.pair||'')?6:18,unit=info&&info.pair?(/WETH|ETH/i.test(info.pair)?'ETH':info.pair):'ETH';
-    var c=readClanker(m);
+    var ck=info&&info._chain||'base',c=readClanker(m,ck);
     return c.dividendOf(addr).then(function(div){
       if(!div||/^0x0{40}$/i.test(div)){erState=null;$('er-amount').textContent='—';$('er-msg').textContent='This token doesn’t pay holder rewards. Only v5 tokens launched with holder rewards do.';return}
-      if(!account){erState={addr:addr};$('er-amount').textContent='Connect to see';$('er-msg').textContent='This token pays holder rewards. Connect your wallet to see what you’ve earned.';$('er-claim').disabled=false;$('er-claim').textContent='Connect wallet';return}
+      if(!account){erState={addr:addr,chain:ck};$('er-amount').textContent='Connect to see';$('er-msg').textContent='This token pays holder rewards. Connect your wallet to see what you’ve earned.';$('er-claim').disabled=false;$('er-claim').textContent='Connect wallet';return}
       return c.withdrawableDividends({token:addr,holder:account}).then(function(v){
-        erState={addr:addr,amount:v};
+        erState={addr:addr,amount:v,chain:ck};
         $('er-amount').textContent=fmtUnits(v,dec)+' '+unit;
         if(v>0n){$('er-claim').disabled=false;$('er-claim').textContent='Claim rewards';$('er-msg').textContent='Ready to claim.'}
         else{$('er-claim').textContent='Nothing to claim yet';$('er-msg').textContent='Hold at least 10,000 tokens to earn. Rewards build up as people trade.'}
@@ -1644,8 +1688,8 @@ $('er-claim').addEventListener('click',function(){
   if(!erState)return;
   if(!account){ensureWallet().then(checkRewards).catch(function(){});return}
   var b=this;b.disabled=true;b.textContent='Confirm in wallet…';
-  ensureBase(activeProvider).then(loadSdk).then(function(m){
-    return readClanker(m).claimDividends({tokens:[erState.addr],unwrapWrappedNative:true});
+  ensureBase(activeProvider,erState.chain).then(loadSdk).then(function(m){
+    return readClanker(m,erState.chain).claimDividends({tokens:[erState.addr],unwrapWrappedNative:true});
   }).then(function(res){
     if(res.error)throw res.error;
     b.textContent='Claiming…';toast('Claim sent');claimsDone++;logAct('Claimed rewards from '+short(erState.addr));
@@ -1663,8 +1707,9 @@ function checkFees(){
   $('fe-result').style.display='flex';$('fe-amount').textContent='…';$('fe-msg').textContent='';$('fe-claim').disabled=true;$('fe-wallet').textContent=short(account);
   Promise.all([tokenInfo(addr),loadSdk()]).then(function(r){
     var info=r[0],m=r[1],dec=info&&/USDC/i.test(info.pair||'')?6:18,unit=info&&info.pair?(/WETH|ETH/i.test(info.pair)?'ETH':info.pair):'ETH';
-    return readClanker(m).availableRewards({token:addr,rewardRecipient:account}).then(function(v){
-      feState={addr:addr,amount:v};
+    var ck=info&&info._chain||'base';
+    return readClanker(m,ck).availableRewards({token:addr,rewardRecipient:account}).then(function(v){
+      feState={addr:addr,amount:v,chain:ck};
       $('fe-amount').textContent=fmtUnits(v,dec)+' '+unit;
       if(v>0n){$('fe-claim').disabled=false;$('fe-msg').textContent='Ready to claim. This includes fees from all your tokens paired with '+unit+'.'}
       else $('fe-msg').textContent='Nothing waiting right now. Fees build up as people trade.';
@@ -1677,14 +1722,18 @@ $('fe-addr').addEventListener('input',function(){clearErr('fe-addr')});
 $('fe-claim').addEventListener('click',function(){
   if(!feState||!account)return;
   var b=this;b.disabled=true;b.textContent='Confirm in wallet…';
-  ensureBase(activeProvider).then(loadSdk).then(function(m){return readClanker(m).claimRewards({token:feState.addr,rewardRecipient:account})})
+  ensureBase(activeProvider,feState.chain).then(loadSdk).then(function(m){return readClanker(m,feState.chain).claimRewards({token:feState.addr,rewardRecipient:account})})
   .then(function(res){if(res.error)throw res.error;b.textContent='Claim fees';toast('Fee claim sent');logAct('Claimed trading fees');setTimeout(checkFees,6000)})
   .catch(function(err){b.disabled=false;b.textContent='Claim fees';toast(walletErr(err),true)});
 });
 
 /* ================= PLATFORM FEES (unlisted page: #/platform) ================= */
 function platformTokens(){
-  var p=new URLSearchParams({chainId:'8453',socialInterface:'Clanker Router',limit:'20'});
+  return Promise.all(CHAIN_KEYS.map(function(k){return platformTokensOn(k).then(function(l){l.forEach(function(t){t._chain=k});return l}).catch(function(){return []})}))
+    .then(function(r){return [].concat.apply([],r)});
+}
+function platformTokensOn(k){
+  var p=new URLSearchParams({chainId:String(chainOf(k).id),socialInterface:'Clanker Router',limit:'20'});
   function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
   return go(tkApi).then(function(j){return Array.isArray(j.data)?j.data:[]});
 }
@@ -1697,22 +1746,21 @@ $('pf-check').addEventListener('click',function(){
   var btn=this,list=$('pf-list');btn.disabled=true;btn.textContent='Checking…';list.innerHTML='';
   Promise.all([platformTokens(),loadSdk()]).then(function(r){
     var toks=r[0],m=r[1],byPair={};
-    toks.forEach(function(t){var k=(t.pair||'ETH').toUpperCase();if(!byPair[k])byPair[k]=t});
+    toks.forEach(function(t){if(isHidden(t))return;var k=t._chain+'|'+(t.pair||'ETH').toUpperCase();if(!byPair[k])byPair[k]=t});
     var pairs=Object.keys(byPair);
     if(!pairs.length){var e=el('div',null,'No tokens launched here yet.');e.className='cr-empty';list.appendChild(e);return}
-    var c=readClanker(m);
-    return Promise.all(pairs.map(function(k){
-      var t=byPair[k],dec=/USDC/.test(k)?6:18,unit=/WETH|ETH/.test(k)?'ETH':k;
+    return Promise.all(pairs.map(function(key){
+      var t=byPair[key],ck=t._chain,k=key.split('|')[1],c=readClanker(m,ck),dec=/USDC/.test(k)?6:18,unit=/WETH|ETH/.test(k)?'ETH':k;
       var row=el('div');row.className='cr-pos';
       var info=el('div','display:flex;flex-direction:column;gap:2px');
-      info.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9A97A6",'PAIRED WITH '+k));
+      info.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9A97A6",chainOf(ck).name.toUpperCase()+' · PAIRED WITH '+k));
       var amt=el('strong','font-family:Unbounded,sans-serif;font-size:20px','…');info.appendChild(amt);row.appendChild(info);
       var b=el('button',null,'Claim');b.type='button';b.className='cr-btn-s';b.disabled=true;row.appendChild(b);list.appendChild(row);
       return c.availableRewards({token:t.contract_address,rewardRecipient:INTEGRATOR.address}).then(function(v){
         amt.textContent=fmtUnits(v,dec)+' '+unit;b.disabled=!(v>0n);
         b.addEventListener('click',function(){
-          ensureWallet().then(function(){b.disabled=true;b.textContent='Confirm in wallet…';return ensureBase(activeProvider)}).then(loadSdk).then(function(mm){
-            return readClanker(mm).claimRewards({token:t.contract_address,rewardRecipient:INTEGRATOR.address});
+          ensureWallet().then(function(){b.disabled=true;b.textContent='Confirm in wallet…';return ensureBase(activeProvider,ck)}).then(loadSdk).then(function(mm){
+            return readClanker(mm,ck).claimRewards({token:t.contract_address,rewardRecipient:INTEGRATOR.address});
           }).then(function(res){if(res.error)throw res.error;b.textContent='Sent ✓';toast('Claim sent — fees go to '+short(INTEGRATOR.address))})
           .catch(function(err){b.disabled=false;b.textContent='Claim';if(err&&err.message!=='closed')toast(walletErr(err),true)});
         });
@@ -1789,7 +1837,7 @@ var CLANKER_TOKEN_URL='https://www.clanker.world/clanker/';
 var POLL_MS=8000;
 var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqId:0};
 var pendingStake=null;
-var tkSrc='all';
+var tkSrc='all',tkChain='base';
 /* Hidden: test launches that should never show on the site (fees are still collected). */
 var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc'];
 /* Pinned: always shown first on Home and Tokens. Add contract addresses here (any case). */
@@ -1803,14 +1851,17 @@ function loadPinned(){
   if(pinned.p)return pinned.p;
   if(Date.now()-pinned.at<20000)return Promise.resolve(pinned.list);
   pinned.p=Promise.all(PINNED_TOKENS.map(function(addr){
-    var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'5',q:addr});
-    function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
-    return go(tkApi).then(function(j){return (j.data||[]).filter(function(t){return lc(t.contract_address)===lc(addr)})[0]||null}).catch(function(){return null});
+    return Promise.all(CHAIN_KEYS.map(function(k){return pinOn(addr,k)})).then(function(r){return r.filter(Boolean)[0]||null});
   })).then(function(r){pinned.list=r.filter(Boolean);pinned.at=Date.now();pinned.p=null;return pinned.list});
   return pinned.p;
 }
+function pinOn(addr,k){
+    var p=new URLSearchParams({chainId:String(chainOf(k).id),includeMarket:'true',limit:'5',q:addr});
+    function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
+    return go(tkApi).then(function(j){return (j.data||[]).filter(function(t){return lc(t.contract_address)===lc(addr)})[0]||null}).catch(function(){return null});
+}
 function tkParams(cursor){
-  var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'20'});
+  var p=new URLSearchParams({chainId:String(chainOf(tkChain).id),includeMarket:'true',limit:'20'});
   if(tkSrc==='here')p.set('socialInterface','Clanker Router');
   var q=$('tk-q').value.trim(),s=$('tk-sort').value;
   if(q.length>=2)p.set('q',q.slice(0,100));
@@ -1956,6 +2007,9 @@ function startStats(){loadStats();clearInterval(statsTimer);statsTimer=setInterv
 
 
 
+document.querySelectorAll('[data-chain]').forEach(function(b){b.addEventListener('click',function(){
+  tkChain=b.dataset.chain;document.querySelectorAll('[data-chain]').forEach(function(x){x.setAttribute('aria-selected',x===b)});loadTokens(true);
+})});
 document.querySelectorAll('[data-src]').forEach(function(b){b.addEventListener('click',function(){
   tkSrc=b.dataset.src;document.querySelectorAll('[data-src]').forEach(function(x){x.setAttribute('aria-selected',x===b)});loadTokens(true);
 })});
