@@ -1863,8 +1863,8 @@ function openToken(addr){
     if(!t){$('h-token').textContent=short(addr);$('tp-err').textContent='We couldn’t find this token on Clanker yet. If it was just launched, give it a minute.';$('tp-err').style.display='block';return}
     $('h-token').textContent=t.name||'Unnamed';$('tp-sym').textContent='$'+(t.symbol||'');
     var nt=$('tp-note');nt.style.display='none';
-    if(isOfficial(t)){nt.style.display='';nt.style.background='rgba(155,107,255,.14)';nt.style.color='#E4D9FF';nt.textContent='✓ This is the official Clanker Router token. Always check the contract ends in …0899cccc.'}
-    else if(isLookalike(t)){nt.style.display='';nt.style.background='rgba(255,107,94,.12)';nt.style.color='#FFB4AC';nt.innerHTML='⚠ <strong>Not the official Clanker Router token.</strong> It uses a similar name or ticker. The official one is <a href="/token/'+OFFICIAL_TOKEN+'" style="color:#FFB4AC">0xe884…cccc</a>.'}
+    if(isOfficial(t)){nt.style.display='';nt.style.background='rgba(155,107,255,.14)';nt.style.color='#E4D9FF';nt.textContent='✓ This is the official Clanker Router token on '+(lc(t.contract_address)===OFFICIAL_TOKENS.robinhood?'Robinhood Chain (…8d97cccc)':'Base (…0899cccc)')+'. Always check the contract address.'}
+    else if(isLookalike(t)){nt.style.display='';nt.style.background='rgba(255,107,94,.12)';nt.style.color='#FFB4AC';nt.innerHTML='⚠ <strong>Not the official Clanker Router token.</strong> It uses a similar name or ticker. The official ones are <a href="/token/'+OFFICIAL_TOKENS.base+'" style="color:#FFB4AC">0xe884…cccc</a> on Base and <a href="/token/'+OFFICIAL_TOKENS.robinhood+'" style="color:#FFB4AC">0xb8b3…cccc</a> on Robinhood Chain.'}
     document.title=(t.name||'Token')+' ($'+(t.symbol||'')+') · Clanker Router';
     var d=t.description||(t.metadata&&t.metadata.description)||'';$('tp-desc').textContent=d;$('tp-desc').style.display=d?'':'none';
     var src=safeImg(t.img_url),im=$('tp-img');im.innerHTML='';
@@ -2061,10 +2061,12 @@ var tkSrc='all',tkChain='base';
 /* Hidden: test launches that should never show on the site (fees are still collected). */
 var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc','0xc5bf5ae06aa31cc56baa7f4cf288fddd41a6cccc','0x19025127aab7e879356372683c6e88effcaccccc'];
 /* Pinned: always shown first on Home and Tokens. Add contract addresses here (any case). */
-var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc'];
+var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc','0xb8b3395b9c21fcdc157c36f0dced2da28d97cccc'];
 /* The one real Clanker Router token. Anything else using the same name or ticker gets a warning. */
-var OFFICIAL_TOKEN='0xe884acdafe359fbad04c84d79b10c8770899cccc';
-function isOfficial(t){return lc(t&&t.contract_address)===OFFICIAL_TOKEN}
+/* official $CLRTR on each chain */
+var OFFICIAL_TOKENS={base:'0xe884acdafe359fbad04c84d79b10c8770899cccc',robinhood:'0xb8b3395b9c21fcdc157c36f0dced2da28d97cccc'};
+var OFFICIAL_TOKEN=OFFICIAL_TOKENS.base;
+function isOfficial(t){var a=lc(t&&t.contract_address);return a===OFFICIAL_TOKENS.base||a===OFFICIAL_TOKENS.robinhood}
 function isLookalike(t){
   if(!t||isOfficial(t))return false;
   var n=String(t.name||'').toLowerCase().replace(/[^a-z]/g,''),sy=String(t.symbol||'').toLowerCase().replace(/[^a-z]/g,'');
@@ -2154,13 +2156,14 @@ function tokenCard(t,isNew,pin){
 }
 function renderTokenGrid(newIds){
   var g=$('tk-grid');g.innerHTML='';
-  if(!tk.list.length){
+  var showPins=$('tk-q').value.trim().length<2;
+  var pinsHere=showPins?pinned.list.filter(function(t){return !t._chain||t._chain===tkChain}):[];
+  if(!tk.list.length&&!pinsHere.length){
     var e=el('div');e.className='cr-empty';e.style.gridColumn='1 / -1';
     e.textContent=tk.loading?'Loading tokens…':($('tk-q').value.trim()?'No tokens match your search.':'No tokens found.');
     g.appendChild(e);return;
   }
-  var showPins=$('tk-q').value.trim().length<2;
-  if(showPins)pinned.list.forEach(function(t){if(!t._chain||t._chain===tkChain)g.appendChild(tokenCard(t,false,true))});
+  pinsHere.forEach(function(t){g.appendChild(tokenCard(t,false,true))});
   tk.list.forEach(function(t){if(isHidden(t)||(showPins&&isPinned(t)))return;g.appendChild(tokenCard(t,newIds&&newIds[t.contract_address]))});
   $('tk-more').style.display=tk.cursor?'':'none';
 }
