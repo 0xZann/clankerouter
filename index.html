@@ -1854,17 +1854,19 @@ function openToken(addr){
   $('h-token').textContent='Loading…';$('tp-sym').textContent='';$('tp-desc').textContent='';$('tp-stats').innerHTML='';$('tp-err').style.display='none';
   $('tp-img').innerHTML='?';$('tp-chain').innerHTML='';$('tp-div').textContent='—';$('tp-age').textContent='—';
   $('tp-addr').textContent=addr;$('tp-clanker').href=CLANKER_TOKEN_URL+addr;
-  tokenInfo(addr,true).then(function(t){
+  (EXTERNAL_TOKENS[A]?Promise.resolve(externalToken(A)):tokenInfo(addr,true)).then(function(t){
     if(tpState.addr!==A)return;
     var k=t&&t._chain||'base';tpState.chain=k;
-    $('tp-buy').href=buyUrl(addr,k);$('tp-scan').href=chainOf(k).explorer+'/token/'+addr;
-    loadTpConfig(addr,k).then(function(){loadTrades(false)});startTrades();
+    $('tp-buy').href=t&&t.buy||buyUrl(addr,k);$('tp-buy').textContent=t&&t.buy?'Buy on '+t.venue+' ↗':'Buy on Uniswap ↗';$('tp-scan').href=chainOf(k).explorer+'/token/'+addr;
+    $('tp-clanker').href=t&&t.buy||CLANKER_TOKEN_URL+addr;$('tp-clanker').textContent=t&&t.venue?t.venue+' ↗':'Clanker ↗';$('tp-rewards').style.display=t&&t.buy?'none':'';
+    if(t&&t.buy){tpCfg=false;$('tp-taxline').textContent='Launched on '+t.venue+'. Creator and holder earnings only show for Clanker v5 tokens.'}else loadTpConfig(addr,k).then(function(){loadTrades(false)});
+    startTrades();
     $('tp-chain').innerHTML=(CHAIN_ICON[k]||'')+chainOf(k).name;
     if(!t){$('h-token').textContent=short(addr);$('tp-err').textContent='We couldn’t find this token on Clanker yet. If it was just launched, give it a minute.';$('tp-err').style.display='block';return}
     $('h-token').textContent=t.name||'Unnamed';$('tp-sym').textContent='$'+(t.symbol||'');
     var nt=$('tp-note');nt.style.display='none';
-    if(isOfficial(t)){nt.style.display='';nt.style.background='rgba(155,107,255,.14)';nt.style.color='#E4D9FF';nt.textContent='✓ This is the official Clanker Router token on '+(lc(t.contract_address)===OFFICIAL_TOKENS.robinhood?'Robinhood Chain (…8d97cccc)':'Base (…0899cccc)')+'. Always check the contract address.'}
-    else if(isLookalike(t)){nt.style.display='';nt.style.background='rgba(255,107,94,.12)';nt.style.color='#FFB4AC';nt.innerHTML='⚠ <strong>Not the official Clanker Router token.</strong> It uses a similar name or ticker. The official ones are <a href="/token/'+OFFICIAL_TOKENS.base+'" style="color:#FFB4AC">0xe884…cccc</a> on Base and <a href="/token/'+OFFICIAL_TOKENS.robinhood+'" style="color:#FFB4AC">0xb8b3…cccc</a> on Robinhood Chain.'}
+    if(isOfficial(t)){nt.style.display='';nt.style.background='rgba(155,107,255,.14)';nt.style.color='#E4D9FF';nt.textContent='✓ This is the official Clanker Router token on '+(lc(t.contract_address)===OFFICIAL_TOKENS.robinhood?'Robinhood Chain':'Base')+' (…'+lc(t.contract_address).slice(-8)+')'+'. Always check the contract address.'}
+    else if(isLookalike(t)){nt.style.display='';nt.style.background='rgba(255,107,94,.12)';nt.style.color='#FFB4AC';nt.innerHTML='⚠ <strong>Not the official Clanker Router token.</strong> It uses a similar name or ticker. The official ones are <a href="/token/'+OFFICIAL_TOKENS.base+'" style="color:#FFB4AC">0xe884…cccc</a> on Base and <a href="/token/'+OFFICIAL_TOKENS.robinhood+'" style="color:#FFB4AC">0x9672…bb7b</a> on Robinhood Chain.'}
     document.title=(t.name||'Token')+' ($'+(t.symbol||'')+') · Clanker Router';
     var d=t.description||(t.metadata&&t.metadata.description)||'';$('tp-desc').textContent=d;$('tp-desc').style.display=d?'':'none';
     var src=safeImg(t.img_url),im=$('tp-img');im.innerHTML='';
@@ -2059,12 +2061,15 @@ var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqI
 var pendingStake=null;
 var tkSrc='all',tkChain='base';
 /* Hidden: test launches that should never show on the site (fees are still collected). */
-var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc','0xc5bf5ae06aa31cc56baa7f4cf288fddd41a6cccc','0x19025127aab7e879356372683c6e88effcaccccc'];
+var HIDDEN_TOKENS=['0xb8b3395b9c21fcdc157c36f0dced2da28d97cccc','0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc','0xc5bf5ae06aa31cc56baa7f4cf288fddd41a6cccc','0x19025127aab7e879356372683c6e88effcaccccc'];
 /* Pinned: always shown first on Home and Tokens. Add contract addresses here (any case). */
-var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc','0xb8b3395b9c21fcdc157c36f0dced2da28d97cccc'];
+var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc','0x96723d7e7e468c8a38d160873021c7c35d10bb7b'];
 /* The one real Clanker Router token. Anything else using the same name or ticker gets a warning. */
 /* official $CLRTR on each chain */
-var OFFICIAL_TOKENS={base:'0xe884acdafe359fbad04c84d79b10c8770899cccc',robinhood:'0xb8b3395b9c21fcdc157c36f0dced2da28d97cccc'};
+var OFFICIAL_TOKENS={base:'0xe884acdafe359fbad04c84d79b10c8770899cccc',robinhood:'0x96723d7e7e468c8a38d160873021c7c35d10bb7b'};
+/* Tokens launched outside Clanker (not in Clanker's list), described here so the site can still show them. */
+var EXTERNAL_TOKENS={'0x96723d7e7e468c8a38d160873021c7c35d10bb7b':{contract_address:'0x96723d7e7e468c8a38d160873021c7c35d10bb7b',name:'Clanker Router',symbol:'CLRTR',img_url:'https://www.clankerouter.xyz/logo.png',deployed_at:'2026-11-26T16:20:00Z',_chain:'robinhood',venue:'Pons',buy:'https://ponsfamily.com/launchpad/0x96723d7e7e468c8a38d160873021c7c35d10bb7b',related:{market:{}}}};
+function externalToken(a){var t=EXTERNAL_TOKENS[lc(a)];return t?JSON.parse(JSON.stringify(t)):null}
 var OFFICIAL_TOKEN=OFFICIAL_TOKENS.base;
 function isOfficial(t){var a=lc(t&&t.contract_address);return a===OFFICIAL_TOKENS.base||a===OFFICIAL_TOKENS.robinhood}
 function isLookalike(t){
@@ -2081,6 +2086,7 @@ function loadPinned(){
   if(pinned.p)return pinned.p;
   if(Date.now()-pinned.at<20000)return Promise.resolve(pinned.list);
   pinned.p=Promise.all(PINNED_TOKENS.map(function(addr){
+    if(EXTERNAL_TOKENS[lc(addr)])return Promise.resolve(externalToken(addr));
     return Promise.all(CHAIN_KEYS.map(function(k){return pinOn(addr,k).then(function(t){if(t)t._chain=k;return t})})).then(function(r){return r.filter(Boolean)[0]||null});
   })).then(function(r){pinned.list=r.filter(Boolean);pinned.at=Date.now();pinned.p=null;return pinned.list});
   return pinned.p;
@@ -2148,7 +2154,8 @@ function tokenCard(t,isNew,pin){
   var row=el('div','display:flex;flex-wrap:wrap;gap:8px;margin-top:auto');
   var s=el('button',null,'Rewards');s.type='button';s.className='cr-btn-s cr-btn-g';
   s.addEventListener('click',function(){pendingStake={addr:t.contract_address};go('/stake')});
-  var v2=el('a',null,'Buy ↗');v2.href=buyUrl(t.contract_address,t._chain);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s';
+  var v2=el('a',null,t.buy?'Buy on '+t.venue+' ↗':'Buy ↗');v2.href=t.buy||buyUrl(t.contract_address,t._chain);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s';
+  if(t.buy)s.style.display='none';
   var v3=el('a',null,'Details');v3.href=tokenPath(t.contract_address);v3.className='cr-btn-s cr-btn-g';
   row.appendChild(v2);row.appendChild(s);row.appendChild(v3);c.appendChild(row);
   top.style.cursor='pointer';top.addEventListener('click',function(){go(tokenPath(t.contract_address))});
