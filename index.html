@@ -1813,16 +1813,16 @@ function openToken(addr){
     var src=safeImg(t.img_url),im=$('tp-img');im.innerHTML='';
     if(src){var i=el('img','width:100%;height:100%;object-fit:cover');i.alt='';i.referrerPolicy='no-referrer';i.src=src;im.appendChild(i)}else im.textContent=(t.symbol||'?').charAt(0).toUpperCase();
     var m=(t.related&&t.related.market)||{},ch=m.priceChangePercent24h;
-    function st(lab,val,col){var b=el('div','background:#0A0A0C;border-radius:14px;padding:12px 14px;min-width:0');b.appendChild(el('span',"display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9A97A6",lab));b.appendChild(el('strong','display:block;font-size:clamp(15px,4vw,20px);margin-top:4px;white-space:nowrap'+(col?';color:'+col:''),val));return b}
+    function st(lab,val,col){var b=el('div','background:#0A0A0C;border-radius:14px;padding:12px 14px;min-width:0');b.appendChild(el('span',"display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A97A6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis",lab));b.appendChild(el('strong','display:block;font-size:clamp(15px,4vw,20px);margin-top:4px;white-space:nowrap'+(col?';color:'+col:''),val));return b}
     var g=$('tp-stats');
-    g.appendChild(st('MARKET CAP',money(m.marketCap)));
-    g.appendChild(st('VOLUME 24H',money(m.volume24h)));
+    g.appendChild(st('MCAP',money(m.marketCap)));
+    g.appendChild(st('VOL 24H',money(m.volume24h)));
     g.appendChild(st('24H',typeof ch==='number'?(ch>0?'+':'')+ch.toFixed(1)+'%':'—',typeof ch==='number'?(ch>0?'#4ADE80':ch<0?'#FF6B5E':''):''));
     $('tp-age').textContent=ago(t.deployed_at||t.created_at)||'—';
     return loadSdk().then(function(mm){return readClanker(mm,k).dividendOf(addr)}).then(function(dv){
       if(tpState.addr!==A)return;
       var on=dv&&!/^0x0{40}$/i.test(dv);$('tp-div').textContent=on?'On · holders of 10,000+ earn':'Off';$('tp-div').style.color=on?'#4ADE80':'';
-    }).catch(function(){});
+    }).catch(function(){if(tpState.addr===A){$('tp-div').textContent='Off';$('tp-div').style.color=''}});
   });
 }
 $('tp-rewards').addEventListener('click',function(){if(!tpState)return;pendingStake={addr:$('tp-addr').textContent};go('/stake')});
