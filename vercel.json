@@ -1,5 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/((?!api/)[^.]*)",
+      "destination": "/index.html"
+    }
+  ],
   "crons": [
-    { "path": "/api/claim-fees", "schedule": "0 20 * * *" }
+    {
+      "path": "/api/claim-fees",
+      "schedule": "0 20 * * *"
+    }
   ]
 }

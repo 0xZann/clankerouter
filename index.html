@@ -258,20 +258,20 @@ html{scroll-behavior:auto}
 <!-- NAV -->
 <header style="max-width: 1240px; margin: 0 auto; padding: 16px 16px">
 <nav aria-label="Main" class="cr-nav">
-<a href="#/" class="cr-brand">
+<a href="/" class="cr-brand">
 <span style="flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; background: #17141F; display: inline-flex; align-items: center; justify-content: center">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12.5" rx="3.6"></rect><path d="M12 7.5V4.2"></path><path d="M7.6 13.75h3.1c1.9 0 1.9-2.5 3.8-2.5h.9M10.7 13.75h4.7M10.7 13.75c1.9 0 1.9 2.5 3.8 2.5h.9"></path></svg>
 </span>
 <span class="cr-brand-text">CLANKER ROUTER</span>
 </a>
 <div class="cr-links" id="cr-menu">
-<a href="#/tokens" data-route="tokens">Tokens</a>
-<a href="#/fuel" data-route="fuel">Fuel <span class="cr-soon-dot">soon</span></a>
-<a href="#/build" data-route="build">Build</a>
-<a href="#/stake" data-route="stake">Earn</a>
-<a href="#/plug" data-route="plug">Plug in <span class="cr-soon-dot">soon</span></a>
-<a href="#/docs" data-route="docs">Docs</a>
-<a href="#/dashboard" data-route="dashboard">Dashboard</a>
+<a href="/tokens" data-route="tokens">Tokens</a>
+<a href="/fuel" data-route="fuel">Fuel <span class="cr-soon-dot">soon</span></a>
+<a href="/build" data-route="build">Build</a>
+<a href="/stake" data-route="stake">Earn</a>
+<a href="/plug" data-route="plug">Plug in <span class="cr-soon-dot">soon</span></a>
+<a href="/docs" data-route="docs">Docs</a>
+<a href="/dashboard" data-route="dashboard">Dashboard</a>
 </div>
 <button type="button" data-wallet class="cr-wallet"><svg class="cr-wicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18M16 14.5h2"></path></svg><span class="cr-dot" style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent); color: #0A0A0C"></span><span class="js-wallet-label">Connect wallet</span></button>
 <button type="button" class="cr-burger" id="cr-burger" aria-label="Menu" aria-expanded="false" aria-controls="cr-menu">
@@ -287,14 +287,14 @@ html{scroll-behavior:auto}
 <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
 <h1 style="flex: 1 1 640px; min-width: 0; margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(36px, 7vw, 104px); line-height: 1.02; letter-spacing: -0.04em; text-transform: uppercase">Every<br>clanker.<br><span class="cr-hl">One router.</span></h1>
 <div style="flex: 1 1 320px; min-width: 0; max-width: 400px; display: flex; flex-direction: column; gap: 18px">
-<p style="margin: 0; font-size: 18px; color: #B4B1BF">Launch a token on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> or <span class="cr-base" style="white-space:nowrap"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood Chain</span> in one click, reward the people who hold it, and browse every Clanker token live.</p>
+<p style="margin: 0; font-size: 18px; color: #B4B1BF">Launch a token on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> or <span class="cr-base" style="white-space:nowrap"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood Chain</span> in one click, reward the people who hold it, and browse every Clanker token live.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
-<a href="#/build" style="text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Launch a token →</a>
-<a href="#/docs" style="text-decoration: none; border: 1.5px solid #2E2840; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Docs</a>
+<a href="/build" style="text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Launch a token →</a>
+<a href="/docs" style="text-decoration: none; border: 1.5px solid #2E2840; font-weight: 600; padding: 0 22px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Docs</a>
 </div>
 <div class="cr-builton" aria-label="Built on Clanker, live on Base">
 <a href="https://www.clanker.world" target="_blank" rel="noopener" class="cr-by">Built on <svg class="cr-ic" viewBox="0 0 210 177" aria-hidden="true"><rect x="0" y="124" width="46" height="53" fill="#865FD3"></rect><rect x="81" y="59" width="47" height="118" fill="#865FD3"></rect><rect x="163" y="0" width="47" height="177" fill="#865FD3"></rect></svg><strong>Clanker</strong></a>
-<span class="cr-by">Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> &amp; <span class="cr-base"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood</span></span>
+<span class="cr-by">Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> &amp; <span class="cr-base"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood</span></span>
 </div>
 
 </div>
@@ -347,7 +347,7 @@ html{scroll-behavior:auto}
 <span class="cr-live cr-live-on" id="hl-live" style="align-self: flex-start"><span class="cr-live-dot" aria-hidden="true"></span><span id="hl-live-text">Live</span></span>
 <h2 id="h-live" style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 48px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase">Fresh off Clanker</h2>
 </div>
-<a href="#/tokens" class="cr-btn-s">See all tokens →</a>
+<a href="/tokens" class="cr-btn-s">See all tokens →</a>
 </div>
 <div id="hl-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px"></div>
 </section>
@@ -423,7 +423,7 @@ export MODEL="auto"</pre>
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">How do holders earn?</h3><p style="margin: 0; color: #9A97A6">A share of trading fees is converted into credits for stakers. [Schedule &amp; rules.]</p></div>
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Which chains?</h3><p style="margin: 0; color: #9A97A6">Base for building tokens. [Other chains for Fuel.]</p></div>
 <div style="background: #131218; border: 1.5px solid #26222F; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Which models?</h3><p style="margin: 0; color: #9A97A6">[List of supported models and providers.]</p></div>
-<div style="background: var(--accent); border: 1.5px solid #2E2840; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; justify-content: space-between; color: #0A0A0C"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Still stuck?</h3><a href="#/docs" style="align-self: flex-start; text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 18px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Read the docs →</a></div>
+<div style="background: var(--accent); border: 1.5px solid #2E2840; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; justify-content: space-between; color: #0A0A0C"><h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 17px">Still stuck?</h3><a href="/docs" style="align-self: flex-start; text-decoration: none; background: #9B6BFF; color: #0A0A0C; font-weight: 600; padding: 0 18px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Read the docs →</a></div>
 </div>
 </section>
 
@@ -440,7 +440,7 @@ export MODEL="auto"</pre>
 <section class="view" id="v-fuel" aria-labelledby="h-fuel">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">MODE 1 · FUEL</span>
 <h1 class="cr-h1" id="h-fuel">Fuel a wallet</h1>
 <p class="cr-lead">Pay with any token you hold. The recipient gets AI credits they can spend on models right away.</p>
@@ -451,8 +451,8 @@ export MODEL="auto"</pre>
 <p style="margin: 0; color: #B4B1BF; max-width: 620px">Top up any wallet with AI credits using any token you hold. We’re finishing the payment flow.</p>
 <ul style="margin: 0; padding-left: 20px; color: #D2D0DA; display: flex; flex-direction: column; gap: 6px"><li>Pay with ETH, USDC or any Base token</li><li>Send credits to any wallet or .eth name</li><li>Credits work across top AI models</li></ul>
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
-<a href="#/build" class="cr-btn-s">Launch a token now</a>
-<a href="#/tokens" class="cr-btn-s cr-btn-g">Browse live tokens</a>
+<a href="/build" class="cr-btn-s">Launch a token now</a>
+<a href="/tokens" class="cr-btn-s cr-btn-g">Browse live tokens</a>
 </div>
 </div>
 <div hidden aria-hidden="true">
@@ -529,12 +529,12 @@ export MODEL="auto"</pre>
 <section class="view" id="v-build" aria-labelledby="h-build">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">MODE 2 · BUILD</span>
 <h1 class="cr-h1" id="h-build">Build a clanker</h1>
 <p class="cr-lead">Launch a real token on Base through Clanker, straight from your wallet. Gas is the only launch cost.</p>
 </div>
-<div class="cr-note cr-note-live" role="note"><strong>Live on Base:</strong> this deploys a real token. You pay gas (plus any launch buy) from your wallet, and a launch can't be undone.</div>
+<div class="cr-note cr-note-live" role="note"><strong>Live on <span id="b-note-chain">Base</span>:</strong> this deploys a real token. You pay gas (plus any launch buy) from your wallet, and a launch can't be undone.</div>
 <div class="cr-grid">
 <form id="b-form" class="cr-card" novalidate>
 <div class="cr-row">
@@ -587,7 +587,7 @@ export MODEL="auto"</pre>
 <span class="cr-label" id="l-b-chain">Chain</span>
 <div class="cr-chainpick" role="radiogroup" aria-labelledby="l-b-chain">
 <button type="button" role="radio" aria-checked="true" data-pick="base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</button>
-<button type="button" role="radio" aria-checked="false" data-pick="robinhood"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood Chain</button>
+<button type="button" role="radio" aria-checked="false" data-pick="robinhood"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood Chain</button>
 </div>
 <input type="hidden" id="b-chain" value="base">
 <span class="cr-hint">Gas and launch buy are paid in ETH on the chain you pick.</span>
@@ -618,7 +618,7 @@ export MODEL="auto"</pre>
 
 <label style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; cursor: pointer">
 <input id="b-ack" type="checkbox" style="width: 22px; height: 22px; margin: 1px 0 0; accent-color: #9B6BFF; flex: 0 0 auto">
-<span>I understand this launches a real token on Base, it can't be undone, and token prices can drop to zero.</span>
+<span>I understand this launches a real token on <span id="b-ack-chain">Base</span>, it can't be undone, and token prices can drop to zero.</span>
 </label>
 <span class="cr-err" id="e-b-ack" style="margin-top: -14px"></span>
 <button type="submit" class="cr-btn" id="b-btn">Connect wallet to deploy</button>
@@ -636,7 +636,7 @@ export MODEL="auto"</pre>
 </div>
 <p id="b-p-desc" style="margin: 0; color: #C9C3DB; font-size: 15px; overflow-wrap: anywhere">Your narrative shows up here.</p>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
-<div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">CHAIN</span><strong id="b-p-chain" class="cr-base" style="gap:.4em"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</strong></div>
+<div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px; min-width: 0; overflow: hidden"><span class="cr-kicker" style="display: block; font-size: 11px">CHAIN</span><strong id="b-p-chain" class="cr-base" style="gap:.4em;max-width:100%;overflow:hidden;text-overflow:ellipsis"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</strong></div>
 <div style="border: 1px solid #4A3A6B; border-radius: 14px; padding: 12px"><span class="cr-kicker" style="display: block; font-size: 11px">TAX</span><strong id="b-p-tax">3% / 3%</strong></div>
 </div>
 </div>
@@ -662,7 +662,7 @@ export MODEL="auto"</pre>
 <section class="view" id="v-stake" aria-labelledby="h-stake">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">MODE 3 · EARN</span>
 <h1 class="cr-h1" id="h-stake">Hold &amp; earn</h1>
 <p class="cr-lead">Tokens launched with holder rewards pay part of every trade to the people holding them. No staking, no lockups — just hold, then claim here.</p>
@@ -701,7 +701,7 @@ export MODEL="auto"</pre>
 <div class="cr-act"><span class="cr-step-b">3</span><span>Anyone holding at least 10,000 tokens earns a share by balance, paid in the token's pair (usually ETH).</span></div>
 <div class="cr-act"><span class="cr-step-b">4</span><span>Claim whenever you like. You pay a small gas fee on Base.</span></div>
 </div>
-<a href="#/build" class="cr-btn-s cr-btn-a" style="align-self: flex-start">Launch a token with rewards →</a>
+<a href="/build" class="cr-btn-s cr-btn-a" style="align-self: flex-start">Launch a token with rewards →</a>
 <p class="cr-hint" style="margin: 0">Rewards run on Clanker's v5 contracts. Only v5 tokens launched with holder rewards pay out.</p>
 </aside>
 </div>
@@ -734,7 +734,7 @@ export MODEL="auto"</pre>
 <section class="view" id="v-plug" aria-labelledby="h-plug">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">MODE 4 · PLUG IN</span>
 <h1 class="cr-h1" id="h-plug">Plug in</h1>
 <p class="cr-lead">Sign in with your wallet, grab an API key, and point any OpenAI-compatible app or coding agent at the router.</p>
@@ -745,8 +745,8 @@ export MODEL="auto"</pre>
 <p style="margin: 0; color: #B4B1BF; max-width: 620px">One API key for top AI models, paid with credits from your wallet. We’re finishing the API.</p>
 <ul style="margin: 0; padding-left: 20px; color: #D2D0DA; display: flex; flex-direction: column; gap: 6px"><li>OpenAI-compatible — works with the tools you already use</li><li>Sign in with your wallet, no email</li><li>Pay per use with AI credits</li></ul>
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
-<a href="#/build" class="cr-btn-s">Launch a token now</a>
-<a href="#/tokens" class="cr-btn-s cr-btn-g">Browse live tokens</a>
+<a href="/build" class="cr-btn-s">Launch a token now</a>
+<a href="/tokens" class="cr-btn-s cr-btn-g">Browse live tokens</a>
 </div>
 </div>
 <div hidden aria-hidden="true">
@@ -774,7 +774,7 @@ export MODEL="auto"</pre>
 <div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">BALANCE</span><strong>[BALANCE] credits</strong></div>
 <div style="background: #0A0A0C; border-radius: 14px; padding: 14px 16px"><span class="cr-kicker" style="display: block">MODELS</span><strong>[N]+</strong></div>
 </div>
-<a href="#/fuel" class="cr-btn-s cr-btn-g" style="align-self: flex-start">Top up credits</a>
+<a href="/fuel" class="cr-btn-s cr-btn-g" style="align-self: flex-start">Top up credits</a>
 </div>
 </div>
 <aside class="cr-side" aria-label="Code">
@@ -797,7 +797,7 @@ export MODEL="auto"</pre>
 <!-- ================= PLATFORM (unlisted) ================= -->
 <section class="view" id="v-platform" aria-labelledby="h-platform">
 <div class="cr-page" style="max-width: 860px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">PLATFORM</span>
 <h1 class="cr-h1" id="h-platform" style="font-size: clamp(30px, 5vw, 56px)">Platform fees</h1>
 <p class="cr-lead">Fees from every token launched on Clanker Router. Connect <strong>any</strong> wallet to claim — the money always goes to the platform wallet below.</p>
@@ -815,7 +815,7 @@ export MODEL="auto"</pre>
 <section class="view" id="v-tokens" aria-labelledby="h-tokens">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">EXPLORE</span>
 <h1 class="cr-h1" id="h-tokens">Tokens</h1>
 <p class="cr-lead">Live tokens deployed through Clanker on Base and Robinhood Chain. Updates on its own every few seconds.</p>
@@ -830,7 +830,7 @@ export MODEL="auto"</pre>
 </div>
 <div class="cr-seg cr-seg-light" role="tablist" aria-label="Which chain" style="align-self: flex-start">
 <button type="button" role="tab" data-chain="base" aria-selected="true"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</button>
-<button type="button" role="tab" data-chain="robinhood" aria-selected="false"><img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">Robinhood Chain</button>
+<button type="button" role="tab" data-chain="robinhood" aria-selected="false"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood Chain</button>
 </div>
 <div class="cr-row" style="align-items: flex-end">
 <div class="cr-field" style="flex: 3 1 260px">
@@ -859,7 +859,7 @@ export MODEL="auto"</pre>
 <section class="view" id="v-dashboard" aria-labelledby="h-dash">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">DASHBOARD</span>
 <h1 class="cr-h1" id="h-dash">Your machine</h1>
 <p class="cr-lead" id="d-sub">Connect a wallet to see your credits, stakes and activity.</p>
@@ -871,10 +871,10 @@ export MODEL="auto"</pre>
 </div>
 <div id="d-open" style="display: none; flex-direction: column; gap: 24px">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
-<div class="cr-stat cr-stat-dark"><span class="cr-kicker">WALLET · BASE</span><strong id="d-eth">—</strong><a href="#/fuel" class="cr-mini">Top up credits →</a></div>
-<div class="cr-stat"><span class="cr-kicker">REWARD CLAIMS</span><strong id="d-stakes">0</strong><a href="#/stake" class="cr-mini">Check rewards →</a></div>
-<div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong id="d-built">0</strong><a href="#/tokens" class="cr-mini">View →</a></div>
-<div class="cr-stat"><span class="cr-kicker">API KEY</span><strong id="d-key">None</strong><a href="#/plug" class="cr-mini">Get key →</a></div>
+<div class="cr-stat cr-stat-dark"><span class="cr-kicker">WALLET · BASE</span><strong id="d-eth">—</strong><a href="/fuel" class="cr-mini">Top up credits →</a></div>
+<div class="cr-stat"><span class="cr-kicker">REWARD CLAIMS</span><strong id="d-stakes">0</strong><a href="/stake" class="cr-mini">Check rewards →</a></div>
+<div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong id="d-built">0</strong><a href="/tokens" class="cr-mini">View →</a></div>
+<div class="cr-stat"><span class="cr-kicker">API KEY</span><strong id="d-key">None</strong><a href="/plug" class="cr-mini">Get key →</a></div>
 </div>
 <div class="cr-grid">
 <div class="cr-card" style="flex: 1.4 1 480px">
@@ -900,7 +900,7 @@ export MODEL="auto"</pre>
 <section class="view" id="v-docs" aria-labelledby="h-docs">
 <div class="cr-page">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <span class="cr-tag">DOCS</span>
 <h1 class="cr-h1" id="h-docs">Documentation</h1>
 <p class="cr-lead">Everything you need to fuel wallets, build tokens, stake, and call models through the router.</p>
@@ -932,8 +932,8 @@ export MODEL="auto"</pre>
 <article id="doc-quickstart">
 <h2>Quickstart</h2>
 <ol>
-<li>Connect a wallet and get credits on the <a href="#/fuel">Fuel</a> tab.</li>
-<li>Go to <a href="#/plug">Plug in</a>, sign a message, and copy your API key.</li>
+<li>Connect a wallet and get credits on the <a href="/fuel">Fuel</a> tab.</li>
+<li>Go to <a href="/plug">Plug in</a>, sign a message, and copy your API key.</li>
 <li>Set two environment variables and call any model:</li>
 </ol>
 <pre class="cr-code">export OPENAI_BASE_URL="https://api.clankerouter.xyz/v1"
@@ -1036,7 +1036,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 <!-- ================= TERMS ================= -->
 <section class="view" id="v-terms" aria-labelledby="h-terms">
 <div class="cr-page" style="max-width: 860px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <h1 class="cr-h1" id="h-terms" style="font-size: clamp(30px, 5vw, 56px)">Terms of Service</h1>
 <p class="cr-hint">Last updated November 22, 2026</p>
 <div class="cr-doc">
@@ -1058,7 +1058,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 <!-- ================= PRIVACY ================= -->
 <section class="view" id="v-privacy" aria-labelledby="h-privacy">
 <div class="cr-page" style="max-width: 860px">
-<a href="#/" class="cr-back">← Home</a>
+<a href="/" class="cr-back">← Home</a>
 <h1 class="cr-h1" id="h-privacy" style="font-size: clamp(30px, 5vw, 56px)">Privacy Policy</h1>
 <p class="cr-hint">Last updated November 22, 2026</p>
 <div class="cr-doc">
@@ -1089,20 +1089,20 @@ curl $OPENAI_BASE_URL/chat/completions \
 <div style="max-width: 1240px; margin: 0 auto; padding: 48px 16px 28px; display: flex; flex-direction: column; gap: 36px">
 <div style="display: flex; flex-wrap: wrap; gap: 36px; justify-content: space-between">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px; max-width: 340px">
-<a href="#/" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+<a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
 <span style="width: 34px; height: 34px; border-radius: 10px; background: #17141F; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="stroke: var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12.5" rx="3.6"></rect><path d="M12 7.5V4.2"></path><path d="M7.6 13.75h3.1c1.9 0 1.9-2.5 3.8-2.5h.9M10.7 13.75h4.7M10.7 13.75c1.9 0 1.9 2.5 3.8 2.5h.9"></path></svg></span>
 <span style="font-family: Unbounded, sans-serif; font-weight: 800">CLANKER ROUTER</span>
 </a>
-<p style="margin: 0; color: #9A97A6; font-size: 15px">Every clanker, one router. Launch and earn on Base.</p>
+<p style="margin: 0; color: #9A97A6; font-size: 15px">Every clanker, one router. Launch and earn on Base and Robinhood Chain.</p>
 <div style="display: flex; gap: 10px">
 <a href="https://x.com/[HANDLE]" class="cr-social" aria-label="X (Twitter)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M17.7 3H21l-7.2 8.2L22.3 21h-6.6l-5.2-6.8L4.6 21H1.3l7.7-8.8L1 3h6.8l4.7 6.2L17.7 3zm-1.2 16h1.8L7.6 4.9H5.7L16.5 19z"></path></svg></a>
 <a href="https://t.me/[GROUP]" class="cr-social" aria-label="Telegram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F2F1F5" aria-hidden="true"><path d="M21.9 4.6 18.8 19.3c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.7 13.2 2 11.7c-1-.3-1-1 .2-1.5l18.3-7c.9-.3 1.6.2 1.4 1.4z"></path></svg></a>
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 48px">
-<div class="cr-fcol"><span class="cr-kicker">PRODUCT</span><a href="#/fuel">Fuel</a><a href="#/build">Build</a><a href="#/stake">Earn</a><a href="#/plug">Plug in</a><a href="#/tokens">Tokens</a></div>
-<div class="cr-fcol"><span class="cr-kicker">RESOURCES</span><a href="#/docs">Docs</a><a href="#doc-api">API reference</a><a href="#doc-contracts">Contracts</a><a href="#/dashboard">Dashboard</a><a href="#faq">FAQ</a></div>
-<div class="cr-fcol"><span class="cr-kicker">LEGAL</span><a href="#/terms">Terms</a><a href="#/privacy">Privacy</a></div>
+<div class="cr-fcol"><span class="cr-kicker">PRODUCT</span><a href="/fuel">Fuel</a><a href="/build">Build</a><a href="/stake">Earn</a><a href="/plug">Plug in</a><a href="/tokens">Tokens</a></div>
+<div class="cr-fcol"><span class="cr-kicker">RESOURCES</span><a href="/docs">Docs</a><a href="#doc-api">API reference</a><a href="#doc-contracts">Contracts</a><a href="/dashboard">Dashboard</a><a href="#faq">FAQ</a></div>
+<div class="cr-fcol"><span class="cr-kicker">LEGAL</span><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>
 </div>
 </div>
 <div style="border-top: 1px solid #26222F; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 13px; color: #9A97A6">
@@ -1135,10 +1135,14 @@ function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
 /* ================= ROUTER ================= */
 var VIEWS={'':'v-home',platform:'v-platform',fuel:'v-fuel',build:'v-build',stake:'v-stake',plug:'v-plug',tokens:'v-tokens',dashboard:'v-dashboard',docs:'v-docs',terms:'v-terms',privacy:'v-privacy'};
 function keyFor(id){for(var k in VIEWS)if(VIEWS[k]===id)return k;return ''}
+var HASH_MODE=location.protocol==='file:';
 function route(){
   var h=location.hash||'',key='',id=null,anchor=null;
   if(h.indexOf('#/')===0){key=h.slice(2);id=VIEWS[key]||null}
-  else if(h.length>1){anchor=h.slice(1);var t=document.getElementById(anchor);var v=t&&t.closest('.view');id=v?v.id:'v-home';key=keyFor(id)}
+  else{
+    if(!HASH_MODE){key=location.pathname.replace(/^\/+|\/+$/g,'').toLowerCase();id=VIEWS.hasOwnProperty(key)?VIEWS[key]:null}
+    if(h.length>1){anchor=h.slice(1);var t=document.getElementById(anchor);var v=t&&t.closest('.view');if(v&&(!id||id==='v-home')){id=v.id;key=keyFor(id)}}
+  }
   if(!id){id='v-home';key=''}
   document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active',v.id===id)});
   document.querySelectorAll('[data-route]').forEach(function(a){var on=key!==''&&a.getAttribute('data-route')===key;a.classList.toggle('cur',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -1152,7 +1156,25 @@ function route(){
   if(id==='v-home'){startHomeTokens();startStats()}
   if(id==='v-dashboard')renderDash();
 }
-window.addEventListener('hashchange',function(){if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(route)}else route()});
+function smoothRoute(){if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var vt=document.startViewTransition(route);['ready','finished','updateCallbackDone'].forEach(function(k){if(vt[k])vt[k].catch(function(){})})}else route()}
+window.addEventListener('hashchange',smoothRoute);
+window.addEventListener('popstate',smoothRoute);
+/* clean URLs: /build, /tokens … (Vercel rewrites every page path to index.html) */
+function go(path){
+  if(HASH_MODE){location.hash='#'+path;return}
+  if(path!==location.pathname||location.hash){history.pushState(null,'',path)}
+  smoothRoute();
+}
+document.addEventListener('click',function(e){
+  if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  var a=e.target.closest&&e.target.closest('a[href^="/"]');if(!a||a.target==='_blank')return;
+  var p=a.getAttribute('href').split('#')[0],k=p.replace(/^\/+|\/+$/g,'');
+  if(!VIEWS.hasOwnProperty(k))return;
+  e.preventDefault();go(p||'/');
+});
+/* old links like clankerouter.xyz/#/build still work and get cleaned up */
+if(!HASH_MODE&&location.hash.indexOf('#/')===0){history.replaceState(null,'','/'+location.hash.slice(2))}
+
 
 /* ================= MENU ================= */
 var menu=$('cr-menu'),burger=$('cr-burger');
@@ -1166,7 +1188,7 @@ var BASE_CHAIN={chainId:'0x2105',chainName:'Base',nativeCurrency:{name:'Ether',s
 /* WalletConnect: lets people on a PC scan a QR code with the wallet app on their phone.
    Get a free Project ID at https://dashboard.reown.com, paste it below, and add your domain to the project's allowlist. */
 var WC_PROJECT_ID='56b3b10be9cfa9e9e75dcd537117d6b0';
-var WC_URL='./walletconnect.js';
+var WC_URL='/walletconnect.js';
 var wcProvider=null;
 function getWC(){
   if(wcProvider)return Promise.resolve(wcProvider);
@@ -1324,7 +1346,7 @@ function renderWallet(){
   renderDash();
 }
 document.querySelectorAll('[data-wallet]').forEach(function(b){b.addEventListener('click',function(){
-  if(account){location.hash='#/dashboard';return}
+  if(account){go('/dashboard');return}
   ensureWallet().catch(function(){});
 })});
 /* --- toast --- */
@@ -1362,16 +1384,16 @@ function copyText(txt,btn){
 
 /* ================= HOME: mode tabs ================= */
 var modes=[
-{tag:'MODE 1 · FUEL · SOON',title:'Top up any wallet with AI credits.',desc:'Pay with whatever token you hold. The recipient gets a credit balance they can spend on AI models right away.',cta:'Coming soon',href:'#/fuel',code:false,
+{tag:'MODE 1 · FUEL · SOON',title:'Top up any wallet with AI credits.',desc:'Pay with whatever token you hold. The recipient gets a credit balance they can spend on AI models right away.',cta:'Coming soon',href:'/fuel',code:false,
 facts:[['SIGNATURES','1'],['CHAINS','[Base + …]']],
 steps:[['Enter wallet + amount','Paste an address or ENS name.'],['Pay with any token','Swapped to a stablecoin under the hood.'],['Credits land','Ready to use with their wallet login.']]},
-{tag:'MODE 2 · BUILD',title:'Build a token that pays out in AI.',desc:'Name it, ticker it, ship it on Base through Clanker — straight from your wallet. Every trade pays a tax to you, the creator.',cta:'Open the builder',href:'#/build',code:false,
+{tag:'MODE 2 · BUILD',title:'Build a token that pays out in AI.',desc:'Name it, ticker it, ship it on Base through Clanker — straight from your wallet. Every trade pays a tax to you, the creator.',cta:'Open the builder',href:'/build',code:false,
 facts:[['BUY / SELL TAX','1–10%'],['TAX GOES TO','You'],['LAUNCH COST','Gas only'],['POOL','Uniswap v4']],
 steps:[['Describe your token','Name, ticker, image and a short pitch.'],['Sign one transaction','Deployed on Base via Clanker.'],['Trading opens','Taxes flow to your wallet.']]},
-{tag:'MODE 3 · EARN',title:'Hold the token. Earn from every trade.',desc:'Tokens launched with holder rewards pay part of every buy and sell to their holders. No staking, no lockups — just hold and claim.',cta:'Check my rewards',href:'#/stake',code:false,
+{tag:'MODE 3 · EARN',title:'Hold the token. Earn from every trade.',desc:'Tokens launched with holder rewards pay part of every buy and sell to their holders. No staking, no lockups — just hold and claim.',cta:'Check my rewards',href:'/stake',code:false,
 facts:[['PAID IN','ETH'],['MIN. HOLDING','10,000 tokens']],
 steps:[['Hold the token','At least 10,000 tokens.'],['Rewards build up','A slice of every trade goes to holders.'],['Claim anytime','One click, small gas fee.']]},
-{tag:'MODE 4 · PLUG IN · SOON',title:'Spend credits in your tools.',desc:'Sign in with your wallet, grab a key, and point any OpenAI-compatible app or coding agent at the router.',cta:'Coming soon',href:'#/plug',code:true,
+{tag:'MODE 4 · PLUG IN · SOON',title:'Spend credits in your tools.',desc:'Sign in with your wallet, grab a key, and point any OpenAI-compatible app or coding agent at the router.',cta:'Coming soon',href:'/plug',code:true,
 facts:[['MODELS','[N]+'],['BILLING','Credits']],
 steps:[['Sign a message','Get your key and balance.'],['Set two env vars','Works with existing SDKs.']]}
 ];
@@ -1432,7 +1454,7 @@ $('fu-again').addEventListener('click',function(){
    clanker-sdk.js (bundled Clanker SDK + viem) is loaded only when someone deploys.
    UPLOAD_API: endpoint that pins an image to IPFS and returns {url:"ipfs://…"} (see api/upload.js). */
 var UPLOAD_API='/api/upload'; // Vercel Blob (api/upload.js)
-var SDK_URL='./clanker-sdk.js';
+var SDK_URL='/clanker-sdk.js';
 /* Platform cut: share = % of the creator's tax that goes to Clanker Router (0–100). */
 var INTEGRATOR={address:'0xEAE6B9Cd34253850ce3c3Bbb637dAD093E8b4685',share:15};
 var built=[];
@@ -1451,7 +1473,9 @@ $('b-buy').addEventListener('change',taxText);
 document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
   $('b-chain').value=b.dataset.pick;
   document.querySelectorAll('[data-pick]').forEach(function(x){x.setAttribute('aria-checked',x===b)});
-  $('b-p-chain').innerHTML=(b.dataset.pick==='robinhood'?'<img class="cr-ic cr-rh" src="./robinhood.png" alt="" aria-hidden="true">':'<svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>')+chainOf(b.dataset.pick).name;
+  $('b-p-chain').innerHTML=(b.dataset.pick==='robinhood'?'<img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">':'<svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>')+(b.dataset.pick==='robinhood'?'Robinhood':'Base');
+  $('b-ack-chain').textContent=chainOf(b.dataset.pick).name;
+  $('b-note-chain').textContent=chainOf(b.dataset.pick).name;
 })});$('b-sell').addEventListener('change',taxText);
 $('b-dev').addEventListener('input',function(){clearErr('b-dev')});
 function showPreview(src){
@@ -1535,7 +1559,7 @@ function mineSaltParallel(input){
     var failed=0;
     function stop(){ws.forEach(function(w){try{w.terminate()}catch(e){}})}
     for(var i=0;i<n;i++){
-      var w;try{w=new Worker('./salt-worker.js')}catch(e){failed++;continue}
+      var w;try{w=new Worker('/salt-worker.js')}catch(e){failed++;continue}
       ws.push(w);
       w.onmessage=function(e){
         if(done)return;
@@ -1909,7 +1933,7 @@ function tokenCard(t,isNew,pin){
   c.appendChild(stats);
   var row=el('div','display:flex;flex-wrap:wrap;gap:8px;margin-top:auto');
   var s=el('button',null,'Rewards');s.type='button';s.className='cr-btn-s';
-  s.addEventListener('click',function(){pendingStake={addr:t.contract_address};location.hash='#/stake'});
+  s.addEventListener('click',function(){pendingStake={addr:t.contract_address};go('/stake')});
   var v2=el('a',null,'Trade ↗');v2.href=CLANKER_TOKEN_URL+encodeURIComponent(t.contract_address);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s cr-btn-g';
   row.appendChild(s);row.appendChild(v2);c.appendChild(row);
   return c;
@@ -2033,7 +2057,7 @@ function loadHomeTokens(){
 }
 function startHomeTokens(){loadHomeTokens();clearInterval(hlTimer);hlTimer=setInterval(loadHomeTokens,10000)}
 
-$('d-disconnect').addEventListener('click',function(){disconnectWallet();toast('Wallet disconnected');location.hash='#/'});
+$('d-disconnect').addEventListener('click',function(){disconnectWallet();toast('Wallet disconnected');go('/')});
 window.addEventListener('unhandledrejection',function(e){var r=e.reason;if(r&&(r.message==='closed'||r.code===4001))e.preventDefault()});
 /* scroll reveal */
 (function(){
