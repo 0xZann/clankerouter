@@ -2038,9 +2038,9 @@ var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqI
 var pendingStake=null;
 var tkSrc='all',tkChain='base';
 /* Hidden: test launches that should never show on the site (fees are still collected). */
-var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc','0xc5bf5ae06aa31cc56baa7f4cf288fddd41a6cccc'];
+var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc','0xc5bf5ae06aa31cc56baa7f4cf288fddd41a6cccc','0x19025127aab7e879356372683c6e88effcaccccc'];
 /* Pinned: always shown first on Home and Tokens. Add contract addresses here (any case). */
-var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc','0x19025127aab7e879356372683c6e88effcaccccc'];
+var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc'];
 /* The one real Clanker Router token. Anything else using the same name or ticker gets a warning. */
 var OFFICIAL_TOKEN='0xe884acdafe359fbad04c84d79b10c8770899cccc';
 function isOfficial(t){return lc(t&&t.contract_address)===OFFICIAL_TOKEN}
