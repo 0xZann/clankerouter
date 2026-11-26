@@ -106,6 +106,9 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-badge-warn{background:rgba(255,107,94,.16)!important;color:#FF6B5E!important;font-weight:700}
 .cr-tok.cr-official{border-color:#9B6BFF!important;box-shadow:0 0 0 1px #9B6BFF inset,0 0 40px rgba(155,107,255,.18)}
 .cr-tp-note{border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.45}
+.cr-balrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0}
+.cr-balrow .cr-base{font-size:16px;color:#C9C3DB}
+.cr-balrow strong{font-family:Unbounded,sans-serif;font-size:clamp(20px,5vw,28px)}
 .cr-kv{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #3A2A5C;padding-bottom:10px;font-size:15px}
 .cr-kv:last-child{border-bottom:0;padding-bottom:0}
 .cr-kv span:first-child{color:#A9A3BB}
@@ -944,7 +947,10 @@ export MODEL="auto"</pre>
 </div>
 <div id="d-open" style="display: none; flex-direction: column; gap: 24px">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
-<div class="cr-stat cr-stat-dark"><span class="cr-kicker">WALLET · BASE</span><strong id="d-eth">—</strong><a href="/fuel" class="cr-mini">Top up credits →</a></div>
+<div class="cr-stat cr-stat-dark"><span class="cr-kicker">WALLET · ETH</span>
+<div class="cr-balrow"><span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span><strong id="d-eth">—</strong></div>
+<div class="cr-balrow"><span class="cr-base"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood</span><strong id="d-eth-rh">—</strong></div>
+<a href="/fuel" class="cr-mini">Top up credits →</a></div>
 <div class="cr-stat"><span class="cr-kicker">REWARD CLAIMS</span><strong id="d-stakes">0</strong><a href="/stake" class="cr-mini">Check rewards →</a></div>
 <div class="cr-stat"><span class="cr-kicker">TOKENS BUILT</span><strong id="d-built">0</strong><a href="/tokens" class="cr-mini">View →</a></div>
 <div class="cr-stat"><span class="cr-kicker">API KEY</span><strong id="d-key">None</strong><a href="/plug" class="cr-mini">Get key →</a></div>
@@ -1417,7 +1423,7 @@ function renderWallet(){
   document.querySelectorAll('.js-wallet-label').forEach(function(l){l.textContent=account?short(account):'Connect wallet'});
   document.querySelectorAll('.cr-wallet').forEach(function(b){b.classList.toggle('is-on',!!account);b.setAttribute('aria-label',account?'Wallet '+short(account)+' — open dashboard':'Connect wallet')});
   if(!busy.fu)$('fu-btn').textContent=account?'Send credits':'Connect wallet to send';
-  if(!busy.b)$('b-btn').textContent=account?'Deploy on Base':'Connect wallet to deploy';
+  if(!busy.b)$('b-btn').textContent=account?'Deploy on '+chainOf($('b-chain')?$('b-chain').value:'base').name:'Connect wallet to deploy';
   if(!apiKey)$('pl-sign').textContent=account?'Sign message':'Connect wallet & sign';
   renderDash();
 }
@@ -1547,7 +1553,7 @@ $('b-desc').addEventListener('input',function(){$('b-count').textContent=this.va
 function taxText(){$('b-p-tax').textContent=$('b-buy').value+'% / '+$('b-sell').value+'%'}
 $('b-buy').addEventListener('change',taxText);
 document.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
-  $('b-chain').value=b.dataset.pick;
+  $('b-chain').value=b.dataset.pick;syncChainLabels();
   document.querySelectorAll('[data-pick]').forEach(function(x){x.setAttribute('aria-checked',x===b)});
   $('b-p-chain').innerHTML=(b.dataset.pick==='robinhood'?'<img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">':'<svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>')+(b.dataset.pick==='robinhood'?'Robinhood':'Base');
   $('b-ack-chain').textContent=chainOf(b.dataset.pick).name;
@@ -1582,8 +1588,8 @@ $('b-ack').addEventListener('change',function(){$('e-b-ack').textContent=''});
 var BASE_RPCS=['https://mainnet.base.org','https://base-rpc.publicnode.com','https://base.llamarpc.com'];
 /* Chains this launchpad deploys to. Both run Clanker v5 with the same contracts. */
 var CHAINS={
-  base:{key:'base',id:8453,hex:'0x2105',name:'Base',rpcs:BASE_RPCS,explorer:'https://basescan.org',add:BASE_CHAIN},
-  robinhood:{key:'robinhood',id:4663,hex:'0x1237',name:'Robinhood Chain',rpcs:['https://rpc.mainnet.chain.robinhood.com'],explorer:'https://robinhoodchain.blockscout.com',
+  base:{key:'base',id:8453,hex:'0x2105',name:'Base',rpcs:BASE_RPCS.concat(['/api/rpc?chain=base']),explorer:'https://basescan.org',add:BASE_CHAIN},
+  robinhood:{key:'robinhood',id:4663,hex:'0x1237',name:'Robinhood Chain',rpcs:['/api/rpc?chain=robinhood','https://rpc.mainnet.chain.robinhood.com'],explorer:'https://robinhoodchain.blockscout.com',
     add:{chainId:'0x1237',chainName:'Robinhood Chain',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://rpc.mainnet.chain.robinhood.com'],blockExplorerUrls:['https://robinhoodchain.blockscout.com']}}
 };
 var CHAIN_KEYS=['base','robinhood'];
@@ -1591,9 +1597,20 @@ function chainOf(k){return CHAINS[k]||CHAINS.base}
 function chainKeyById(id){for(var k in CHAINS)if(CHAINS[k].id===+id)return k;return 'base'}
 function viemChain(m,k){
   var c=chainOf(k);if(c.key==='base')return m.base;
-  return {id:c.id,name:c.name,nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:{default:{http:c.rpcs}},blockExplorers:{default:{name:'Blockscout',url:c.explorer}},contracts:{}};
+  return {id:c.id,name:c.name,nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:{default:{http:c.rpcs.filter(function(u){return /^https:/.test(u)})}},blockExplorers:{default:{name:'Blockscout',url:c.explorer}},contracts:{}};
 }
 var _rpcId=1;
+function rpcCall(k,method,params){
+  var RPCS=chainOf(k).rpcs,i=0;
+  function next(err){
+    if(i>=RPCS.length)return Promise.reject(err||new Error('RPC unavailable'));
+    return fetch(RPCS[i++],{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:_rpcId++,method:method,params:params||[]})})
+      .then(function(r){if(!r.ok)throw new Error('RPC '+r.status);return r.json()})
+      .then(function(j){if(j.error)throw new Error(j.error.message||'RPC error');return j.result})
+      .catch(next);
+  }
+  return next();
+}
 function baseReadTransport(m,k){
   var RPCS=chainOf(k).rpcs;
   // Reads go straight to public Base RPCs (not the wallet), so in-app wallet browsers can't break decoding.
@@ -1626,6 +1643,7 @@ function socials(){
   return out;
 }
 var BUILD_STEPS=['Uploading image','Preparing launch','Confirm in your wallet','Deploying on Base','Token is live'];
+function syncChainLabels(){var n=chainOf($('b-chain').value).name;BUILD_STEPS[3]='Deploying on '+n;if(account&&!busy.b)$('b-btn').textContent='Deploy on '+n}
 /* Clanker v5 needs a token address ending in ...cccc. The SDK searches for it on one thread;
    we search on several Web Workers at once so the wallet prompt shows up much sooner. */
 function mineSaltParallel(input){
@@ -2019,9 +2037,12 @@ function renderDash(){
   $('d-built').textContent=(built||[]).length;
   $('d-key').textContent=apiKey?'Active':'None';
   if(activeProvider&&$('v-dashboard').classList.contains('active')){
-    activeProvider.request({method:'eth_getBalance',params:[account,'latest']}).then(function(h){
-      var wei=BigInt(h),eth=Number(wei/10n**12n)/1e6;$('d-eth').textContent=eth.toLocaleString('en-US',{maximumFractionDigits:4})+' ETH';
-    }).catch(function(){$('d-eth').textContent='—'});
+    // ETH on both chains, read straight from each chain (not from whichever chain the wallet is on)
+    [['base','d-eth'],['robinhood','d-eth-rh']].forEach(function(p){
+      rpcCall(p[0],'eth_getBalance',[account,'latest']).then(function(h){
+        var wei=BigInt(h),eth=Number(wei/10n**12n)/1e6;$(p[1]).textContent=eth.toLocaleString('en-US',{maximumFractionDigits:4})+' ETH';
+      }).catch(function(){$(p[1]).textContent='—'});
+    });
   }
   var ol=$('d-activity');ol.innerHTML='';
   if(!activity.length){var e=el('li',null,'Nothing yet. Fuel a wallet, build a token or stake to see it here.');e.className='cr-empty';ol.appendChild(e);return}
