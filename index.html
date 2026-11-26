@@ -102,6 +102,10 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-tp-row small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#9A97A6;font-family:'IBM Plex Mono',monospace;font-size:11px}
 .cr-tp-row.fresh{animation:crFresh 1.2s ease}
 @keyframes crFresh{from{box-shadow:0 0 0 2px #9B6BFF inset;background:#1A1625}to{box-shadow:none}}
+.cr-badge-off{background:#9B6BFF!important;color:#0A0A0C!important;font-weight:700}
+.cr-badge-warn{background:rgba(255,107,94,.16)!important;color:#FF6B5E!important;font-weight:700}
+.cr-tok.cr-official{border-color:#9B6BFF!important;box-shadow:0 0 0 1px #9B6BFF inset,0 0 40px rgba(155,107,255,.18)}
+.cr-tp-note{border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.45}
 .cr-kv{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #3A2A5C;padding-bottom:10px;font-size:15px}
 .cr-kv:last-child{border-bottom:0;padding-bottom:0}
 .cr-kv span:first-child{color:#A9A3BB}
@@ -828,6 +832,7 @@ export MODEL="auto"</pre>
 <span style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="tp-sym" class="cr-mono" style="color:var(--accent);font-size:16px"></span><span id="tp-chain" class="cr-base" style="font-size:15px"></span></span>
 </div>
 </div>
+<div id="tp-note" class="cr-tp-note" style="display:none"></div>
 <p id="tp-desc" style="margin:0;color:#C9C3DB;overflow-wrap:anywhere"></p>
 <div id="tp-stats" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px"></div>
 <div style="display:flex;flex-wrap:wrap;gap:10px">
@@ -1839,6 +1844,9 @@ function openToken(addr){
     $('tp-chain').innerHTML=(CHAIN_ICON[k]||'')+chainOf(k).name;
     if(!t){$('h-token').textContent=short(addr);$('tp-err').textContent='We couldn’t find this token on Clanker yet. If it was just launched, give it a minute.';$('tp-err').style.display='block';return}
     $('h-token').textContent=t.name||'Unnamed';$('tp-sym').textContent='$'+(t.symbol||'');
+    var nt=$('tp-note');nt.style.display='none';
+    if(isOfficial(t)){nt.style.display='';nt.style.background='rgba(155,107,255,.14)';nt.style.color='#E4D9FF';nt.textContent='✓ This is the official Clanker Router token. Always check the contract ends in …0899cccc.'}
+    else if(isLookalike(t)){nt.style.display='';nt.style.background='rgba(255,107,94,.12)';nt.style.color='#FFB4AC';nt.innerHTML='⚠ <strong>Not the official Clanker Router token.</strong> It uses a similar name or ticker. The official one is <a href="/token/'+OFFICIAL_TOKEN+'" style="color:#FFB4AC">0xe884…cccc</a>.'}
     document.title=(t.name||'Token')+' ($'+(t.symbol||'')+') · Clanker Router';
     var d=t.description||(t.metadata&&t.metadata.description)||'';$('tp-desc').textContent=d;$('tp-desc').style.display=d?'':'none';
     var src=safeImg(t.img_url),im=$('tp-img');im.innerHTML='';
@@ -2030,9 +2038,17 @@ var tk={list:[],cursor:null,loading:false,timer:null,seen:{},firstLoad:true,reqI
 var pendingStake=null;
 var tkSrc='all',tkChain='base';
 /* Hidden: test launches that should never show on the site (fees are still collected). */
-var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc'];
+var HIDDEN_TOKENS=['0xa37695b0bd8c2cc72c17e7f38bc4cbab03c0cccc','0xc5bf5ae06aa31cc56baa7f4cf288fddd41a6cccc'];
 /* Pinned: always shown first on Home and Tokens. Add contract addresses here (any case). */
-var PINNED_TOKENS=[];
+var PINNED_TOKENS=['0xe884acdafe359fbad04c84d79b10c8770899cccc','0x19025127aab7e879356372683c6e88effcaccccc'];
+/* The one real Clanker Router token. Anything else using the same name or ticker gets a warning. */
+var OFFICIAL_TOKEN='0xe884acdafe359fbad04c84d79b10c8770899cccc';
+function isOfficial(t){return lc(t&&t.contract_address)===OFFICIAL_TOKEN}
+function isLookalike(t){
+  if(!t||isOfficial(t))return false;
+  var n=String(t.name||'').toLowerCase().replace(/[^a-z]/g,''),sy=String(t.symbol||'').toLowerCase().replace(/[^a-z]/g,'');
+  return n.indexOf('clankerrouter')>=0||n==='clankerouter'||sy==='clrtr'||sy==='crouter';
+}
 function lc(a){return String(a||'').toLowerCase()}
 function isHidden(t){return HIDDEN_TOKENS.indexOf(lc(t.contract_address))>=0}
 function isPinned(t){return PINNED_TOKENS.some(function(a){return lc(a)===lc(t.contract_address)})}
@@ -2080,7 +2096,7 @@ function buyUrl(addr,k){return 'https://app.uniswap.org/swap?chain='+(UNI_CHAIN[
 function tokenPath(addr){return HASH_MODE?'/token/'+addr.toLowerCase():'/token/'+addr.toLowerCase()}
 function tokenCard(t,isNew,pin){
   var m=(t.related&&t.related.market)||{};
-  var c=el('div');c.className='cr-tok'+(isNew?' cr-new':'');
+  var c=el('div');c.className='cr-tok'+(isNew?' cr-new':'')+(isOfficial(t)?' cr-official':'');
   var top=el('div','display:flex;gap:14px;align-items:center;min-width:0');
   var im=el('span');im.className='cr-tok-img';
   var letter=(t.symbol||t.name||'?').charAt(0).toUpperCase();
@@ -2092,7 +2108,9 @@ function tokenCard(t,isNew,pin){
   nrow.appendChild(el('strong','font-family:Unbounded,sans-serif;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap',t.name||'Unnamed'));
   if(t._chain)nrow.appendChild(chainBadge(t._chain));
   if(t.tags&&t.tags.verified){var v=el('span',null,'✓');v.className='cr-badge';v.title='Verified on Clanker';v.setAttribute('aria-label','Verified');nrow.appendChild(v)}
-  if(pin){var pb=el('span',null,'PINNED');pb.className='cr-badge cr-badge-new';nrow.appendChild(pb)}
+  if(isOfficial(t)){var ob=el('span',null,'OFFICIAL');ob.className='cr-badge cr-badge-off';ob.title='The official Clanker Router token';nrow.appendChild(ob)}
+  else if(pin){var pb=el('span',null,'PINNED');pb.className='cr-badge cr-badge-new';nrow.appendChild(pb)}
+  if(isLookalike(t)){var wb=el('span',null,'NOT OFFICIAL');wb.className='cr-badge cr-badge-warn';wb.title='Same name or ticker as Clanker Router, but not the official token';nrow.appendChild(wb)}
   if(isNew&&!pin){var nb=el('span',null,'NEW');nb.className='cr-badge cr-badge-new';nrow.appendChild(nb)}
   nm.appendChild(nrow);
   nm.appendChild(el('span',"font-family:'IBM Plex Mono',monospace;font-size:13px;color:#B79BFF;overflow:hidden;text-overflow:ellipsis;white-space:nowrap",'$'+(t.symbol||'')+' · '+ago(t.deployed_at||t.created_at)));
@@ -2121,7 +2139,7 @@ function renderTokenGrid(newIds){
     g.appendChild(e);return;
   }
   var showPins=$('tk-q').value.trim().length<2;
-  if(showPins)pinned.list.forEach(function(t){g.appendChild(tokenCard(t,false,true))});
+  if(showPins)pinned.list.forEach(function(t){if(!t._chain||t._chain===tkChain)g.appendChild(tokenCard(t,false,true))});
   tk.list.forEach(function(t){if(isHidden(t)||(showPins&&isPinned(t)))return;g.appendChild(tokenCard(t,newIds&&newIds[t.contract_address]))});
   $('tk-more').style.display=tk.cursor?'':'none';
 }
