@@ -3,7 +3,7 @@
 import { ImageResponse } from '@vercel/og';
 import { CHAINS, findToken, withTimeout } from './_lib/tokens.js';
 
-export const config = { runtime: 'edge' };
+// Runs on the Node.js runtime: the Edge runtime blocks the WebAssembly this renderer needs.
 
 const C = { bg: '#0A0A0C', panel: '#17141F', line: '#2E2840', purple: '#9B6BFF', white: '#F4F4F6', muted: '#9A97A6', green: '#4ADE80', red: '#FF6B5E' };
 
@@ -46,7 +46,7 @@ function fontOpt(list) {
   return ok.length ? { fonts: ok } : {};
 }
 
-export default async function handler(req) {
+export async function GET(req) {
   const u = new URL(req.url);
   const addr = String(u.searchParams.get('addr') || '').toLowerCase();
   const origin = `${u.protocol}//${u.host}`;
