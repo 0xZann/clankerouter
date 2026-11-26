@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clanker Router — Launch tokens on Base, earn from every trade</title>
-<meta name="description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
+<title>Clanker Router — Launch tokens on Base &amp; Robinhood Chain, earn from every trade</title>
+<meta name="description" content="Launch a token on Base or Robinhood Chain in one click. Earn from every trade, reward your holders, and browse every Clanker token live.">
 <meta name="theme-color" content="#0A0A0C">
 <link rel="apple-touch-icon" href="/logo.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 fill=%22%230A0A0C%22/%3E%3Cg fill=%22none%22 stroke=%22%239B6BFF%22 stroke-width=%2228%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%2292%22 y=%22168%22 width=%22328%22 height=%22236%22 rx=%2264%22/%3E%3Cpath d=%22M256 168v-58%22/%3E%3C/g%3E%3Ccircle cx=%22256%22 cy=%2294%22 r=%2222%22 fill=%22%239B6BFF%22/%3E%3Cg fill=%22none%22 stroke=%22%23F4F0FF%22 stroke-width=%2218%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M168 286h56%22/%3E%3Cpath d=%22M224 286C262 286 262 236 300 236h12%22/%3E%3Cpath d=%22M224 286h88%22/%3E%3Cpath d=%22M224 286C262 286 262 336 300 336h12%22/%3E%3C/g%3E%3Ccircle cx=%22164%22 cy=%22286%22 r=%2220%22 fill=%22%23F4F0FF%22/%3E%3Ccircle cx=%22340%22 cy=%22236%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3Ccircle cx=%22340%22 cy=%22286%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3Ccircle cx=%22340%22 cy=%22336%22 r=%2218%22 fill=%22%239B6BFF%22/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Clanker Router — Launch tokens on Base, earn from every trade">
+<meta property="og:title" content="Clanker Router — Launch tokens on Base &amp; Robinhood Chain, earn from every trade">
 <meta property="og:site_name" content="Clanker Router">
-<meta property="og:description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
+<meta property="og:description" content="Launch a token on Base or Robinhood Chain in one click. Earn from every trade, reward your holders, and browse every Clanker token live.">
 <meta property="og:url" content="https://clankerouter.xyz/">
 <meta property="og:image" content="https://clankerouter.xyz/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Clanker Router — Launch tokens on Base, earn from every trade">
-<meta name="twitter:description" content="Launch a token on Base in one click. Lower fees than other launchpads. Browse every Clanker token live.">
+<meta name="twitter:title" content="Clanker Router — Launch tokens on Base &amp; Robinhood Chain, earn from every trade">
+<meta name="twitter:description" content="Launch a token on Base or Robinhood Chain in one click. Earn from every trade, reward your holders, and browse every Clanker token live.">
 <meta name="twitter:image" content="https://clankerouter.xyz/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
@@ -165,11 +165,16 @@ a{color:#F2F1F5}a:hover{color:#FFFFFF}
 .cr-base{display:inline-flex;align-items:center;gap:.3em;color:#FFFFFF;font-weight:500;vertical-align:baseline;white-space:nowrap}
 .cr-base .cr-ic{width:.85em;height:.85em}
 .cr-rh{border-radius:22%;object-fit:cover}
+.cr-kv{display:flex;justify-content:space-between;gap:16px;align-items:baseline;font-size:15px}
+.cr-kv>span:first-child{color:#9A97A6;flex:0 0 auto}
+.cr-chainbadge{display:inline-flex;flex:0 0 auto;width:16px;height:16px}
+.cr-chainbadge .cr-ic{width:16px;height:16px}
 .cr-chainpick{display:flex;gap:10px;flex-wrap:wrap}
 .cr-chainpick button{flex:1 1 auto;white-space:nowrap;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 16px;border-radius:14px;border:1.5px solid #2E2840;background:#0A0A0C;color:#F4F4F6;font:inherit;font-weight:600;cursor:pointer}
 .cr-chainpick button[aria-checked="true"]{border-color:#9B6BFF;background:#1A1625;box-shadow:0 0 0 1px #9B6BFF inset}
 .cr-chainpick .cr-ic{width:24px;height:24px}
-[data-chain] .cr-ic{width:16px;height:16px;margin-right:6px;vertical-align:-3px}
+[data-chain],[data-hlchain]{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+[data-chain] .cr-ic,[data-hlchain] .cr-ic{width:16px;height:16px;margin-right:6px;vertical-align:-3px}
 .cr-builton{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-top:6px}
 .cr-by{display:inline-flex;align-items:center;gap:.45em;font-size:15px;color:#B4B1BF;text-decoration:none}
 .cr-by strong{color:#F2F1F5}
@@ -329,7 +334,7 @@ html{scroll-behavior:auto}
 <!-- LIVE STATS -->
 <section aria-labelledby="h-stats" style="max-width: 1240px; margin: 0 auto; padding: 8px 16px 0">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 14px">
-<h2 id="h-stats" class="cr-kicker" style="margin: 0; font-weight: 600">CLANKER ON BASE · LIVE</h2>
+<h2 id="h-stats" class="cr-kicker" style="margin: 0; font-weight: 600">CLANKER ON BASE &amp; ROBINHOOD · LIVE</h2>
 <span class="cr-kicker" id="stats-src">Loading…</span>
 </div>
 <div class="cr-stats">
@@ -348,6 +353,11 @@ html{scroll-behavior:auto}
 <h2 id="h-live" style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 48px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase">Fresh off Clanker</h2>
 </div>
 <a href="/tokens" class="cr-btn-s">See all tokens →</a>
+</div>
+<div class="cr-seg cr-seg-light" role="tablist" aria-label="Which chain" style="align-self: flex-start">
+<button type="button" role="tab" data-hlchain="all" aria-selected="true">All</button>
+<button type="button" role="tab" data-hlchain="base" aria-selected="false"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</button>
+<button type="button" role="tab" data-hlchain="robinhood" aria-selected="false"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood</button>
 </div>
 <div id="hl-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px"></div>
 </section>
@@ -647,7 +657,7 @@ export MODEL="auto"</pre>
 <div id="b-done" style="display: none; flex-direction: column; gap: 10px">
 <span style="font-size: 15px; overflow-wrap: anywhere">Contract: <code class="cr-mono" id="b-addr"></code></span>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
-<a href="#" id="b-view" target="_blank" rel="noopener" class="cr-btn-s cr-btn-a">View on Clanker ↗</a>
+<a href="#" id="b-view" target="_blank" rel="noopener" class="cr-btn-s cr-btn-a">Open token page →</a>
 <a href="#" id="b-scan" target="_blank" rel="noopener" class="cr-btn-s cr-btn-g">Transaction ↗</a>
 <button type="button" class="cr-btn-s cr-btn-g" id="b-again">Build another</button>
 </div>
@@ -795,6 +805,34 @@ export MODEL="auto"</pre>
 </section>
 
 <!-- ================= PLATFORM (unlisted) ================= -->
+<section class="view" id="v-token" aria-labelledby="h-token">
+<div class="cr-page" style="max-width: 860px">
+<a href="/tokens" class="cr-back">← All tokens</a>
+<div class="cr-dark" style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;gap:18px;align-items:center;min-width:0">
+<span id="tp-img" class="cr-tok-img" style="width:88px;height:88px;border-radius:24px;font-size:34px">?</span>
+<div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+<h1 id="h-token" style="margin:0;font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(24px,5vw,40px);line-height:1.05;overflow-wrap:anywhere">Loading…</h1>
+<span style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="tp-sym" class="cr-mono" style="color:var(--accent);font-size:16px"></span><span id="tp-chain" class="cr-base" style="font-size:15px"></span></span>
+</div>
+</div>
+<p id="tp-desc" style="margin:0;color:#C9C3DB;overflow-wrap:anywhere"></p>
+<div id="tp-stats" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px"></div>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<a id="tp-buy" href="#" target="_blank" rel="noopener" style="text-decoration:none;background:#9B6BFF;color:#0A0A0C;font-weight:700;padding:0 26px;border-radius:999px;min-height:52px;display:inline-flex;align-items:center">Buy on Uniswap ↗</a>
+<button id="tp-rewards" type="button" class="cr-btn-s" style="min-height:52px">Holder rewards</button>
+<button id="tp-share" type="button" class="cr-btn-s cr-btn-g" style="min-height:52px">Share</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #2E2840;padding-top:18px">
+<div class="cr-kv"><span>Contract</span><button id="tp-addr" type="button" class="cr-mono" style="background:none;border:0;color:#F4F4F6;padding:0;cursor:pointer;font-size:14px;overflow-wrap:anywhere;text-align:right" title="Copy address"></button></div>
+<div class="cr-kv"><span>Holder rewards</span><strong id="tp-div">—</strong></div>
+<div class="cr-kv"><span>Launched</span><span id="tp-age">—</span></div>
+<div class="cr-kv"><span>Links</span><span style="display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end"><a id="tp-clanker" href="#" target="_blank" rel="noopener" style="color:var(--accent)">Clanker ↗</a><a id="tp-scan" href="#" target="_blank" rel="noopener" style="color:var(--accent)">Explorer ↗</a></span></div>
+</div>
+<p id="tp-err" class="cr-empty" style="display:none;margin:0"></p>
+</div>
+</div>
+</section>
 <section class="view" id="v-platform" aria-labelledby="h-platform">
 <div class="cr-page" style="max-width: 860px">
 <a href="/" class="cr-back">← Home</a>
@@ -1107,7 +1145,7 @@ curl $OPENAI_BASE_URL/chat/completions \
 </div>
 <div style="border-top: 1px solid #26222F; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 13px; color: #9A97A6">
 <span class="cr-mono">© 2026 Clanker Router</span>
-<span class="cr-by" style="font-size: 13px">Built on <svg class="cr-ic" viewBox="0 0 210 177" aria-hidden="true"><rect x="0" y="124" width="46" height="53" fill="#865FD3"></rect><rect x="81" y="59" width="47" height="118" fill="#865FD3"></rect><rect x="163" y="0" width="47" height="177" fill="#865FD3"></rect></svg>Clanker · Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span></span>
+<span class="cr-by" style="font-size: 13px">Built on <svg class="cr-ic" viewBox="0 0 210 177" aria-hidden="true"><rect x="0" y="124" width="46" height="53" fill="#865FD3"></rect><rect x="81" y="59" width="47" height="118" fill="#865FD3"></rect><rect x="163" y="0" width="47" height="177" fill="#865FD3"></rect></svg>Clanker · Live on <span class="cr-base"><svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>Base</span> &amp; <span class="cr-base"><img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">Robinhood</span></span>
 <span class="cr-mono">Not financial advice. Tokens are volatile and can lose all value.</span>
 </div>
 </div>
@@ -1138,11 +1176,13 @@ function keyFor(id){for(var k in VIEWS)if(VIEWS[k]===id)return k;return ''}
 var HASH_MODE=location.protocol==='file:';
 function route(){
   var h=location.hash||'',key='',id=null,anchor=null;
-  if(h.indexOf('#/')===0){key=h.slice(2);id=VIEWS[key]||null}
+  if(h.indexOf('#/')===0){key=h.slice(2).toLowerCase();id=VIEWS[key]||null}
   else{
     if(!HASH_MODE){key=location.pathname.replace(/^\/+|\/+$/g,'').toLowerCase();id=VIEWS.hasOwnProperty(key)?VIEWS[key]:null}
     if(h.length>1){anchor=h.slice(1);var t=document.getElementById(anchor);var v=t&&t.closest('.view');if(v&&(!id||id==='v-home')){id=v.id;key=keyFor(id)}}
   }
+  var tokenAddr=null;
+  if(/^token\/0x[0-9a-f]{40}$/.test(key)){tokenAddr=key.slice(6);id='v-token';key='tokens'}
   if(!id){id='v-home';key=''}
   document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active',v.id===id)});
   document.querySelectorAll('[data-route]').forEach(function(a){var on=key!==''&&a.getAttribute('data-route')===key;a.classList.toggle('cur',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -1153,6 +1193,7 @@ function route(){
   if(id==='v-tokens')startTokens();
   if(id==='v-build')loadSdk().catch(function(){});
   if(id==='v-platform')startPlatform();
+  if(id==='v-token')openToken(tokenAddr);
   if(id==='v-home'){startHomeTokens();startStats()}
   if(id==='v-dashboard')renderDash();
 }
@@ -1169,7 +1210,7 @@ document.addEventListener('click',function(e){
   if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
   var a=e.target.closest&&e.target.closest('a[href^="/"]');if(!a||a.target==='_blank')return;
   var p=a.getAttribute('href').split('#')[0],k=p.replace(/^\/+|\/+$/g,'');
-  if(!VIEWS.hasOwnProperty(k))return;
+  if(!VIEWS.hasOwnProperty(k)&&!/^token\/0x[0-9a-fA-F]{40}$/.test(k))return;
   e.preventDefault();go(p||'/');
 });
 /* old links like clankerouter.xyz/#/build still work and get cleaned up */
@@ -1629,7 +1670,7 @@ $('b-form').addEventListener('submit',function(e){
     return deployToken(data,function(i,tx){cur=i;renderSteps($('b-steps'),BUILD_STEPS,i);if(tx){$('b-scan').href=chainOf($('b-chain').value).explorer+'/tx/'+tx}}).then(function(r){
       renderSteps($('b-steps'),BUILD_STEPS,BUILD_STEPS.length);
       $('b-status-title').textContent='Your token is live 🎉';
-      $('b-addr').textContent=r.address;$('b-view').href=CLANKER_TOKEN_URL+r.address;$('b-scan').href=chainOf($('b-chain').value).explorer+'/tx/'+r.txHash;
+      $('b-addr').textContent=r.address;$('b-view').href=tokenPath(r.address);$('b-view').removeAttribute('target');$('b-scan').href=chainOf($('b-chain').value).explorer+'/tx/'+r.txHash;
       $('b-done').style.display='flex';btn.textContent='Deployed ✓';busy.b=false;
       built.push({name:name,ticker:ticker,img:imgFile?imgURL:gatewayOf(imgURL),desc:data.desc,address:r.address});
       logAct('Launched $'+ticker+' at '+short(r.address));toast('$'+ticker+' is live on Base');
@@ -1658,13 +1699,13 @@ function readClanker(m,k){
   if(activeProvider&&account)cfg.wallet=m.createWalletClient({account:account,chain:viemChain(m,k),transport:m.custom(activeProvider)});
   return new m.Clanker(cfg);
 }
-function tokenInfo(addr){
+function tokenInfo(addr,market){
   // look the token up on every chain we support; the result tells us which chain to read from
-  return Promise.all(CHAIN_KEYS.map(function(k){return tokenInfoOn(addr,k).then(function(t){if(t)t._chain=k;return t})}))
+  return Promise.all(CHAIN_KEYS.map(function(k){return tokenInfoOn(addr,k,market).then(function(t){if(t)t._chain=k;return t})}))
     .then(function(r){return r.filter(Boolean)[0]||null});
 }
-function tokenInfoOn(addr,k){
-  var p=new URLSearchParams({chainId:String(chainOf(k).id),q:addr,limit:'1'});
+function tokenInfoOn(addr,k,market){
+  var p=new URLSearchParams({chainId:String(chainOf(k).id),q:addr,limit:'1'});if(market)p.set('includeMarket','true');
   function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
   return go(tkApi).then(function(j){var d=(j.data||[]).filter(function(t){return (t.contract_address||'').toLowerCase()===addr.toLowerCase()})[0];return d||null}).catch(function(){return null});
 }
@@ -1749,6 +1790,47 @@ $('fe-claim').addEventListener('click',function(){
   ensureBase(activeProvider,feState.chain).then(loadSdk).then(function(m){return readClanker(m,feState.chain).claimRewards({token:feState.addr,rewardRecipient:account})})
   .then(function(res){if(res.error)throw res.error;b.textContent='Claim fees';toast('Fee claim sent');logAct('Claimed trading fees');setTimeout(checkFees,6000)})
   .catch(function(err){b.disabled=false;b.textContent='Claim fees';toast(walletErr(err),true)});
+});
+
+/* ================= TOKEN PAGE (/token/0x…) ================= */
+var tpState=null;
+function openToken(addr){
+  if(!addr)return;
+  var A=addr.toLowerCase();if(tpState&&tpState.addr===A&&Date.now()-tpState.at<15000)return;
+  tpState={addr:A,at:Date.now(),chain:'base'};
+  $('h-token').textContent='Loading…';$('tp-sym').textContent='';$('tp-desc').textContent='';$('tp-stats').innerHTML='';$('tp-err').style.display='none';
+  $('tp-img').innerHTML='?';$('tp-chain').innerHTML='';$('tp-div').textContent='—';$('tp-age').textContent='—';
+  $('tp-addr').textContent=addr;$('tp-clanker').href=CLANKER_TOKEN_URL+addr;
+  tokenInfo(addr,true).then(function(t){
+    if(tpState.addr!==A)return;
+    var k=t&&t._chain||'base';tpState.chain=k;
+    $('tp-buy').href=buyUrl(addr,k);$('tp-scan').href=chainOf(k).explorer+'/token/'+addr;
+    $('tp-chain').innerHTML=(CHAIN_ICON[k]||'')+chainOf(k).name;
+    if(!t){$('h-token').textContent=short(addr);$('tp-err').textContent='We couldn’t find this token on Clanker yet. If it was just launched, give it a minute.';$('tp-err').style.display='block';return}
+    $('h-token').textContent=t.name||'Unnamed';$('tp-sym').textContent='$'+(t.symbol||'');
+    document.title=(t.name||'Token')+' ($'+(t.symbol||'')+') · Clanker Router';
+    var d=t.description||(t.metadata&&t.metadata.description)||'';$('tp-desc').textContent=d;$('tp-desc').style.display=d?'':'none';
+    var src=safeImg(t.img_url),im=$('tp-img');im.innerHTML='';
+    if(src){var i=el('img','width:100%;height:100%;object-fit:cover');i.alt='';i.referrerPolicy='no-referrer';i.src=src;im.appendChild(i)}else im.textContent=(t.symbol||'?').charAt(0).toUpperCase();
+    var m=(t.related&&t.related.market)||{},ch=m.priceChangePercent24h;
+    function st(lab,val,col){var b=el('div','background:#0A0A0C;border-radius:14px;padding:12px 14px;min-width:0');b.appendChild(el('span',"display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9A97A6",lab));b.appendChild(el('strong','display:block;font-size:clamp(15px,4vw,20px);margin-top:4px;white-space:nowrap'+(col?';color:'+col:''),val));return b}
+    var g=$('tp-stats');
+    g.appendChild(st('MARKET CAP',money(m.marketCap)));
+    g.appendChild(st('VOLUME 24H',money(m.volume24h)));
+    g.appendChild(st('24H',typeof ch==='number'?(ch>0?'+':'')+ch.toFixed(1)+'%':'—',typeof ch==='number'?(ch>0?'#4ADE80':ch<0?'#FF6B5E':''):''));
+    $('tp-age').textContent=ago(t.deployed_at||t.created_at)||'—';
+    return loadSdk().then(function(mm){return readClanker(mm,k).dividendOf(addr)}).then(function(dv){
+      if(tpState.addr!==A)return;
+      var on=dv&&!/^0x0{40}$/i.test(dv);$('tp-div').textContent=on?'On · holders of 10,000+ earn':'Off';$('tp-div').style.color=on?'#4ADE80':'';
+    }).catch(function(){});
+  });
+}
+$('tp-rewards').addEventListener('click',function(){if(!tpState)return;pendingStake={addr:$('tp-addr').textContent};go('/stake')});
+$('tp-addr').addEventListener('click',function(){var a=this.textContent;(navigator.clipboard?navigator.clipboard.writeText(a):Promise.reject()).then(function(){toast('Address copied')},function(){toast(a)})});
+$('tp-share').addEventListener('click',function(){
+  var url=location.origin+'/token/'+(tpState?tpState.addr:''),txt=$('h-token').textContent+' '+$('tp-sym').textContent+' on Clanker Router';
+  if(navigator.share){navigator.share({title:txt,url:url}).catch(function(){});return}
+  window.open('https://x.com/intent/post?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(url),'_blank','noopener');
 });
 
 /* ================= PLATFORM FEES (unlisted page: #/platform) ================= */
@@ -1875,7 +1957,7 @@ function loadPinned(){
   if(pinned.p)return pinned.p;
   if(Date.now()-pinned.at<20000)return Promise.resolve(pinned.list);
   pinned.p=Promise.all(PINNED_TOKENS.map(function(addr){
-    return Promise.all(CHAIN_KEYS.map(function(k){return pinOn(addr,k)})).then(function(r){return r.filter(Boolean)[0]||null});
+    return Promise.all(CHAIN_KEYS.map(function(k){return pinOn(addr,k).then(function(t){if(t)t._chain=k;return t})})).then(function(r){return r.filter(Boolean)[0]||null});
   })).then(function(r){pinned.list=r.filter(Boolean);pinned.at=Date.now();pinned.p=null;return pinned.list});
   return pinned.p;
 }
@@ -1906,6 +1988,11 @@ function ago(iso){
   if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';
 }
 function safeImg(u){return typeof u==='string'&&/^https:\/\//.test(u)?u:null}
+var CHAIN_ICON={base:'<svg class="cr-ic" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="8" fill="#0000FF"></rect></svg>',robinhood:'<img class="cr-ic cr-rh" src="data:image/png;base64,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" alt="" aria-hidden="true">'};
+function chainBadge(k){var b=el('span');b.className='cr-chainbadge';b.title=chainOf(k).name;b.setAttribute('aria-label',chainOf(k).name);b.innerHTML=CHAIN_ICON[k]||'';return b}
+var UNI_CHAIN={base:'base',robinhood:'robinhood'};
+function buyUrl(addr,k){return 'https://app.uniswap.org/swap?chain='+(UNI_CHAIN[k]||'base')+'&inputCurrency=NATIVE&outputCurrency='+addr}
+function tokenPath(addr){return HASH_MODE?'/token/'+addr.toLowerCase():'/token/'+addr.toLowerCase()}
 function tokenCard(t,isNew,pin){
   var m=(t.related&&t.related.market)||{};
   var c=el('div');c.className='cr-tok'+(isNew?' cr-new':'');
@@ -1918,6 +2005,7 @@ function tokenCard(t,isNew,pin){
   var nm=el('div','display:flex;flex-direction:column;min-width:0;flex:1');
   var nrow=el('div','display:flex;gap:6px;align-items:center;min-width:0');
   nrow.appendChild(el('strong','font-family:Unbounded,sans-serif;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap',t.name||'Unnamed'));
+  if(t._chain)nrow.appendChild(chainBadge(t._chain));
   if(t.tags&&t.tags.verified){var v=el('span',null,'✓');v.className='cr-badge';v.title='Verified on Clanker';v.setAttribute('aria-label','Verified');nrow.appendChild(v)}
   if(pin){var pb=el('span',null,'PINNED');pb.className='cr-badge cr-badge-new';nrow.appendChild(pb)}
   if(isNew&&!pin){var nb=el('span',null,'NEW');nb.className='cr-badge cr-badge-new';nrow.appendChild(nb)}
@@ -1932,10 +2020,12 @@ function tokenCard(t,isNew,pin){
   stats.appendChild(st('24H',typeof ch==='number'?(ch>0?'+':'')+ch.toFixed(1)+'%':'—',typeof ch==='number'?(ch>0?'#4ADE80':ch<0?'#FF6B5E':''):''));
   c.appendChild(stats);
   var row=el('div','display:flex;flex-wrap:wrap;gap:8px;margin-top:auto');
-  var s=el('button',null,'Rewards');s.type='button';s.className='cr-btn-s';
+  var s=el('button',null,'Rewards');s.type='button';s.className='cr-btn-s cr-btn-g';
   s.addEventListener('click',function(){pendingStake={addr:t.contract_address};go('/stake')});
-  var v2=el('a',null,'Trade ↗');v2.href=CLANKER_TOKEN_URL+encodeURIComponent(t.contract_address);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s cr-btn-g';
-  row.appendChild(s);row.appendChild(v2);c.appendChild(row);
+  var v2=el('a',null,'Buy ↗');v2.href=buyUrl(t.contract_address,t._chain);v2.target='_blank';v2.rel='noopener';v2.className='cr-btn-s';
+  var v3=el('a',null,'Details');v3.href=tokenPath(t.contract_address);v3.className='cr-btn-s cr-btn-g';
+  row.appendChild(v2);row.appendChild(s);row.appendChild(v3);c.appendChild(row);
+  top.style.cursor='pointer';top.addEventListener('click',function(){go(tokenPath(t.contract_address))});
   return c;
 }
 function renderTokenGrid(newIds){
@@ -1956,7 +2046,7 @@ function fetchTokens(cursor){
   function go(i){
     return fetch(TOKENS_APIS[i]+'?'+tkParams(cursor),{headers:{accept:'application/json'}})
       .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
-      .then(function(j){tkApi=i;return j})
+      .then(function(j){tkApi=i;var ck=tkChain;(j.data||[]).forEach(function(t){t._chain=ck});return j})
       .catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e});
   }
   return go(tkApi).then(function(j){return id===tk.reqId?j:null});
@@ -2013,7 +2103,13 @@ function countUp(el,to){
 }
 function fmt(n){return typeof n==='number'?n.toLocaleString('en-US'):String(n)}
 function countTokens(extra){
-  var p=new URLSearchParams({chainId:'8453',limit:'1'});for(var k in extra)p.set(k,extra[k]);
+  return Promise.all(CHAIN_KEYS.map(function(k){return countTokensOn(extra,k)})).then(function(r){
+    if(r.every(function(x){return x==null}))return null;
+    return r.reduce(function(a,b){return a+(b||0)},0);
+  });
+}
+function countTokensOn(extra,k){
+  var p=new URLSearchParams({chainId:String(chainOf(k).id),limit:'1'});for(var k in extra)p.set(k,extra[k]);
   function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
   return go(tkApi).then(function(j){return typeof j.total==='number'?j.total:null}).catch(function(){return null});
 }
@@ -2038,16 +2134,28 @@ document.querySelectorAll('[data-src]').forEach(function(b){b.addEventListener('
   tkSrc=b.dataset.src;document.querySelectorAll('[data-src]').forEach(function(x){x.setAttribute('aria-selected',x===b)});loadTokens(true);
 })});
 /* home: latest tokens */
-var hlTimer=null;
+var hlTimer=null,hlChain='all';
 function loadHomeTokens(){
   if(document.hidden||!$('v-home').classList.contains('active'))return;
-  var p=new URLSearchParams({chainId:'8453',includeMarket:'true',limit:'12'});
+  var keys=hlChain==='all'?CHAIN_KEYS:[hlChain];
+  function one(k){
+  var p=new URLSearchParams({chainId:String(chainOf(k).id),includeMarket:'true',limit:'12'});
   function go(i){return fetch(TOKENS_APIS[i]+'?'+p,{headers:{accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(e){if(i+1<TOKENS_APIS.length&&location.protocol.indexOf('http')===0)return go(i+1);throw e})}
-  Promise.all([go(tkApi),loadPinned()]).then(function(rr){var j=rr[0],pins=rr[1];
-    var rest=(Array.isArray(j.data)?j.data:[]).filter(function(t){return !isHidden(t)&&!isPinned(t)});
-    var data=pins.concat(rest).slice(0,6),g=$('hl-grid'),prev=g.getAttribute('data-ids')||'';
+  return go(tkApi).then(function(j){var l=Array.isArray(j.data)?j.data:[];l.forEach(function(t){t._chain=k});return l}).catch(function(){return null});
+  }
+  Promise.all([Promise.all(keys.map(one)),loadPinned()]).then(function(rr){var lists=rr[0],pins=rr[1];
+    if(lists.every(function(x){return x==null}))throw new Error('offline');
+    var all=[].concat.apply([],lists.map(function(x){return x||[]}));
+    var rest=all.filter(function(t){return !isHidden(t)&&!isPinned(t)});
+    // newest first; on "All", keep at least 2 from each chain that has tokens
+    rest.sort(function(a,b){return (Date.parse(b.deployed_at)||0)-(Date.parse(a.deployed_at)||0)});
+    if(keys.length>1){var picked=[];keys.forEach(function(k){rest.filter(function(t){return t._chain===k}).slice(0,2).forEach(function(t){picked.push(t)})});
+      rest.forEach(function(t){if(picked.indexOf(t)<0)picked.push(t)});rest=picked.slice(0,6).sort(function(a,b){return (Date.parse(b.deployed_at)||0)-(Date.parse(a.deployed_at)||0)})}
+    var pinsHere=pins.filter(function(t){return hlChain==='all'||t._chain===hlChain});
+    var data=pinsHere.concat(rest).slice(0,6),g=$('hl-grid'),prev=g.getAttribute('data-ids')||'';
     var ids=data.map(function(t){return t.contract_address}).join(',');
-    g.innerHTML='';data.forEach(function(t){var pin=isPinned(t);g.appendChild(tokenCard(t,!pin&&prev&&prev.indexOf(t.contract_address)<0,pin))});
+    g.innerHTML='';if(!data.length){var em=el('div');em.className='cr-empty';em.style.gridColumn='1 / -1';em.innerHTML='No tokens on '+(hlChain==='all'?'Clanker':chainOf(hlChain).name)+' yet. <a href="/build" style="color:var(--accent)">Be the first →</a>';g.appendChild(em)}
+    data.forEach(function(t){var pin=isPinned(t);g.appendChild(tokenCard(t,!pin&&prev&&prev.indexOf(t.contract_address)<0,pin))});
     g.setAttribute('data-ids',ids);
     $('hl-live').className='cr-live cr-live-on';$('hl-live-text').textContent='Live · '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   }).catch(function(){
@@ -2055,6 +2163,10 @@ function loadHomeTokens(){
     if(!$('hl-grid').children.length){var e=el('div',null,'Loading live tokens…');e.className='cr-empty';e.style.gridColumn='1 / -1';$('hl-grid').appendChild(e)}
   });
 }
+document.querySelectorAll('[data-hlchain]').forEach(function(b){b.addEventListener('click',function(){
+  hlChain=b.dataset.hlchain;document.querySelectorAll('[data-hlchain]').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+  $('hl-grid').innerHTML='';$('hl-grid').setAttribute('data-ids','');loadHomeTokens();
+})});
 function startHomeTokens(){loadHomeTokens();clearInterval(hlTimer);hlTimer=setInterval(loadHomeTokens,10000)}
 
 $('d-disconnect').addEventListener('click',function(){disconnectWallet();toast('Wallet disconnected');go('/')});

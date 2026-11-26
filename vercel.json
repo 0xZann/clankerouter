@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/token/:addr",
+      "destination": "/api/token-page?addr=:addr"
+    },
+    {
       "source": "/((?!api/)[^.]*)",
       "destination": "/index.html"
     }
